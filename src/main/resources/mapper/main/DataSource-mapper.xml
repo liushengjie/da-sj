@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.DataSourceMapper">
+	<!-- 分页查询数据源 -->
+	<select id="selectDs" resultType="cn.bocom.entity.DataSource" parameterType="cn.bocom.entity.DataSource">
+		select t.id,t.name,
+		t.type,(select name from v_sys_code a where a.type_code='datasouce_type' and a.code=t.type) as typeName,
+		t.driver,t.url,t.username,t.pwd,t.xa,t.create_user as createUser,
+		DATE_FORMAT(t.create_time, '%Y-%m-%d %H:%i:%S') as createTime,
+		t.state,t.data_mode as dataMode
+		 from t_data_source t
+		<where>
+			1=1 and t.state='1'
+			<if test="id!=null and id!=''">
+				and t.id=#{id}
+			</if>
+			<if test="name!=null and name!=''">
+				and t.name like CONCAT(CONCAT('%',#{name}),'%')
+			</if>
+			<if test="type!=null and type!=''">
+				and t.type=#{type}
+			</if>
+			<if test="xa!=null and xa!=''">
+				and t.xa=#{xa}
+			</if>
+			<if test="dataMode!=null and dataMode!=''">
+				and t.data_mode=#{dataMode} 
+			</if>
+		</where>
+		order by create_time desc
+	</select>
+	
+	<!-- 新增数据源 -->
+	<insert id="insertDs" parameterType="Map">
+		insert into t_data_source(
+			<if test="id!=null and id!=''">id,</if>
+			<if test="name!=null and name!=''">name,</if>
+			<if test="type!=null and type!=''">type,</if>
+			<if test="driver!=null and driver!=''">driver,</if>
+			<if test="url!=null and url!=''">url,</if>
+			<if test="username!=null and username!=''">username,</if>
+			<if test="pwd!=null and pwd!=''">pwd,</if>
+			<if test="xa!=null and xa!=''">xa,</if>
+			<if test="createUser!=null and createUser!=''">create_user,</if>
+			<if test="state!=null and state!=''">state,</if>
+			<if test="dataMode!=null and dataMode!=''">data_mode,</if>
+			create_time
+		) values (
+			<if test="id!=null and id!=''">#{id},</if>
+			<if test="name!=null and name!=''">#{name},</if>
+			<if test="type!=null and type!=''">#{type},</if>
+			<if test="driver!=null and driver!=''">#{driver},</if>
+			<if test="url!=null and url!=''">#{url},</if>
+			<if test="username!=null and username!=''">#{username},</if>
+			<if test="pwd!=null and pwd!=''">#{pwd},</if>
+			<if test="xa!=null and xa!=''">#{xa},</if>
+			<if test="createUser!=null and createUser!=''">#{createUser},</if>
+			<if test="state!=null and state!=''">#{state},</if>
+			<if test="dataMode!=null and dataMode!=''">#{dataMode},</if>
+			now()
+		)
+	</insert>
+	
+	<!-- 修改数据源 -->
+	<update id="updateDs" parameterType="cn.bocom.entity.DataSource">
+		update t_data_source t set 
+		
+		<if test="name!=null and name!=''">
+			t.name=#{name},
+		</if>
+		<if test="type!=null and type!=''">
+			t.type=#{type},
+		</if>
+		<if test="driver!=null and driver!=''">
+			t.driver=#{driver},
+		</if>
+		<if test="url!=null and url!=''">
+			t.url=#{url},
+		</if>
+		<if test="username!=null and username!=''">
+			t.username=#{username},
+		</if>
+		<if test="pwd!=null and pwd!=''">
+			t.pwd=#{pwd},
+		</if>
+		<if test="xa!=null and xa!=''">
+			t.xa=#{xa},
+		</if>
+		<if test="state!=null and state!=''">
+			t.state=#{state},
+		</if>
+		<if test="dataMode!=null and dataMode!=''">
+			t.data_mode=#{dataMode},
+		</if>
+		t.id=#{id}
+		<where>
+			t.id=#{id}
+		</where>
+	</update>
+</mapper>

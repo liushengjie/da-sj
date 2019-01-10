@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.ResFilterProcMapper" >
+	<select id="findResFilterProc" resultType="cn.bocom.entity.ResFilterProc" parameterType="cn.bocom.entity.ResFilterProc">
+		select * from t_res_filter_proc t where 1=1
+	    <if test="filterId != null and filterId != ''">
+	       and t.filter_id=#{filterId}
+	    </if>
+	    order by sort
+	</select>
+	<update id="saveResFilterProc" parameterType="cn.bocom.entity.ResFilterProc">
+		REPLACE INTO t_res_filter_proc(
+			<trim suffixOverrides=",">
+				<if test="id!=null and id!=''">id,</if>
+				<if test="filterId!=null and filterId!=''">filter_id,</if>
+				<if test="procId!=null and procId!=''">proc_id,</if>
+				<if test="params!=null and params!=''">params,</if>
+				<if test="sort!=null and sort!=''">sort,</if>
+			</trim>
+		) values (
+			<trim suffixOverrides=",">
+				<if test="id!=null and id!=''">#{id},</if>
+				<if test="filterId!=null and filterId!=''">#{filterId},</if>
+				<if test="procId!=null and procId!=''">#{procId},</if>
+				<if test="params!=null and params!=''">#{params},</if>
+				<if test="sort!=null and sort!=''">#{sort},</if>
+			</trim>
+		)
+	</update>
+</mapper>

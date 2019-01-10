@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.business.MysqlHandlerMapper">
+	<select id="findTables" resultType="HashMap" parameterType="string">
+		select CONCAT(TABLE_SCHEMA , '.' , TABLE_NAME) AS ID,TABLE_NAME,TABLE_ROWS,DATE_FORMAT(UPDATE_TIME, '%Y-%m-%d %H:%i:%S') AS UPDATE_TIME,TABLE_COMMENT,REPLACE(TABLE_TYPE,'BASE ','') AS OBJ_TYPE from
+		information_schema.TABLES where TABLE_SCHEMA = #{database} ORDER BY TABLE_TYPE,TABLE_NAME
+	</select>
+	<select id="preloadData" resultType="HashMap" parameterType="string">
+		select * from ${tableName} limit 0,${limit}
+	</select>
+	<select id="preloadSQLData" resultType="HashMap" parameterType="string">
+		${sql} limit 0,${limit}
+	</select>
+	<select id="findCountByTable" resultType="int" parameterType="string">
+		select count(1) from ${tableName}
+	</select>
+</mapper>

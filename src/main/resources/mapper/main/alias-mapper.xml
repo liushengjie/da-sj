@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.AliasMapper" >
+	<select id="queryAlias" resultType="HashMap" parameterType="cn.bocom.entity.Alias">
+		select id as aliasId,type,datasource,alias,remark,tablename,colname from t_alias where 1=1
+		<if test="type != null">
+	       and type=#{type}
+	    </if>
+	    <if test="id != null">
+	       and id=#{id}
+	    </if>
+	     <if test="datasource != null">
+	       and datasource =#{datasource}
+	    </if>
+	    <if test="tablename != null">
+	       and tablename =#{tablename}
+	    </if>
+	    <if test="colname != null">
+	       and colname =#{colname}
+	    </if>
+	</select>
+	<insert id="addAlias" parameterType="cn.bocom.entity.Alias">
+	  insert into t_alias
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	     <if test="id != null">
+	        id,
+	      </if>
+	      <if test="type != null">
+	        type,
+	      </if>
+	      <if test="datasource != null">
+	        datasource,
+	      </if>
+	      <if test="alias != null">
+	        alias,
+	      </if>
+	      <if test="remark != null">
+	        remark,
+	      </if>
+	      <if test="tablename != null">
+	        tablename,
+	      </if>
+	      <if test="colname != null">
+	        colname,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	     
+	      <if test="id != null">
+	        #{id},
+	      </if>
+	      <if test="type != null">
+	        #{type},
+	      </if>
+	      <if test="datasource != null">
+	         #{datasource},
+	   	  </if>
+	      <if test="alias != null">
+	        #{alias},
+	      </if>
+	      <if test="remark != null">
+	        #{remark},
+	      </if>
+	      <if test="tablename != null">
+	         #{tablename},
+	      </if>
+	      <if test="colname != null">
+	         #{colname},
+	      </if>
+	    </trim>
+	</insert>
+	<update id="updateAlias" parameterType="cn.bocom.entity.Alias">
+		update t_alias
+		<trim prefix="set" suffixOverrides=",">
+		  <if test="type!=null">type=#{type},</if>
+		  <if test="datasource">datasource=#{datasource},</if>
+		  <if test="alias!=null">alias=#{alias},</if>
+		  <if test="remark!=null">remark=#{remark},</if>
+		  <if test="tablename">tablename=#{tablename},</if>
+		  <if test="colname">colname=#{colname},</if>
+ 		</trim>
+		where id=#{id}
+	</update>
+	<delete id="delAlias" parameterType="string">
+		delete from t_alias where id=#{id}
+	</delete>
+	
+</mapper>

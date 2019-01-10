@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.CategoryMapper" >
+	<select id="queryCategoryTree" resultType="cn.bocom.entity.Category" parameterType="cn.bocom.entity.Category">
+		select * from (
+		SELECT
+		id,pid,name,type,(select name from d_sys_code dc where dc.`code`=type and dc.type_code='category_type')type_name,levels FROM (
+		SELECT t.*,
+		@le:= IF (pid = 0 ,0,
+		IF( LOCATE(
+		CONCAT('|',pid,':'),@pathlevel) > 0 ,
+		SUBSTRING_INDEX(
+		SUBSTRING_INDEX(@pathlevel,CONCAT('|',pid,':'),-1),'|',1) +1
+		,@le+1) )
+		levels
+		, @pathlevel:= CONCAT(@pathlevel,'|',id,':', @le ,'|') pathlevel
+		, @pathnodes:= IF( pid =0,',0',
+		CONCAT_WS(',',
+		IF( LOCATE(
+		CONCAT('|',pid,':'),@pathall) > 0 ,
+		SUBSTRING_INDEX(
+		SUBSTRING_INDEX(@pathall,CONCAT('|',pid,':'),-1),'|',1)
+		,@pathnodes )
+		,LPAD(pid,9,'0') ) )paths
+		,@pathall:=CONCAT(@pathall,'|',id,':',
+		@pathnodes ,'|') pathall
+		FROM t_category t,
+		(SELECT
+		@le:=0,@pathlevel:='', @pathall:='',@pathnodes:='') vv
+		ORDER BY pid,id
+		) src
+		) tt where 1=1 
+			<if test="name!=null and name!=''">
+				and t.name like '%#{name}%'
+			</if>
+		
+	</select>
+	<insert id="addCategory" parameterType="cn.bocom.entity.Category">
+	  insert into t_category
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	     
+	      <if test="pid != null">
+	        pid,
+	      </if>
+	      <if test="name != null">
+	        name,
+	      </if>
+	      <if test="type != null">
+	        type,
+	      </if>
+	       <if test="sort != null">
+	        sort,
+	      </if>
+	      create_time,
+	      
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	     
+	      <if test="pid != null">
+	        #{pid},
+	      </if>
+	      <if test="name != null">
+	        #{name},
+	      </if>
+	      <if test="type != null">
+	        #{type},
+	      </if>
+	      <if test="sort != null">
+	        #{sort},
+	      </if>
+	      now(),
+	     
+	    </trim>
+	</insert>
+	<update id="updateCategory" parameterType="cn.bocom.entity.Category">
+		update t_category
+		<trim prefix="set" suffixOverrides=",">
+		  <if test="pid!=null">pid=#{pid},</if>
+		  <if test="name!=null">name=#{name},</if>
+		  <if test="type!=null">type=#{type},</if>
+		  <if test="sort!=null">sort=#{sort},</if>
+ 		</trim>
+		where id=#{id}
+	</update>
+	<delete id="delCategory" parameterType="string">
+		delete from t_category where id=#{id}
+	</delete>
+	
+	<select id="selectCategoryTree" parameterType="java.lang.String" resultType="cn.bocom.entity.Category">
+    	select * from t_category where type=#{type} order by id, sort
+  	</select>
+	
+</mapper>

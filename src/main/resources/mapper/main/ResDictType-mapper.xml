@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.ResDictTypeMapper" >
+	<select id="queryResDictType" resultType="HashMap" parameterType="cn.bocom.entity.Alias">
+		select id as res_dict_typeid,type_code typecode,type_name type_name,remark,enabled from t_res_dict_type where 1=1
+		<if test="typeCode != null">
+	       and type_code=#{type_code}
+	    </if>
+	    <if test="id != null">
+	       and id=#{id}
+	    </if>
+	     <if test="typeName != null">
+	       and type_name LIKE CONCAT('%',#{typeName},'%')
+	    </if>
+	    
+	</select>
+	<insert id="addResDictType" parameterType="cn.bocom.entity.ResDictType">
+	  insert into t_res_dict_type
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	     <if test="id != null">
+	        id,
+	      </if>
+	      <if test="typeCode != null">
+	        type_code,
+	      </if>
+	      <if test="typeName != null">
+	        type_name,
+	      </if>
+	     
+	      <if test="remark != null">
+	        remark,
+	      </if>
+	      <if test="enabled != null">
+	        enabled,
+	      </if>
+	      
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	     
+	      <if test="id != null">
+	        #{id},
+	      </if>
+	      <if test="typeCode != null">
+	        #{typeCode},
+	      </if>
+	      <if test="typeName != null">
+	         #{typeName},
+	   	  </if>
+	     
+	      <if test="remark != null">
+	        #{remark},
+	      </if>
+	      <if test="enabled != null">
+	         #{enabled},
+	      </if>
+	    
+	    </trim>
+	</insert>
+	<update id="updateResDictType" parameterType="cn.bocom.entity.ResDictType">
+		update t_res_dict_type
+		<trim prefix="set" suffixOverrides=",">
+		  <if test="typeCode!=null">type_code=#{typeCode},</if>
+		  <if test="typeName">type_name=#{typeName},</if>
+		  <if test="remark!=null">remark=#{remark},</if>
+		  <if test="enabled">enabled=#{enabled},</if>
+ 		</trim>
+		where id=#{id}
+	</update>
+	<delete id="delResDictType" parameterType="string">
+		delete from t_res_dict_type where id=#{id}
+	</delete>
+	
+</mapper>

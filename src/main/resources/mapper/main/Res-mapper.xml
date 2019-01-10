@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.ResMapper" >
+	<select id="findRes" resultType="cn.bocom.entity.Res" parameterType="cn.bocom.entity.Res">
+		select * from t_res t where 1=1
+	    <if test="id != null and id != ''">
+	       and t.id=#{id}
+	    </if>
+	    order by create_time desc
+	</select>
+	<select id="queryResListByPage" resultType="cn.bocom.entity.ResView" parameterType="cn.bocom.entity.ResView">
+		select t1.*,
+		(select t4.name from t_category t4 where t1.category=t4.id) as category_name,
+		(case t1.connect_type when 0 then '实时'  else '数据提取' End ) as connect_type_name,
+		(case t1.status when 0 then '未缓存'  else '已缓存' End ) as status_name,
+		DATE_FORMAT(t1.create_time, '%Y-%m-%d %H:%i:%S') as create_time_str,
+		t3.id as ds_id,t3.name as ds_name 
+		from t_res t1,t_res_data t2,t_data_source t3 where t1.id=t2.res_id and t2.ds_id=t3.id
+	    <if test="id != null and id != ''">
+	       and t1.id=#{id}
+	    </if>
+	     <if test="name != null and name != ''">
+	       and t1.name like CONCAT('%',#{name},'%')
+	    </if>
+	    <if test="category != null and category != ''">
+	       and t1.category=#{category}
+	    </if>
+	    <if test="ds_id != null and ds_id != ''">
+	       and t2.ds_id=#{ds_id}
+	    </if>
+	    <if test="ds_name != null and ds_name != ''">
+	       and t3.name like CONCAT('%',#{ds_name},'%')
+	    </if>
+	    <if test="connect_type != null and connect_type != ''">
+	       and t1.connect_type =#{connect_type}
+	    </if>
+	    <if test="status != null and status != ''">
+	       and t1.status =#{status}
+	    </if>
+	    <!-- 
+	    <if test="starttime != null and starttime != ''">
+	       and DATE_FORMAT(t1.create_time, '%Y-%m-%d %H:%i:%S') =#{starttime}
+	    </if>
+	    <if test="endtime != null and endtime != ''">
+	       and DATE_FORMAT(t1.create_time, '%Y-%m-%d %H:%i:%S') =#{endtime}
+	    </if>
+	     -->
+	     order by create_time desc
+	</select>
+	<update id="saveRes" parameterType="cn.bocom.entity.Res">
+		REPLACE INTO t_res(
+			<if test="id!=null and id!=''">id,</if>
+			<if test="name!=null and name!=''">name,</if>
+			<if test="category!=null and category!=''">category,</if>
+			<if test="connectType!=null and connectType!=''">connect_type,</if>
+			<if test="cacheTable!=null and cacheTable!=''">cache_table,</if>
+			<if test="createUser!=null and createUser!=''">create_user,</if>
+			create_time,update_time
+		) values (
+			<if test="id!=null and id!=''">#{id},</if>
+			<if test="name!=null and name!=''">#{name},</if>
+			<if test="category!=null and category!=''">#{category},</if>
+			<if test="connectType!=null and connectType!=''">#{connectType},</if>
+			<if test="cacheTable!=null and cacheTable!=''">#{cacheTable},</if>			
+			<if test="createUser!=null and createUser!=''">#{createUser},</if>
+			now(),now()
+		)
+	</update>
+	<update id="saveRes2" parameterType="cn.bocom.entity.Res">
+		REPLACE INTO t_res(
+			<if test="id!=null and id!=''">id,</if>
+			<if test="name!=null and name!=''">name,</if>
+			<if test="category!=null and category!=''">category,</if>
+			<if test="connectType!=null and connectType!=''">connect_type,</if>
+			<if test="cacheTable!=null and cacheTable!=''">cache_table,</if>
+			<if test="createUser!=null and createUser!=''">create_user,</if>
+			<if test="num!=null">num,</if><!-- mysql里num为int类型，此值为0时mybatis会认为是'' -->
+			<if test="createTime!=null">create_time,</if>
+			<if test="status!=null and status!=''">status,</if>
+			<if test="schemaFlag!=null and schemaFlag!=''">schema_flag,</if>
+			update_time
+		) values (
+			<if test="id!=null and id!=''">#{id},</if>
+			<if test="name!=null and name!=''">#{name},</if>
+			<if test="category!=null and category!=''">#{category},</if>
+			<if test="connectType!=null and connectType!=''">#{connectType},</if>
+			<if test="cacheTable!=null and cacheTable!=''">#{cacheTable},</if>
+			<if test="createUser!=null and createUser!=''">#{createUser},</if>
+			<if test="num!=null">#{num},</if>
+			<if test="createTime!=null">#{createTime},</if>
+			<if test="status!=null and status!=''">#{status},</if>
+			<if test="schemaFlag!=null and schemaFlag!=''">#{schemaFlag},</if>
+			now()
+		)
+	</update>
+	<delete id="delRes" parameterType="java.lang.String">
+	    delete from t_res_col_proc where col_id in (select id from t_res_col where res_id = #{id,jdbcType=VARCHAR});
+		delete from t_res_col where res_id = #{id,jdbcType=VARCHAR};
+		delete from t_res_filter_proc where filter_id in (select id from t_res_filter where res_id = #{id,jdbcType=VARCHAR});
+		delete from t_res_filter where res_id = #{id,jdbcType=VARCHAR};
+		delete from t_res_data where res_id = #{id,jdbcType=VARCHAR};
+		delete from t_res where id = #{id,jdbcType=VARCHAR};
+    </delete>
+	
+</mapper>

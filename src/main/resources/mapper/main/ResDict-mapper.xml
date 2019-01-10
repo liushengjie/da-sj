@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.ResDictMapper" >
+	<select id="queryResDict" resultType="HashMap" parameterType="cn.bocom.entity.Alias">
+		select id as resdictid,code,name,code_type,remark,enabled from t_res_dict where 1=1
+		
+	    <if test="id != null">
+	       and id=#{id}
+	    </if>
+	     <if test="code != null">
+	       and code =#{code}
+	    </if>
+	    <if test="name != null">
+	       and name LIKE CONCAT('%',#{name},'%')
+	    </if>
+	    <if test="codeType != null">
+	       and code_type =#{codeType}
+	    </if>
+	</select>
+	<insert id="addResDict" parameterType="cn.bocom.entity.ResDict">
+	  insert into t_res_dict
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	     <if test="id != null">
+	        id,
+	      </if>
+	      <if test="code != null">
+	        code,
+	      </if>
+	      <if test="name != null">
+	        name,
+	      </if>
+	      <if test="codeType != null">
+	        code_type,
+	      </if>
+	      <if test="remark != null">
+	        remark,
+	      </if>
+	      <if test="enabled != null">
+	        enabled,
+	      </if>
+	     
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	     
+	      <if test="id != null">
+	        #{id},
+	      </if>
+	      <if test="code != null">
+	        #{code},
+	      </if>
+	      <if test="name != null">
+	         #{name},
+	   	  </if>
+	      <if test="codeType != null">
+	        #{codeType},
+	      </if>
+	      <if test="remark != null">
+	        #{remark},
+	      </if>
+	      <if test="enabled != null">
+	         #{enabled},
+	      </if>
+	    </trim>
+	</insert>
+	<update id="updateResDict" parameterType="cn.bocom.entity.Alias">
+		update t_res_dict
+		<trim prefix="set" suffixOverrides=",">
+		  <if test="code!=null">code=#{code},</if>
+		  <if test="name">name=#{name},</if>
+		  <if test="codeType!=null">code_type=#{codeType},</if>
+		  <if test="remark!=null">remark=#{remark},</if>
+		  <if test="enabled!=null">enabled=#{enabled},</if>
+ 		</trim>
+		where id=#{id}
+	</update>
+	<delete id="delResDict" parameterType="string">
+		delete from t_res_dict where id=#{id}
+	</delete>
+	
+</mapper>

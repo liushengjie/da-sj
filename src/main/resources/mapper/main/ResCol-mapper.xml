@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.ResColMapper" >
+	<select id="findResCol" resultType="cn.bocom.entity.ResCol" parameterType="cn.bocom.entity.ResCol">
+		select * from t_res_col t where 1=1
+	    <if test="resId != null and resId != ''">
+	       and t.res_id=#{resId}
+	    </if>
+	    order by sort
+	</select>
+	<update id="saveResCol" parameterType="cn.bocom.entity.ResCol">
+		REPLACE INTO t_res_col(
+			<trim suffixOverrides=",">
+				<if test="id!=null and id!=''">id,</if>
+				<if test="resId!=null and resId!=''">res_id,</if>
+				<if test="aliasId!=null and aliasId!=''">alias_id,</if>
+				<if test="type!=null and type!=''">type,</if>
+				<if test="attr!=null and attr!=''">attr,</if>
+				<if test="col!=null and col!=''">col,</if>
+				<if test="pk!=null and pk!=''">pk,</if>
+				<if test="idx!=null and idx!=''">idx,</if>
+				<if test="dic!=null and dic!=''">dic,</if>
+				<if test="status!=null and status!=''">status,</if>
+				<if test="origin!=null and origin!=''">origin,</if>
+				<if test="changeType!=null and changeType!=''">change_type,</if>
+				<if test="colCache!=null and colCache!=''">col_cache,</if>
+				<if test="sort!=null and sort!=''">sort,</if>
+				create_time
+			</trim>
+		) values (
+			<trim suffixOverrides=",">
+				<if test="id!=null and id!=''">#{id},</if>
+				<if test="resId!=null and resId!=''">#{resId},</if>
+				<if test="aliasId!=null and aliasId!=''">#{aliasId},</if>
+				<if test="type!=null and type!=''">#{type},</if>
+				<if test="attr!=null and attr!=''">#{attr},</if>
+				<if test="col!=null and col!=''">#{col},</if>
+				<if test="pk!=null and pk!=''">#{pk},</if>
+				<if test="idx!=null and idx!=''">#{idx},</if>
+				<if test="dic!=null and dic!=''">#{dic},</if>
+				<if test="status!=null and status!=''">#{status},</if>
+				<if test="origin!=null and origin!=''">#{origin},</if>
+				<if test="changeType!=null and changeType!=''">#{changeType},</if>
+				<if test="colCache!=null and colCache!=''">#{colCache},</if>
+				<if test="sort!=null and sort!=''">#{sort},</if>
+				now()
+			</trim>
+		)
+	</update>
+</mapper>

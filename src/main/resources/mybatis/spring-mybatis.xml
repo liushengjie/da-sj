@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+   http://www.springframework.org/schema/beans 
+   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+   http://www.springframework.org/schema/tx 
+   http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+   ">
+	<!-- 默认的dataSource -->
+	<bean id="defaultDataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" destroy-method="close" primary="true">
+		<!-- 该数据源唯一的名称，不能重复 -->
+		<property name="uniqueResourceName" value="defaultDataSource"/>
+		<property name="xaDataSourceClassName" value="com.alibaba.druid.pool.xa.DruidXADataSource" />
+        <property name="borrowConnectionTimeout" value="60" />     
+        <property name="minPoolSize" value="5" />     
+        <property name="maxPoolSize" value="20" />     
+        <property name="maxLifetime" value="0" />     
+		<property name="xaProperties">
+	        <props>
+	            <prop key="driverClassName">com.mysql.jdbc.Driver</prop>    
+	            <prop key="url">jdbc:mysql://192.168.124.240:3306/da_sj?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;allowMultiQueries=true</prop>    
+	            <prop key="username">root</prop>    
+	            <prop key="password">sjz@Hiynn1111</prop>    
+	            <prop key="initialSize">10</prop>    
+	            <prop key="minIdle">2</prop>    
+	            <prop key="maxActive">30</prop>    
+	            <prop key="maxWait">60000</prop>    
+	            <prop key="timeBetweenEvictionRunsMillis">60000</prop>    
+	            <prop key="minEvictableIdleTimeMillis">300000</prop>    
+	            <prop key="validationQuery">SELECT 1</prop>    
+	            <prop key="testWhileIdle">true</prop>    
+	            <prop key="testOnBorrow">false</prop>    
+	            <prop key="testOnReturn">false</prop>    
+	            <prop key="poolPreparedStatements">true</prop>    
+	            <prop key="maxPoolPreparedStatementPerConnectionSize">20</prop>    
+	            <prop key="filters">stat</prop>
+	        </props>    
+	    </property>
+	</bean>
+
+	<!-- 定义中间表使用的数据源、sqlSessionFactory等 -->
+	<bean id="atomikosDynamicDataSource" class="cn.bocom.other.datasource.AtomikosDynamicDataSource" >
+        <property name="defaultTargetDataSource" ref="defaultDataSource"></property> 
+        <property name="targetDataSources">
+            <map>
+                <entry key="defaultDataSource" value-ref="defaultDataSource"/> 
+            </map>
+        </property>
+    </bean>
+    
+     <!-- 定义主业务使用的sqlSessionFactory -->
+	<bean id="sqlSessionFactoryMain" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="defaultDataSource" />
+		<property name="mapperLocations" value="classpath:mapper/main/*.xml" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+	</bean>
+	<!-- 扫描mybatis的接口所在的文件 -->
+	<bean id="mapperScannerConfigurerMain" class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.bocom.mapper.main" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryMain"/>
+	</bean>
+    
+    <!-- 定义切换数据源使用的sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="atomikosDynamicDataSource" />
+		<property name="mapperLocations" value="classpath:mapper/business/*.xml" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+	</bean>
+	<!-- 扫描mybatis的接口所在的文件 -->
+	<bean id="mapperScannerConfigurer" class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.bocom.mapper.business" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	</bean>
+
+
+	<!-- jta分布式事务 -->
+	
+	<!-- Atomikos 事务管理器配置 -->
+	<bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
+		init-method="init" destroy-method="close">
+		<!-- <property name="startupTransactionService" value="false" /> -->
+		<!-- close()时是否强制终止事务 -->
+    	<property name="forceShutdown" value="false" />
+	</bean>
+
+	<!-- Atomikos UserTransaction配置 -->
+	<bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"></bean>
+
+	<!-- JTA事务管理器 -->
+	<bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+		<property name="transactionManager">
+			<ref bean="atomikosTransactionManager" />
+		</property>
+		<property name="userTransaction">
+			<ref bean="atomikosUserTransaction" />
+		</property>
+	</bean>
+	
+	<!-- 开启spring注解事务 -->
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+</beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.ResColProcMapper" >
+	<select id="findResColProc" resultType="cn.bocom.entity.ResColProc" parameterType="cn.bocom.entity.ResColProc">
+		select * from t_res_col_proc t where 1=1
+	    <if test="colId != null and colId != ''">
+	       and t.col_id=#{colId}
+	    </if>
+	    order by sort
+	</select>
+	<update id="saveResColProc" parameterType="cn.bocom.entity.ResColProc">
+		REPLACE INTO t_res_col_proc(
+			<trim suffixOverrides=",">
+				<if test="id!=null and id!=''">id,</if>
+				<if test="colId!=null and colId!=''">col_id,</if>
+				<if test="procId!=null and procId!=''">proc_id,</if>
+				<if test="params!=null and params!=''">params,</if>
+				<if test="sort!=null and sort!=''">sort,</if>
+			</trim>
+		) values (
+			<trim suffixOverrides=",">
+				<if test="id!=null and id!=''">#{id},</if>
+				<if test="colId!=null and colId!=''">#{colId},</if>
+				<if test="procId!=null and procId!=''">#{procId},</if>
+				<if test="params!=null and params!=''">#{params},</if>
+				<if test="sort!=null and sort!=''">#{sort},</if>
+			</trim>
+		)
+	</update>
+</mapper>

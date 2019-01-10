@@ -1,0 +1,197 @@
+apply plugin: 'application'
+apply plugin: 'eclipse'
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'org.springframework.boot'
+apply plugin: "com.gradle.build-scan"
+
+buildscript {
+	ext {
+		springBootVersion = '1.4.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		maven {url "http://maven.aliyun.com/nexus/content/repositories/snapshots"}
+		maven {url "https://plugins.gradle.org/m2/"}
+	}
+
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE'
+		classpath "org.hidetake:gradle-ssh-plugin:2.9.0"
+		classpath "com.gradle:build-scan-plugin:1.15.2"
+	}
+}
+
+buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
+
+ext {
+	springBootVersion = '1.4.3.RELEASE'
+	snappyVersion = '1.1.2.1'
+	log4jAPIVersion = '2.5'
+}
+
+jar {
+    baseName = 'da-sj'
+    version =  '1.0'
+}
+
+configurations {
+	compile.exclude module: "spring-boot-starter-tomcat"
+	compile.exclude module: "spring-boot-starter-logging"
+	mybatisGenerator
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile("com.alibaba:fastjson:1.2.8")
+	compile("com.atomikos:transactions-jdbc:4.0.4")
+	compile("com.atomikos:transactions-jta:4.0.4")
+	
+	
+	compile("javax.transaction:jta:1.1")
+    compile("org.springframework.boot:spring-boot-starter")
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-undertow")
+	compile("org.springframework.boot:spring-boot-starter-data-redis"){
+		exclude module: 'jcl-over-slf4j'
+	}
+	compile("org.springframework.boot:spring-boot-starter-jdbc")
+	compile("org.springframework.boot:spring-boot-starter-test"){
+		exclude module: 'slf4j-api'
+	}
+	compile("org.springframework.boot:spring-boot-starter-aop")
+
+	compile("commons-io:commons-io:2.4")
+	compile("commons-lang:commons-lang:2.6")
+	compile("com.alibaba:druid:1.0.15")
+	compile("mysql:mysql-connector-java:5.1.34")
+
+	compile("org.im4java:im4java:1.4.0")
+
+    compile('io.springfox:springfox-swagger2:2.7.0'){
+    	exclude module: 'slf4j-api'
+    }
+    compile('io.springfox:springfox-swagger-ui:2.7.0')
+    compile('io.springfox:springfox-petstore:2.7.0'){
+    	exclude module: 'slf4j-api'
+    }
+    
+
+    compile("commons-beanutils:commons-beanutils:1.8.3")
+
+    compile files('lib/ojdbc14.jar')
+    compile('com.github.pagehelper:pagehelper:5.0.0')
+    compile("commons-collections:commons-collections:3.2.2")
+    
+    compile("org.slf4j:slf4j-api:1.7.22")
+    compile("org.slf4j:jcl-over-slf4j:1.7.22")
+    compile("org.slf4j:log4j-over-slf4j:1.7.22")
+    compile("org.slf4j:jul-to-slf4j:1.7.22")
+    
+    compile("org.apache.logging.log4j:log4j-api:2.4.1")
+    compile("org.apache.logging.log4j:log4j-core:2.4.1")
+    compile("org.apache.logging.log4j:log4j-slf4j-impl:2.4.1")
+    compile("com.google.guava:guava")
+    
+    compile group: 'org.springframework', name: 'springloaded', version:'1.2.6.RELEASE'
+    
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.1'
+    compile group: 'tk.mybatis', name:'mapper', version:'3.4.0'
+    compile group: 'org.mybatis.generator', name:'mybatis-generator-core', version:'1.3.5'
+    
+    compile files('lib/lts-1.7.2-SNAPSHOT.jar')
+    compile ('com.github.sgroschupf:zkclient:0.1'){
+    	exclude module: 'log4j'
+    	exclude module: 'slf4j-log4j12'
+    }
+    compile group: 'io.netty', name:'netty-all', version:'4.0.20.Final'
+    compile group: 'org.mapdb', name:'mapdb', version:'2.0-beta10'
+    
+    compile 'com.github.caspar-chen:swagger-ui-layer:0.0.6'
+    
+    compile ('org.apache.ignite:ignite-core:2.6.0')
+    compile ('org.apache.ignite:ignite-spring:2.6.0')
+    compile ('org.apache.ignite:ignite-log4j2:2.6.0')
+    
+    compile ('net.oschina.likaixuan:excelutil:2.0.1')
+    compile ("cn.sj:da-common-sj:0.0.8")
+    compile ("org.antlr:ST4:4.0.8")
+    
+    
+	mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.3.5'
+    mybatisGenerator 'tk.mybatis:mapper:3.4.0'
+    mybatisGenerator 'mysql:mysql-connector-java:5.1.34'
+    mybatisGenerator 'cn.sj:mapper-sj-plugin:1.0.1'
+}
+
+repositories {
+    mavenCentral()
+	maven { url "http://maven.aliyun.com/nexus/content/repositories/snapshots"}
+	maven { url "https://repo.spring.io/snapshot/" }
+	maven { url 'http://nexus.pentaho.org/content/groups/omni' }
+	maven { url "https://raw.github.com/liushengjie/maven-repo/master/" }
+}
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+def env = System.getProperty("env") ?: "dev"
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/resources", "src/main/profile/$env"]
+        }
+    }
+}
+
+
+def getDbProperties = {
+    def properties = new Properties()
+    file("src/main/resources/mybatis/my-config.properties").withInputStream { inputStream ->
+        properties.load(inputStream)
+    }
+    properties
+}
+
+task mybatisGenerate {
+    leftShift {
+        def properties = getDbProperties()
+        ant.properties['targetProject'] = projectDir.path
+        ant.properties['driverClass'] = properties.getProperty("jdbc.driverClassName")
+        ant.properties['connectionURL'] = properties.getProperty("jdbc.url")
+        ant.properties['userId'] = properties.getProperty("jdbc.username")
+        ant.properties['password'] = properties.getProperty("jdbc.password")
+        ant.properties['src_main_java'] = sourceSets.main.java.srcDirs[0].path
+        ant.properties['src_main_resources'] = sourceSets.main.resources.srcDirs[0].path
+        ant.properties['modelPackage'] = properties.getProperty("package.model")
+        ant.properties['mapperPackage'] = properties.getProperty("package.mapper")
+        ant.properties['sqlMapperPackage'] = properties.getProperty("package.xml")
+        ant.taskdef(
+            name: 'mbgenerator',
+            classname: 'org.mybatis.generator.ant.GeneratorAntTask',
+            classpath: configurations.mybatisGenerator.asPath
+        )
+        ant.mbgenerator(overwrite: true,
+            configfile: 'src/main/resources/mybatis/generator.xml', verbose: true) {
+            propertyset {
+                propertyref(name: 'targetProject')
+                propertyref(name: 'userId')
+                propertyref(name: 'driverClass')
+                propertyref(name: 'connectionURL')
+                propertyref(name: 'password')
+                propertyref(name: 'src_main_java')
+                propertyref(name: 'src_main_resources')
+                propertyref(name: 'modelPackage')
+                propertyref(name: 'mapperPackage')
+                propertyref(name: 'sqlMapperPackage')
+            }
+        }
+    }
+} 
+
+tasks.withType(JavaCompile) {  
+    options.encoding = "UTF-8"  
+}

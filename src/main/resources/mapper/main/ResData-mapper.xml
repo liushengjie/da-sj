@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.ResDataMapper" >
+	<select id="findResData" resultType="cn.bocom.entity.ResData" parameterType="cn.bocom.entity.ResData">
+		select * from t_res_data t where 1=1
+	    <if test="resId != null and resId != ''">
+	       and t.res_id=#{resId}
+	    </if>
+	    order by create_time desc
+	</select>
+	<update id="saveResData" parameterType="cn.bocom.entity.ResData">
+		REPLACE INTO t_res_data(
+			<if test="id!=null and id!=''">id,</if>
+			<if test="resId!=null and resId!=''">res_id,</if>
+			<if test="dsId!=null and dsId!=''">ds_id,</if>
+			<if test="tableName!=null and tableName!=''">table_name,</if>
+			<if test="diy!=null and diy!=''">diy,</if>
+			<if test="diySql!=null and diySql!=''">diy_sql,</if>
+			<if test="aliasId!=null and aliasId!=''">alias_id,</if>
+			create_time
+		) values (
+			<if test="id!=null and id!=''">#{id},</if>
+			<if test="resId!=null and resId!=''">#{resId},</if>
+			<if test="dsId!=null and dsId!=''">#{dsId},</if>
+			<if test="tableName!=null and tableName!=''">#{tableName},</if>
+			<if test="diy!=null and diy!=''">#{diy},</if>
+			<if test="diySql!=null and diySql!=''">#{diySql},</if>
+			<if test="aliasId!=null and aliasId!=''">#{aliasId},</if>
+			now()
+		)
+	</update>
+</mapper>
