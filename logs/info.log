@@ -2438,3 +2438,108 @@ Metrics for local node (to disable set 'metricsLogFrequency' to 0)
     ^-- Outbound messages queue [size=0]
     ^-- Public thread pool [active=0, idle=0, qSize=0]
     ^-- System thread pool [active=0, idle=0, qSize=0]
+[17:43:41:120] [INFO] - org.springframework.boot.StartupInfoLogger.logStarting(StartupInfoLogger.java:48) - Starting Application on owlj with PID 2728 (C:\work\code\da-service\da-sj\bin started by Administrator in C:\work\code\da-service\da-sj)
+[17:43:41:120] [INFO] - org.springframework.boot.SpringApplication.logStartupProfileInfo(SpringApplication.java:661) - No active profile set, falling back to default profiles: default
+[17:43:41:193] [INFO] - org.hibernate.validator.internal.util.Version.<clinit>(Version.java:30) - HV000001: Hibernate Validator 5.2.4.Final
+[17:43:44:031] [ERROR] - org.apache.ignite.logger.java.JavaLogger.error(JavaLogger.java:300) - Failed to resolve default logging config file: config/java.util.logging.properties
+[17:43:44:093] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - 
+
+>>>    __________  ________________  
+>>>   /  _/ ___/ |/ /  _/_  __/ __/  
+>>>  _/ // (7 7    // /  / / / _/    
+>>> /___/\___/_/|_/___/ /_/ /___/   
+>>> 
+>>> ver. 2.6.0#20180710-sha1:669feacc
+>>> 2018 Copyright(C) Apache Software Foundation
+>>> 
+>>> Ignite documentation: http://ignite.apache.org
+
+[17:43:44:098] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Config URL: n/a
+[17:43:44:106] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - IgniteConfiguration [igniteInstanceName=clientNode, pubPoolSize=12, svcPoolSize=12, callbackPoolSize=12, stripedPoolSize=12, sysPoolSize=12, mgmtPoolSize=4, igfsPoolSize=12, dataStreamerPoolSize=12, utilityCachePoolSize=12, utilityCacheKeepAliveTime=60000, p2pPoolSize=2, qryPoolSize=12, igniteHome=null, igniteWorkDir=C:\Users\ADMINI~1\AppData\Local\Temp\ignite\work, mbeanSrv=com.sun.jmx.mbeanserver.JmxMBeanServer@e874448, nodeId=88e029a2-15b1-4b61-89d6-2492e71ab742, marsh=org.apache.ignite.internal.binary.BinaryMarshaller@4ec0229c, marshLocJobs=false, daemon=false, p2pEnabled=true, netTimeout=5000, sndRetryDelay=1000, sndRetryCnt=3, metricsHistSize=10000, metricsUpdateFreq=2000, metricsExpTime=9223372036854775807, discoSpi=TcpDiscoverySpi [addrRslvr=null, sockTimeout=0, ackTimeout=0, marsh=null, reconCnt=10, reconDelay=2000, maxAckTimeout=600000, forceSrvMode=false, clientReconnectDisabled=false, internalLsnr=null], segPlc=STOP, segResolveAttempts=2, waitForSegOnStart=true, allResolversPassReq=true, segChkFreq=10000, commSpi=TcpCommunicationSpi [connectGate=null, connPlc=null, enableForcibleNodeKill=false, enableTroubleshootingLog=false, srvLsnr=org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi$2@df9d400, locAddr=null, locHost=null, locPort=47100, locPortRange=100, shmemPort=-1, directBuf=true, directSndBuf=false, idleConnTimeout=600000, connTimeout=5000, maxConnTimeout=600000, reconCnt=10, sockSndBuf=32768, sockRcvBuf=32768, msgQueueLimit=0, slowClientQueueLimit=0, nioSrvr=null, shmemSrv=null, usePairedConnections=false, connectionsPerNode=1, tcpNoDelay=true, filterReachableAddresses=false, ackSndThreshold=32, unackedMsgsBufSize=0, sockWriteTimeout=2000, lsnr=null, boundTcpPort=-1, boundTcpShmemPort=-1, selectorsCnt=6, selectorSpins=0, addrRslvr=null, ctxInitLatch=java.util.concurrent.CountDownLatch@4ec427[Count = 1], stopping=false, metricsLsnr=org.apache.ignite.spi.communication.tcp.TcpCommunicationMetricsListener@4c8d45cf], evtSpi=org.apache.ignite.spi.eventstorage.NoopEventStorageSpi@fde487b, colSpi=NoopCollisionSpi [], deploySpi=LocalDeploymentSpi [lsnr=null], indexingSpi=org.apache.ignite.spi.indexing.noop.NoopIndexingSpi@b34c7c9, addrRslvr=null, clientMode=true, rebalanceThreadPoolSize=1, txCfg=org.apache.ignite.configuration.TransactionConfiguration@5b490d5e, cacheSanityCheckEnabled=true, discoStartupDelay=60000, deployMode=SHARED, p2pMissedCacheSize=100, locHost=null, timeSrvPortBase=31100, timeSrvPortRange=100, failureDetectionTimeout=10000, clientFailureDetectionTimeout=30000, metricsLogFreq=60000, hadoopCfg=null, connectorCfg=org.apache.ignite.configuration.ConnectorConfiguration@1f6c4ae, odbcCfg=null, warmupClos=null, atomicCfg=AtomicConfiguration [seqReserveSize=1000, cacheMode=PARTITIONED, backups=1, aff=null, grpName=null], classLdr=null, sslCtxFactory=null, platformCfg=null, binaryCfg=null, memCfg=null, pstCfg=null, dsCfg=null, activeOnStart=true, autoActivation=true, longQryWarnTimeout=3000, sqlConnCfg=null, cliConnCfg=ClientConnectorConfiguration [host=null, port=10800, portRange=100, sockSndBufSize=0, sockRcvBufSize=0, tcpNoDelay=true, maxOpenCursorsPerConn=128, threadPoolSize=12, idleTimeout=0, jdbcEnabled=true, odbcEnabled=true, thinCliEnabled=true, sslEnabled=false, useIgniteSslCtxFactory=true, sslClientAuth=false, sslCtxFactory=null], authEnabled=false, failureHnd=null, commFailureRslvr=null]
+[17:43:44:106] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Daemon mode: off
+[17:43:44:106] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - OS: Windows 10 10.0 amd64
+[17:43:44:106] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - OS user: Administrator
+[17:43:44:107] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - PID: 2728
+[17:43:44:107] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Language runtime: Java Platform API Specification ver. 1.8
+[17:43:44:107] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - VM information: Java(TM) SE Runtime Environment 1.8.0_191-b12 Oracle Corporation Java HotSpot(TM) 64-Bit Server VM 25.191-b12
+[17:43:44:107] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - VM total memory: 3.5GB
+[17:43:44:107] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Remote Management [restart: off, REST: off, JMX (remote: off)]
+[17:43:44:108] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Logger: JavaLogger [quiet=true, config=null]
+[17:43:44:108] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - IGNITE_HOME=null
+[17:43:44:108] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - VM arguments: [-Dfile.encoding=UTF-8]
+[17:43:44:113] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Configured caches [in 'sysMemPlc' dataRegion: ['ignite-sys-cache']]
+[17:43:44:114] [WARN] - org.apache.ignite.logger.java.JavaLogger.warning(JavaLogger.java:290) - Peer class loading is enabled (disable it in production for performance and deployment consistency reasons)
+[17:43:44:115] [WARN] - org.apache.ignite.logger.java.JavaLogger.warning(JavaLogger.java:290) - This operating system has been tested less rigorously: Windows 10 10.0 amd64. Our team will appreciate the feedback if you experience any problems running ignite in this environment.
+[17:43:44:116] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Local node user attribute [cache.service.node=false]
+[17:43:44:116] [WARN] - org.apache.ignite.logger.java.JavaLogger.warning(JavaLogger.java:290) - Initial heap size is 256MB (should be no less than 512MB, use -Xms512m -Xmx512m).
+[17:43:44:154] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Configured plugins:
+[17:43:44:154] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) -   ^-- None
+[17:43:44:154] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - 
+[17:43:44:156] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Configured failure handler: [hnd=StopNodeOrHaltFailureHandler [tryStop=false, timeout=0]]
+[17:43:44:184] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Successfully bound communication NIO server to TCP port [port=47100, locHost=0.0.0.0/0.0.0.0, selectorsCnt=6, selectorSpins=0, pairedConn=false]
+[17:43:44:233] [WARN] - org.apache.ignite.logger.java.JavaLogger.warning(JavaLogger.java:290) - Message queue limit is set to 0 which may lead to potential OOMEs when running cache operations in FULL_ASYNC or PRIMARY_SYNC modes due to message queues growth on sender and receiver sides.
+[17:43:44:243] [WARN] - org.apache.ignite.logger.java.JavaLogger.warning(JavaLogger.java:290) - Checkpoints are disabled (to enable configure any GridCheckpointSpi implementation)
+[17:43:44:261] [WARN] - org.apache.ignite.logger.java.JavaLogger.warning(JavaLogger.java:290) - Collision resolution is disabled (all jobs will be activated upon arrival).
+[17:43:44:262] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Security status [authentication=off, tls/ssl=off]
+[17:43:44:446] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Client connector processor has started on TCP port 10800
+[17:43:44:457] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - REST protocols do not start on client node. To start the protocols on client node set '-DIGNITE_REST_START_ON_CLIENT=true' system property.
+[17:43:44:621] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Non-loopback local IPs: 192.168.124.47, fe80:0:0:0:80c4:d125:960f:fd81%eth5, fe80:0:0:0:a91e:75e8:8dc3:f7b4%eth3
+[17:43:44:622] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Enabled local MACs: 00FF8954AE33, 6C4B9092095E
+[17:43:45:706] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Accepted incoming communication connection [locAddr=/192.168.124.47:47100, rmtAddr=/192.168.124.242:60298]
+[17:43:47:056] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Started exchange init [topVer=AffinityTopologyVersion [topVer=45, minorTopVer=0], crd=false, evt=NODE_JOINED, evtNode=88e029a2-15b1-4b61-89d6-2492e71ab742, customEvt=null, allowMerge=true]
+[17:43:47:202] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Started cache [name=ignite-sys-cache, id=-2100569601, memoryPolicyName=sysMemPlc, mode=REPLICATED, atomicity=TRANSACTIONAL, backups=2147483647]
+[17:43:47:203] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Finished exchange init [topVer=AffinityTopologyVersion [topVer=45, minorTopVer=0], crd=false]
+[17:43:47:233] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Received full message, will finish exchange [node=92f1b1fe-e848-4e47-a1ef-a26247edfc99, resVer=AffinityTopologyVersion [topVer=45, minorTopVer=0]]
+[17:43:47:235] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Finish exchange future [startVer=AffinityTopologyVersion [topVer=45, minorTopVer=0], resVer=AffinityTopologyVersion [topVer=45, minorTopVer=0], err=null]
+[17:43:47:253] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Class locally deployed: class cn.sj.common.filters.CacheServiceFilter
+[17:43:47:256] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Performance suggestions for grid 'clientNode' (fix if possible)
+[17:43:47:256] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - To disable, set -DIGNITE_PERFORMANCE_SUGGESTIONS_DISABLED=true
+[17:43:47:257] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) -   ^-- Enable G1 Garbage Collector (add '-XX:+UseG1GC' to JVM options)
+[17:43:47:257] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) -   ^-- Specify JVM heap max size (add '-Xmx<size>[g|G|m|M|k|K]' to JVM options)
+[17:43:47:257] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) -   ^-- Set max direct memory size if getting 'OOME: Direct buffer memory' (add '-XX:MaxDirectMemorySize=<size>[g|G|m|M|k|K]' to JVM options)
+[17:43:47:257] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) -   ^-- Disable processing of calls to System.gc() (add '-XX:+DisableExplicitGC' to JVM options)
+[17:43:47:257] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Refer to this page for more performance suggestions: https://apacheignite.readme.io/docs/jvm-and-system-tuning
+[17:43:47:257] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - 
+[17:43:47:258] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - To start Console Management & Monitoring run ignitevisorcmd.{sh|bat}
+[17:43:47:258] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - 
+[17:43:47:258] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - 
+
+>>> +----------------------------------------------------------------------+
+>>> Ignite ver. 2.6.0#20180710-sha1:669feacc5d3a4e60efcdd300dc8de99780f38eed
+>>> +----------------------------------------------------------------------+
+>>> OS name: Windows 10 10.0 amd64
+>>> CPU(s): 12
+>>> Heap: 3.5GB
+>>> VM name: 2728@owlj
+>>> Ignite instance name: clientNode
+>>> Local node [ID=88E029A2-15B1-4B61-89D6-2492E71AB742, order=45, clientMode=true]
+>>> Local node addresses: [owlj/0:0:0:0:0:0:0:1, /127.0.0.1, /192.168.124.47]
+>>> Local ports: TCP:10800 TCP:47100 
+
+[17:43:47:260] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - Topology snapshot [ver=45, servers=1, clients=2, CPUs=13, offheap=0.74GB, heap=5.4GB]
+[17:43:47:260] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) -   ^-- Node [id=88E029A2-15B1-4B61-89D6-2492E71AB742, clusterState=ACTIVE]
+[17:43:47:260] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) -   ^-- Baseline [id=0, size=1, online=1, offline=0]
+[17:43:49:134] [INFO] - org.springframework.boot.StartupInfoLogger.logStarted(StartupInfoLogger.java:57) - Started Application in 8.251 seconds (JVM running for 8.684)
+[17:43:52:615] [INFO] - cn.bocom.other.aspect.LogRecordAspect.doAround(LogRecordAspect.java:36) - 请求开始, 各个参数, url: http://localhost:3066/sysCode/selectDsType, method: GET, queryString: null
+[17:43:52:620] [INFO] - cn.bocom.other.aspect.LogRecordAspect.doAround(LogRecordAspect.java:36) - 请求开始, 各个参数, url: http://localhost:3066/dataSource/selectDsByPage, method: GET, queryString: name=&type=&dataMode=0&currentPage=1&pageSize=10
+[17:43:52:680] [INFO] - cn.bocom.other.aspect.LogRecordAspect.doAround(LogRecordAspect.java:39) - 请求结束，controller的返回值是 {"data":[{"name":"MYSQL","code":0,"cat":"relationData"},{"name":"ORACLE","code":1,"cat":"relationData"},{"name":"EXCEL","code":2,"cat":"noSQLData"}],"errno":0,"error":"","success":true}
+[17:43:53:028] [INFO] - com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:669) - {dataSource-1} inited
+[17:43:53:116] [INFO] - cn.bocom.other.aspect.LogRecordAspect.doAround(LogRecordAspect.java:39) - 请求结束，controller的返回值是 {"data":{"endRow":1,"firstPage":1,"hasNextPage":false,"hasPreviousPage":false,"isFirstPage":true,"isLastPage":true,"lastPage":1,"list":[{"createTime":"2019-01-11 17:29:06","createUser":"admin","dataMode":"0","database":"da_sj","driver":"com.mysql.jdbc.Driver","id":"190651","ip":"192.168.124.240","name":"da-sj","port":"3306","pwd":"sjz@Hiynn1111","state":"1","type":"1","typeName":"MYSQL","username":"root","xa":"0"},{"createTime":"2019-01-05 10:42:20","createUser":"admin","dataMode":"0","database":"ry","driver":"com.mysql.jdbc.Driver","id":"140745","ip":"192.168.124.240","name":"ruoyi","port":"3306","pwd":"1111@Hiynn","state":"1","type":"1","typeName":"MYSQL","username":"hiynn","xa":"0"}],"navigateFirstPage":1,"navigateLastPage":1,"navigatePages":8,"navigatepageNums":[1],"nextPage":0,"pageNum":1,"pageSize":2,"pages":1,"prePage":0,"size":2,"startRow":0,"total":2},"errno":0,"error":"","success":true}
+[17:43:55:531] [INFO] - cn.bocom.other.aspect.LogRecordAspect.doAround(LogRecordAspect.java:36) - 请求开始, 各个参数, url: http://localhost:3066/dataSource/selectDsByPage, method: GET, queryString: dataMode=0&currentPage=1&pageSize=100
+[17:43:55:538] [INFO] - cn.bocom.other.aspect.LogRecordAspect.doAround(LogRecordAspect.java:39) - 请求结束，controller的返回值是 {"data":{"endRow":1,"firstPage":1,"hasNextPage":false,"hasPreviousPage":false,"isFirstPage":true,"isLastPage":true,"lastPage":1,"list":[{"createTime":"2019-01-11 17:29:06","createUser":"admin","dataMode":"0","database":"da_sj","driver":"com.mysql.jdbc.Driver","id":"190651","ip":"192.168.124.240","name":"da-sj","port":"3306","pwd":"sjz@Hiynn1111","state":"1","type":"1","typeName":"MYSQL","username":"root","xa":"0"},{"createTime":"2019-01-05 10:42:20","createUser":"admin","dataMode":"0","database":"ry","driver":"com.mysql.jdbc.Driver","id":"140745","ip":"192.168.124.240","name":"ruoyi","port":"3306","pwd":"1111@Hiynn","state":"1","type":"1","typeName":"MYSQL","username":"hiynn","xa":"0"}],"navigateFirstPage":1,"navigateLastPage":1,"navigatePages":8,"navigatepageNums":[1],"nextPage":0,"pageNum":1,"pageSize":2,"pages":1,"prePage":0,"size":2,"startRow":0,"total":2},"errno":0,"error":"","success":true}
+[17:43:56:470] [INFO] - cn.bocom.other.aspect.LogRecordAspect.doAround(LogRecordAspect.java:36) - 请求开始, 各个参数, url: http://localhost:3066/dataSource/findTables, method: GET, queryString: dataSource=190651
+[17:43:56:478] [INFO] - cn.bocom.other.datasource.AbstractDynamicDataSource.verifyAndInitDataSource(AbstractDynamicDataSource.java:135) - 【初始化数据源】
+[17:43:56:721] [INFO] - com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:669) - {dataSource-2} inited
+[17:43:56:852] [INFO] - cn.bocom.other.aspect.LogRecordAspect.doAround(LogRecordAspect.java:39) - 请求结束，controller的返回值是 {"data":[{"TABLE_COMMENT":"系统代码表","TABLE_NAME":"d_sys_code","OBJ_TYPE":"TABLE","TABLE_ROWS":5,"ID":"da_sj.d_sys_code","UPDATE_TIME":"2019-01-04 10:56:06"},{"TABLE_COMMENT":"","TABLE_NAME":"d_sys_code_type","OBJ_TYPE":"TABLE","TABLE_ROWS":2,"ID":"da_sj.d_sys_code_type","UPDATE_TIME":"2019-01-04 10:56:06"},{"TABLE_COMMENT":"别名表","TABLE_NAME":"t_alias","OBJ_TYPE":"TABLE","TABLE_ROWS":1,"ID":"da_sj.t_alias","UPDATE_TIME":"2019-01-09 11:17:50"},{"TABLE_COMMENT":"","TABLE_NAME":"t_category","OBJ_TYPE":"TABLE","TABLE_ROWS":6,"ID":"da_sj.t_category","UPDATE_TIME":"2019-01-04 10:56:07"},{"TABLE_COMMENT":"","TABLE_NAME":"t_col_processor","OBJ_TYPE":"TABLE","TABLE_ROWS":10,"ID":"da_sj.t_col_processor","UPDATE_TIME":"2019-01-04 10:56:07"},{"TABLE_COMMENT":"数据仓库表","TABLE_NAME":"t_data_repos","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_data_repos"},{"TABLE_COMMENT":"数据源表","TABLE_NAME":"t_data_source","OBJ_TYPE":"TABLE","TABLE_ROWS":2,"ID":"da_sj.t_data_source","UPDATE_TIME":"2019-01-11 17:43:08"},{"TABLE_COMMENT":"","TABLE_NAME":"t_job","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_job"},{"TABLE_COMMENT":"资源表","TABLE_NAME":"t_res","OBJ_TYPE":"TABLE","TABLE_ROWS":2,"ID":"da_sj.t_res","UPDATE_TIME":"2019-01-05 14:55:34"},{"TABLE_COMMENT":"","TABLE_NAME":"t_res_col","OBJ_TYPE":"TABLE","TABLE_ROWS":23,"ID":"da_sj.t_res_col","UPDATE_TIME":"2019-01-05 14:55:33"},{"TABLE_COMMENT":"","TABLE_NAME":"t_res_col_proc","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_res_col_proc"},{"TABLE_COMMENT":"","TABLE_NAME":"t_res_data","OBJ_TYPE":"TABLE","TABLE_ROWS":2,"ID":"da_sj.t_res_data","UPDATE_TIME":"2019-01-05 14:55:33"},{"TABLE_COMMENT":"","TABLE_NAME":"t_res_dict","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_res_dict"},{"TABLE_COMMENT":"资源字典表","TABLE_NAME":"t_res_dict_type","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_res_dict_type"},{"TABLE_COMMENT":"","TABLE_NAME":"t_res_filter","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_res_filter"},{"TABLE_COMMENT":"","TABLE_NAME":"t_res_filter_proc","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_res_filter_proc","UPDATE_TIME":"2019-01-05 14:46:33"},{"TABLE_COMMENT":"","TABLE_NAME":"t_srv","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_srv"},{"TABLE_COMMENT":"","TABLE_NAME":"t_srv_edges","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_srv_edges"},{"TABLE_COMMENT":"","TABLE_NAME":"t_srv_nodes","OBJ_TYPE":"TABLE","TABLE_ROWS":0,"ID":"da_sj.t_srv_nodes"},{"TABLE_COMMENT":"VIEW","TABLE_NAME":"v_sys_code","OBJ_TYPE":"VIEW","TABLE_ROWS":5,"ID":"da_sj.v_sys_code"}],"errno":0,"error":"","success":true}
+[17:43:57:054] [WARN] - org.apache.ignite.logger.java.JavaLogger.warning(JavaLogger.java:290) - New version is available at ignite.apache.org: 2.7.0
+[17:44:47:266] [INFO] - org.apache.ignite.logger.java.JavaLogger.info(JavaLogger.java:285) - 
+Metrics for local node (to disable set 'metricsLogFrequency' to 0)
+    ^-- Node [id=88e029a2, name=clientNode, uptime=00:01:00.004]
+    ^-- H/N/C [hosts=2, nodes=3, CPUs=13]
+    ^-- CPU [cur=0.13%, avg=1.77%, GC=0%]
+    ^-- PageMemory [pages=0]
+    ^-- Heap [used=213MB, free=94.1%, comm=609MB]
+    ^-- Non heap [used=109MB, free=-1%, comm=110MB]
+    ^-- Outbound messages queue [size=0]
+    ^-- Public thread pool [active=0, idle=0, qSize=0]
+    ^-- System thread pool [active=0, idle=0, qSize=0]

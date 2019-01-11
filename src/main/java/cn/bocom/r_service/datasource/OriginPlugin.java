@@ -23,5 +23,5 @@ public interface OriginPlugin <T extends OriginEntity>{
      * @param datasource
      * @return
      */
-    public T converDataSource(DataSource datasource);
+    public T converOrigin(DataSource datasource);
 }

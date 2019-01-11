@@ -40,9 +40,10 @@ public class MysqlPlugin implements OriginPlugin<MySQL>{
     }
 
     @Override
-    public MySQL converDataSource(DataSource datasource) {
+    public MySQL converOrigin(DataSource datasource) {
         return null;
     }
+
     
     
     

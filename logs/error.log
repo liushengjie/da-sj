@@ -22,3 +22,4 @@ Consider defining a bean of type 'org.apache.ignite.Ignite' in your configuratio
 [17:25:04:725] [ERROR] - org.apache.ignite.logger.java.JavaLogger.error(JavaLogger.java:300) - Failed to resolve default logging config file: config/java.util.logging.properties
 [17:26:48:850] [ERROR] - org.apache.ignite.logger.java.JavaLogger.error(JavaLogger.java:300) - Failed to resolve default logging config file: config/java.util.logging.properties
 [17:28:08:519] [ERROR] - org.apache.ignite.logger.java.JavaLogger.error(JavaLogger.java:300) - Failed to resolve default logging config file: config/java.util.logging.properties
+[17:43:44:031] [ERROR] - org.apache.ignite.logger.java.JavaLogger.error(JavaLogger.java:300) - Failed to resolve default logging config file: config/java.util.logging.properties

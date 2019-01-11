@@ -21,10 +21,9 @@ public class ExcelPlugin implements OriginPlugin<Excel>{
     }
 
     @Override
-    public Excel converDataSource(DataSource datasource) {
+    public Excel converOrigin(DataSource datasource) {
         return null;
     }
-    
     
 
 }

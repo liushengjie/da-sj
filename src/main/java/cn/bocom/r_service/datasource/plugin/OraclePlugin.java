@@ -21,10 +21,7 @@ public class OraclePlugin implements OriginPlugin<Oracle>{
     }
 
     @Override
-    public Oracle converDataSource(DataSource datasource) {
+    public Oracle converOrigin(DataSource datasource) {
         return null;
     }
-    
-    
-
 }
