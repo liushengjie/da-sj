@@ -1,4 +1,4 @@
-package cn.bocom.r_service.datasource.origin;
+package cn.bocom.r_service.datasource;
 
 import cn.bocom.entity.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
@@ -9,5 +9,12 @@ import cn.bocom.r_entity.datasource.OriginEntity;
  * @version $Id: OriginPlugin.java, v 0.1 2019年1月11日 下午2:22:06 liushengjie Exp $
  */
 public interface OriginPlugin <T extends OriginEntity>{
+    
+    /**
+     * 转换为DataSource对象，进行数据存储
+     * @param originObj
+     * @param typeCode
+     * @return
+     */
     public DataSource convertDataSource(T originObj, int typeCode);
 }

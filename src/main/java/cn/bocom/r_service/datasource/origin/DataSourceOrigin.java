@@ -11,6 +11,7 @@ import cn.bocom.entity.DataSource;
 import cn.bocom.mapper.main.DataSourceMapper;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
+import cn.bocom.r_service.datasource.OriginPlugin;
 
 /**
  * 数据源对象处理类

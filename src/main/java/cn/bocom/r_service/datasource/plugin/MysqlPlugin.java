@@ -1,4 +1,4 @@
-package cn.bocom.r_service.datasource.origin.plugin;
+package cn.bocom.r_service.datasource.plugin;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import cn.bocom.entity.DataSource;
 import cn.bocom.other.common.Constant;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.form.MySQL;
-import cn.bocom.r_service.datasource.origin.OriginPlugin;
+import cn.bocom.r_service.datasource.OriginPlugin;
 
 /**
  * mysql 插件类

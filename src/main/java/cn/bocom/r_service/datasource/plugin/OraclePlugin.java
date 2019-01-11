@@ -1,11 +1,11 @@
-package cn.bocom.r_service.datasource.origin.plugin;
+package cn.bocom.r_service.datasource.plugin;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.bocom.entity.DataSource;
 import cn.bocom.r_entity.datasource.form.Oracle;
-import cn.bocom.r_service.datasource.origin.OriginPlugin;
+import cn.bocom.r_service.datasource.OriginPlugin;
 
 /**
  * oracle 插件类

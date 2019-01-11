@@ -4,10 +4,10 @@ import cn.bocom.other.common.SjException;
 import cn.bocom.r_entity.datasource.form.Excel;
 import cn.bocom.r_entity.datasource.form.MySQL;
 import cn.bocom.r_entity.datasource.form.Oracle;
-import cn.bocom.r_service.datasource.origin.OriginPlugin;
-import cn.bocom.r_service.datasource.origin.plugin.ExcelPlugin;
-import cn.bocom.r_service.datasource.origin.plugin.MysqlPlugin;
-import cn.bocom.r_service.datasource.origin.plugin.OraclePlugin;
+import cn.bocom.r_service.datasource.OriginPlugin;
+import cn.bocom.r_service.datasource.plugin.ExcelPlugin;
+import cn.bocom.r_service.datasource.plugin.MysqlPlugin;
+import cn.bocom.r_service.datasource.plugin.OraclePlugin;
 
 /**
  * 上游数据源枚举类
