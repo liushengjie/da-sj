@@ -1,5 +1,13 @@
 package cn.bocom.r_entity.datasource;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.assertj.core.util.Lists;
+
+import com.google.common.collect.ImmutableMap;
+
 import cn.bocom.other.common.SjException;
 import cn.bocom.r_entity.datasource.form.Excel;
 import cn.bocom.r_entity.datasource.form.MySQL;
@@ -17,20 +25,22 @@ import cn.bocom.r_service.datasource.plugin.OraclePlugin;
 public class Origins {
     public enum DataSourceEnum {
         //源名称、编号、entity类、插件名称
-        MYSQL("MYSQL", 0, MySQL.class, MysqlPlugin.class),
-        ORACLE("ORACLE", 1, Oracle.class, OraclePlugin.class),
-        EXCEL("EXCEL",2, Excel.class, ExcelPlugin.class);
+        MYSQL("MYSQL", 0, MySQL.class, MysqlPlugin.class,"relationData"),
+        ORACLE("ORACLE", 1, Oracle.class, OraclePlugin.class,"relationData"),
+        EXCEL("EXCEL",2, Excel.class, ExcelPlugin.class,"noSQLData");
         
         private String name;
         private int code;
         private Class <? extends OriginEntity> entityClass;
         private Class <? extends OriginPlugin> pluginClass;
+        private String category;
         
-        private DataSourceEnum(String name, int code, Class <? extends OriginEntity> entityClass, Class <? extends OriginPlugin> pluginClass) {
+        private DataSourceEnum(String name, int code, Class <? extends OriginEntity> entityClass, Class <? extends OriginPlugin> pluginClass, String categoty) {
             this.name = name;
             this.code = code;
             this.entityClass = entityClass;
             this.pluginClass = pluginClass;
+            this.category = categoty;
         }
         
         public static DataSourceEnum match (int type, DataSourceEnum defaultDataSource) {
@@ -59,6 +69,16 @@ public class Origins {
             } catch (Exception e) {
                 throw new SjException(e);
             }
+        }
+        
+        public static List<Map<String, Object>> getOrigins(){
+            List<Map<String, Object>> ret = Lists.newArrayList();
+            for (DataSourceEnum item : DataSourceEnum.values()) {
+                Map<String, Object> m = ImmutableMap.<String, Object>builder().put("name",item.name)
+                                                    .put("code",item.code).put("cat",item.category).build();
+                ret.add(m);
+            }
+            return ret;
         }
         
     }

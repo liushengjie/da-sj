@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.bocom.other.common.DataResponse;
+import cn.bocom.r_entity.datasource.Origins;
 import cn.bocom.service.SysCodeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +39,7 @@ public class SysCodeController {
     @ApiOperation(value = "查询数据源类别代码")
     @RequestMapping(value = "/selectDsType", method = RequestMethod.GET)
     public DataResponse selectDsType() {
-        return new DataResponse(sysCodeService.selectSysCode("datasouce_type"));
+        return new DataResponse(Origins.DataSourceEnum.getOrigins());
     }
 
     @ApiOperation(value = "查询分类类别代码")
