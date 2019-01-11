@@ -17,4 +17,6 @@ public interface OriginPlugin <T extends OriginEntity>{
      * @return
      */
     public DataSource convertDataSource(T originObj, int typeCode);
+    
+    public T converDataSource(DataSource datasource);
 }
