@@ -18,5 +18,10 @@ public interface OriginPlugin <T extends OriginEntity>{
      */
     public DataSource convertDataSource(T originObj, int typeCode);
     
+    /**
+     * 从DataSource对象转换为数据源表单对象
+     * @param datasource
+     * @return
+     */
     public T converDataSource(DataSource datasource);
 }
