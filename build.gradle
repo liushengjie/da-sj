@@ -137,15 +137,15 @@ configurations {
     compile.exclude module: "spring-boot-starter-tomcat"
 }
 
-def env = System.getProperty("env") ?: "dev"
+//def env = System.getProperty("env") ?: "dev"
 
-sourceSets {
-    main {
-        resources {
-            srcDirs = ["src/main/resources", "src/main/profile/$env"]
-        }
-    }
-}
+//sourceSets {
+//    main {
+//        resources {
+//           srcDirs = ["src/main/resources", "src/main/profile/$env"]
+//        }
+//   }
+//}
 
 
 def getDbProperties = {
