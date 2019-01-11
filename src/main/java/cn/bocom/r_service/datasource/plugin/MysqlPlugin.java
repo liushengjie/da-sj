@@ -44,8 +44,4 @@ public class MysqlPlugin implements OriginPlugin<MySQL>{
         return null;
     }
 
-    
-    
-    
-        
 }
