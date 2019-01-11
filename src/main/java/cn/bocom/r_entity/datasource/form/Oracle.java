@@ -1,5 +1,7 @@
 package cn.bocom.r_entity.datasource.form;
 
-public class Oracle {
+import cn.bocom.r_entity.datasource.OriginEntity;
+
+public class Oracle extends OriginEntity{
 
 }

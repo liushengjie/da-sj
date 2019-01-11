@@ -1,0 +1,16 @@
+[14:40:21:069] [ERROR] - org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter.report(LoggingFailureAnalysisReporter.java:42) - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field ignite in cn.bocom.service.resource.ResourceService required a bean of type 'org.apache.ignite.Ignite' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.apache.ignite.Ignite' in your configuration.
+
+[14:40:55:775] [ERROR] - org.apache.ignite.logger.java.JavaLogger.error(JavaLogger.java:300) - Failed to resolve default logging config file: config/java.util.logging.properties

@@ -1,8 +1,8 @@
 package cn.bocom.r_entity.datasource.form;
 
-import cn.bocom.r_entity.datasource.BaseForm;
+import cn.bocom.r_entity.datasource.OriginEntity;
 
-public class MySQL extends BaseForm {
+public class MySQL extends OriginEntity {
     
     private static final long serialVersionUID = 1L;
     private String driver;
@@ -55,4 +55,6 @@ public class MySQL extends BaseForm {
     public void setXa(String xa) {
         this.xa = xa;
     }
+    
+    
 }

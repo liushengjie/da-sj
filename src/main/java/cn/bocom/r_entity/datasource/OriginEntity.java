@@ -2,48 +2,20 @@ package cn.bocom.r_entity.datasource;
 
 import java.io.Serializable;
 
-public class BaseForm implements Serializable{
+/**
+ * 上游数据源表单父类
+ * @author liushengjie
+ * @version $Id: OriginEntity.java, v 0.1 2019年1月11日 下午2:21:27 liushengjie Exp $
+ */
+public class OriginEntity implements Serializable{
     private static final long serialVersionUID = 1L;
     private String id;           //数据源ID
     private String name;         //数据源名称
-    private ConnStyleEnum conn_style;   //数据源连接类型 (jdbc、excel)
-    private DataSourceEnum ds_type;      //数据源类型(MYSQL、ORACLE)
+    private String typeName;     //类型名称
     private String createUser;    //创建人
     private String createTime;    //创建日期
     private int status;           //当前状态
     private int model;            //数据使用方式（0：接入，1：接出）
-    
-    public enum DataSourceEnum {
-        MYSQL("MYSQL", 0),
-        ORACLE("ORACLE", 1);
-        
-        private String name;
-        private int code;
-        private DataSourceEnum(String name, int code) {
-            this.name = name;
-            this.code = code;
-        }
-        
-        public String getName() {
-            return name;
-        }
-        public int getCode() {
-            return code;
-        }
-    }
-    
-    public enum ConnStyleEnum {      //连接类型枚举
-        JDBC(0),
-        EXCEL(1);
-        
-        private int code;
-        private ConnStyleEnum(int code) {
-            this.code = code;
-        }
-        public int getCode() {
-            return code;
-        }
-    }
     
     public String getId() {
         return id;
@@ -56,18 +28,6 @@ public class BaseForm implements Serializable{
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public ConnStyleEnum getConn_style() {
-        return conn_style;
-    }
-    public void setConn_style(ConnStyleEnum conn_style) {
-        this.conn_style = conn_style;
-    }
-    public DataSourceEnum getDs_type() {
-        return ds_type;
-    }
-    public void setDs_type(DataSourceEnum ds_type) {
-        this.ds_type = ds_type;
     }
     public String getCreateUser() {
         return createUser;
@@ -92,5 +52,11 @@ public class BaseForm implements Serializable{
     }
     public void setModel(int model) {
         this.model = model;
+    }
+    public String getTypeName() {
+        return typeName;
+    }
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

@@ -13,6 +13,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import tk.mybatis.mapper.annotation.ColumnType;
 
+/**
+ * 数据源入库实体类
+ * @author liushengjie
+ * @version $Id: DataSource.java, v 0.1 2019年1月11日 下午2:21:16 liushengjie Exp $
+ */
 @Table(name = "t_data_source")
 @ApiModel("DataSource（）")
 public class DataSource implements Serializable {

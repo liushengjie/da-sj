@@ -1,5 +1,7 @@
 package cn.bocom.r_entity.datasource.form;
 
-public class Excel {
+import cn.bocom.r_entity.datasource.OriginEntity;
+
+public class Excel extends OriginEntity{
 
 }

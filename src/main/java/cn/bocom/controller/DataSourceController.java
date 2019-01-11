@@ -14,9 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.github.ltsopensource.json.JSONObject;
-
 import cn.bocom.entity.Alias;
 import cn.bocom.entity.DataSource;
 import cn.bocom.entity.DsParam;
@@ -40,6 +35,7 @@ import cn.bocom.other.util.FileUtil;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.other.util.excel.ExcelSheetPO;
 import cn.bocom.other.util.excel.POIExcelUtil;
+import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 import cn.bocom.service.AliasService;
 import cn.bocom.service.datasource.DataSourceService;
 import cn.bocom.service.datasource.factory.DsHandlerFactory;
@@ -64,6 +60,8 @@ public class DataSourceController {
     private DataSourceService dataSourceService;
     @Autowired
     private AliasService aliasService;
+    @Autowired
+    private DataSourceOrigin datasourceOrigin;
 
     // 分页查询数据源
     @ApiOperation(value = "分页查询数据源")
@@ -77,8 +75,8 @@ public class DataSourceController {
     // 新增数据源
     @ApiOperation(value = "新增数据源")
     @RequestMapping(value = "/insertDs", method = RequestMethod.POST)
-    public DataResponse insertDs(@RequestBody DsParam ds) {
-        return new DataResponse(dataSourceService.insertDs(ds));
+    public DataResponse insertDs(@RequestParam int type, @RequestBody String obj) {
+        return new DataResponse(datasourceOrigin.insertDataSource(type, obj));
     }
 
     // 修改数据源
