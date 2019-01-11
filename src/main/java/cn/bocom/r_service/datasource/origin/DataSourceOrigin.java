@@ -1,13 +1,17 @@
 package cn.bocom.r_service.datasource.origin;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageInfo;
 
 import cn.bocom.entity.DataSource;
+import cn.bocom.entity.DsParam;
 import cn.bocom.mapper.main.DataSourceMapper;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
@@ -25,6 +29,12 @@ public  class DataSourceOrigin {
     @Autowired
     private DataSourceMapper dataSourceMapper;
     
+    /**
+     * 插入数据源
+     * @param type
+     * @param obj
+     * @return
+     */
     @SuppressWarnings("unchecked")
     public <T extends OriginEntity> int insertDataSource(int type, String obj) {
         OriginPlugin<T> op = (OriginPlugin<T>)originPlugin(type);
@@ -34,6 +44,46 @@ public  class DataSourceOrigin {
         DataSource datasource = op.convertDataSource(originObj, type);
         
         return dataSourceMapper.insert(datasource);
+    }
+    
+    /**
+     * 分页查询数据源信息
+     * @param datasource
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    public PageInfo<? extends OriginEntity> selectDataSourceByPage(DataSource datasource, int currentPage, int pageSize) {
+        return null;
+    }
+    
+    /**
+     * 根据ID查询数据源信息
+     * @param datasourceId
+     * @return
+     */
+    public DataSource selectDataSourceById(String datasourceId) {
+        return null;
+    }
+    
+    /**
+     * 更新数据源信息
+     * @param type
+     * @param obj
+     * @return
+     */
+    public <T extends OriginEntity> int updateDataSource(int type, String obj) {
+        return 0;
+    }
+    
+    
+    /**
+     * 删除数据源信息
+     * @param id
+     * @return
+     */
+    public int deleteDataSource(String datasourceId) {
+        return 0;
     }
     
     
