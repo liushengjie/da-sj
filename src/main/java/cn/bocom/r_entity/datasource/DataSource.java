@@ -43,12 +43,6 @@ public class DataSource implements Serializable {
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String type;
 
-    /**
-     * 数据源类型名称
-     */
-    @ApiModelProperty(value = "数据源类型名称", required = false)
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String typeName;
 
     /**
      * 数据源驱动
@@ -172,25 +166,6 @@ public class DataSource implements Serializable {
      */
     public DataSource setType(String type) {
         this.type = type == null ? null : type.trim();
-        return this;
-    }
-
-    /**
-     * 获取数据源类型名称
-     *
-     * @return typeName - 数据源类型名称
-     */
-    public String gettypeName() {
-        return typeName;
-    }
-
-    /**
-     * 设置数据源类型名称
-     *
-     * @param type 数据源类型名称
-     */
-    public DataSource settypeName(String typeName) {
-        this.typeName = typeName == null ? null : typeName.trim();
         return this;
     }
 
@@ -363,44 +338,5 @@ public class DataSource implements Serializable {
     public DataSource setDataMode(String dataMode) {
         this.dataMode = dataMode == null ? null : dataMode.trim();
         return this;
-    }
-
-    public enum FieldEnum {
-        ID("id", "id"), NAME("name", "name"), TYPE("type", "type"), DRIVER("driver", "driver"), URL(
-                "url", "url"), USERNAME("username", "username"), PWD("pwd", "pwd"), XA("xa",
-                        "xa"), CREATE_USER("createUser", "create_user"), CREATE_TIME("createTime",
-                                "create_time"), STATE("state",
-                                        "state"), DATA_MODE("dataMode", "data_mode");
-
-        private String javaFieldName;
-
-        private String dbFieldName;
-
-        FieldEnum(String javaFieldName, String dbFieldName) {
-            this.javaFieldName = javaFieldName;
-            this.dbFieldName = dbFieldName;
-        }
-
-        public String javaFieldName() {
-            return javaFieldName;
-        }
-
-        public String dbFieldName() {
-            return dbFieldName;
-        }
-    }
-
-    public enum DSTypeIdEnum {
-        MYSQL("1"), ORACLE("2"), EXCEL("3"), MONGODB("4"), API("5"), MQ("6");
-
-        private String DSTypeId;
-
-        DSTypeIdEnum(String DSTypeId) {
-            this.DSTypeId = DSTypeId;
-        }
-
-        public String DSTypeId() {
-            return DSTypeId;
-        }
     }
 }

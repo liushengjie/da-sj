@@ -1,6 +1,6 @@
 package cn.bocom.r_service.datasource;
 
-import cn.bocom.entity.DataSource;
+import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
 
 /**

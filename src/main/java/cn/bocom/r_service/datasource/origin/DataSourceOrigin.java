@@ -1,7 +1,5 @@
 package cn.bocom.r_service.datasource.origin;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +8,8 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 
-import cn.bocom.entity.DataSource;
-import cn.bocom.entity.DsParam;
-import cn.bocom.mapper.main.DataSourceMapper;
+import cn.bocom.mapper.main.R_DataSourceMapper;
+import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
 import cn.bocom.r_service.datasource.OriginPlugin;
@@ -27,7 +24,7 @@ public  class DataSourceOrigin {
     private static Logger logger = LoggerFactory.getLogger(DataSourceOrigin.class);
     
     @Autowired
-    private DataSourceMapper dataSourceMapper;
+    private R_DataSourceMapper dataSourceMapper;
     
     /**
      * 插入数据源

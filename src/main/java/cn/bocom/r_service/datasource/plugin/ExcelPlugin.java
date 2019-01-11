@@ -3,7 +3,7 @@ package cn.bocom.r_service.datasource.plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.bocom.entity.DataSource;
+import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.form.Excel;
 import cn.bocom.r_service.datasource.OriginPlugin;
 
