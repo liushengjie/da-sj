@@ -72,7 +72,7 @@ public class DataSourceController {
     public DataResponse selectDsByPage(DataSource dataSource,
             @RequestParam("currentPage") int currentPage, @RequestParam("pageSize") int pageSize) {
         return new DataResponse(
-        		datasourceOrigin.selectDataSourceByPage(dataSource, currentPage, pageSize));
+        		datasourceOrigin.selectOriginListByPage(dataSource, currentPage, pageSize));
     }
     
     // 根据ID查询数据源信息
@@ -101,7 +101,7 @@ public class DataSourceController {
     @ApiOperation(value = "删除数据源")
     @RequestMapping(value = "/deleteDs", method = RequestMethod.GET)
     public DataResponse deleteDs(String id) {
-        return new DataResponse(dataSourceService.deleteDs(id));
+        return new DataResponse((datasourceOrigin.deleteDataSource(id))==-1?"删除失败！":"删除成功！");
     }
 
     // 数据源连接是否成功
