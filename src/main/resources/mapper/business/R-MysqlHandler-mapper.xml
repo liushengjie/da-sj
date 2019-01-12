@@ -12,7 +12,7 @@
 		<result column="OBJ_TYPE" property="objType" />
 	</resultMap>
 	
-	<select id="findTables" resultType="tableInfo" parameterType="string">
+	<select id="findTables" resultMap="tableInfo" parameterType="string">
 		select CONCAT(TABLE_SCHEMA , '.' , TABLE_NAME) AS ID,TABLE_NAME,TABLE_ROWS,DATE_FORMAT(UPDATE_TIME, '%Y-%m-%d %H:%i:%S') AS UPDATE_TIME,TABLE_COMMENT,REPLACE(TABLE_TYPE,'BASE ','') AS OBJ_TYPE from
 		information_schema.TABLES where TABLE_SCHEMA = #{database} ORDER BY TABLE_TYPE,TABLE_NAME
 	</select>
