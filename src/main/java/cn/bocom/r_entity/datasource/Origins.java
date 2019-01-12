@@ -25,9 +25,9 @@ import cn.bocom.r_service.datasource.plugin.OraclePlugin;
 public class Origins {
     public enum DataSourceEnum {
         // 源名称、编号、entity类、插件名称
-        MYSQL("MYSQL", 0, MySQL.class, MysqlPlugin.class, "relationData"), ORACLE("ORACLE", 1,
-                Oracle.class, OraclePlugin.class,
-                "relationData"), EXCEL("EXCEL", 2, Excel.class, ExcelPlugin.class, "noSQLData");
+        MYSQL("MYSQL", 0, MySQL.class, MysqlPlugin.class, "relationData"), 
+        ORACLE("ORACLE", 1,Oracle.class, OraclePlugin.class,"relationData"), 
+        EXCEL("EXCEL", 2, Excel.class, ExcelPlugin.class, "noSQLData");
 
         private String name;
         private int code;

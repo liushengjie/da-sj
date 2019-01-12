@@ -98,12 +98,12 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     }
 
     @Override
-    public List<ColInfo> showColsInfo(DataSource datasource, String table) {
+    public List<ColInfo> showColsInfo(String table) {
         return null;
     }
 
     @Override
-    public int tableCount(DataSource datasource, String table) {
+    public int tableCount(String table) {
         return 0;
     }
 

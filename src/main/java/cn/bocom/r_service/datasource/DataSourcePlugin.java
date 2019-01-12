@@ -50,7 +50,7 @@ public interface DataSourcePlugin<T extends OriginEntity> extends ResourceProtoc
      * @param table(表名、sql、 collection 等等)
      * @return
      */
-    public List<ColInfo> showColsInfo(DataSource datasource, String table);
+    public List<ColInfo> showColsInfo(String table);
     
     /**
      * 查询表数量
@@ -58,7 +58,7 @@ public interface DataSourcePlugin<T extends OriginEntity> extends ResourceProtoc
      * @param tableName
      * @return
      */
-    public int tableCount(DataSource datasource, String table);
+    public int tableCount(String table);
     
     /**
      * 读取数据
