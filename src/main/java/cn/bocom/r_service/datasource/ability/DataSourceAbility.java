@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
@@ -14,6 +15,7 @@ import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_service.datasource.DatasourceUtil;
 import cn.bocom.r_service.datasource.OriginPlugin;
+import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 
 /**
  * 数据源能力类
@@ -24,6 +26,8 @@ import cn.bocom.r_service.datasource.OriginPlugin;
 public class DataSourceAbility {
     private static Logger logger = LoggerFactory.getLogger(DataSourceAbility.class);
     
+    @Autowired
+    private DataSourceOrigin datasourceOrigin;
     /**
      * 检测数据源是否有效
      * @param type
@@ -47,9 +51,8 @@ public class DataSourceAbility {
      */
     public List<TableInfo> showTablesInfo(String datasourceId) {
         OriginPlugin<?> op = DatasourceUtil.originPluginById(datasourceId);
-        
-        
-        return null;
+        DataSource datasource = datasourceOrigin.selectDataSourceById(datasourceId);
+        return op.showTablesInfo(datasource);
     }
     
     /**

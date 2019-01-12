@@ -1,6 +1,7 @@
 package cn.bocom.r_service.datasource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import cn.bocom.other.datasource.DBContextHolder;
 import cn.bocom.r_entity.datasource.DataSource;
@@ -13,9 +14,16 @@ import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
  * @author liushengjie
  * @version $Id: DatasourceUtil.java, v 0.1 2019年1月12日 下午2:23:43 liushengjie Exp $
  */
+@Component
 public class DatasourceUtil {
-    @Autowired
+    
     private static DataSourceOrigin datasourceOrigin;
+    
+    @Autowired  
+    public void setOrigin(DataSourceOrigin datasourceOrigin) {  
+        DatasourceUtil.datasourceOrigin = datasourceOrigin;  
+    }  
+    
     /**
      * 通过源类型获取处理插件
      * @param type

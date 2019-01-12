@@ -59,7 +59,7 @@
          <logger name="org.xnio" level="ERROR"></logger>
          <logger name="io.undertow" level="ERROR"></logger>
          <logger name="springfox" level="ERROR"></logger>
-         <root level="INFO">
+         <root level="ALL">
              <appender-ref ref="Console"/>
              <appender-ref ref="RollingFileInfo"/>
              <appender-ref ref="RollingFileWarn"/>

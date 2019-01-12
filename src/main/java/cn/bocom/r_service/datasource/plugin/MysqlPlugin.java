@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import cn.bocom.mapper.business.R_MysqlHandlerMapper;
 import cn.bocom.other.common.Constant;
@@ -15,18 +16,25 @@ import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.MySQL;
+import cn.bocom.r_service.datasource.DatasourceUtil;
 import cn.bocom.r_service.datasource.OriginPlugin;
+import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 
 /**
  * mysql 插件类
  * @author liushengjie
  * @version $Id: MysqlPlugin.java, v 0.1 2019年1月11日 下午2:20:10 liushengjie Exp $
  */
+@Component
 public class MysqlPlugin implements OriginPlugin<MySQL>{
     private static Logger logger = LoggerFactory.getLogger(MysqlPlugin.class);
     
-    @Autowired
-    private R_MysqlHandlerMapper mysqlHandlerMapper;
+    private static R_MysqlHandlerMapper mysqlHandlerMapper;
+    
+    @Autowired  
+    public void setMapper(R_MysqlHandlerMapper mysqlHandlerMapper) {  
+        MysqlPlugin.mysqlHandlerMapper = mysqlHandlerMapper;  
+    } 
 
     @Override
     public DataSource convertDataSource(MySQL originObj, int typeCode) {

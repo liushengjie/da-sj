@@ -14,6 +14,7 @@ import cn.bocom.r_entity.datasource.TableInfo;
  * @author liushengjie
  * @version $Id: OriginPlugin.java, v 0.1 2019年1月11日 下午2:22:06 liushengjie Exp $
  */
+
 public interface OriginPlugin<T extends OriginEntity> {
 
     /**
