@@ -101,7 +101,7 @@ public class DataSourceController {
     @ApiOperation(value = "删除数据源")
     @RequestMapping(value = "/deleteDs", method = RequestMethod.GET)
     public DataResponse deleteDs(String id) {
-        return new DataResponse((datasourceOrigin.deleteDataSource(id))==-1?"删除失败！":"删除成功！");
+        return new DataResponse(datasourceOrigin.deleteDataSource(id));
     }
 
     // 数据源连接是否成功
