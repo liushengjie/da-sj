@@ -4,8 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.resource.Resource;
+import cn.bocom.r_entity.resource.ResourceBody;
+import cn.bocom.r_entity.resource.ResourceData;
 
 /**
  * 资源转换层
@@ -21,7 +24,22 @@ public class ResourceTrans {
      * @param datasource
      * @return
      */
-    public Resource convert(DataSource datasource) {
+    public Resource convert(DataSource datasource, String table) {
+        //1、设置body属性
+        ResourceBody res_body = new ResourceBody();
+        String resId = RandomUtil.getRandomId(18);  
+        String cacheTable = "res_" + resId;
+        res_body.setId(resId);
+        res_body.setCacheTable(cacheTable);
+        
+        //2、设置data属性
+        ResourceData res_data = new ResourceData();
+        res_data.setResId(resId);
+        res_data.setDsId(datasource.getId());
+        res_data.setTableName(table);
+        
+        
+        
         return null;
     }
 }

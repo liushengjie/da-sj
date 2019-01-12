@@ -1,6 +1,7 @@
 package cn.bocom.r_entity.resource;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 資源基類
@@ -12,7 +13,7 @@ public class Resource implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private ResourceBody resourceBody;
-    private ResourceCol resourceCol;
+    private List<ResourceCol> resourceCols;
     private ResourceData resourceData;
     
     public ResourceBody getResourceBody() {
@@ -21,11 +22,12 @@ public class Resource implements Serializable{
     public void setResourceBody(ResourceBody resourceBody) {
         this.resourceBody = resourceBody;
     }
-    public ResourceCol getResourceCol() {
-        return resourceCol;
+
+    public List<ResourceCol> getResourceCols() {
+        return resourceCols;
     }
-    public void setResourceCol(ResourceCol resourceCol) {
-        this.resourceCol = resourceCol;
+    public void setResourceCols(List<ResourceCol> resourceCols) {
+        this.resourceCols = resourceCols;
     }
     public ResourceData getResourceData() {
         return resourceData;

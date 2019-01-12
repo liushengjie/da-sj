@@ -6,6 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.Oracle;
@@ -33,5 +34,22 @@ public class OraclePlugin implements DataSourcePlugin<Oracle>{
     public List<TableInfo> showTablesInfo(DataSource datasource) {
         return null;
     }
+
+    @Override
+    public List<ColInfo> showColsInfo(DataSource datasource, String table) {
+        return null;
+    }
+
+    @Override
+    public int tableCount(DataSource datasource, String table) {
+        return 0;
+    }
+
+    @Override
+    public List<Map<String, Object>> loadData(String table, String limit) {
+        return null;
+    }
+    
+    
     
 }

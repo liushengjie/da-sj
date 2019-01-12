@@ -2,8 +2,10 @@ package cn.bocom.r_service.datasource;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import cn.bocom.other.datasource.AtomikosDynamicDataSource;
+import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_entity.datasource.TableInfo;
@@ -41,6 +43,31 @@ public interface DataSourcePlugin<T extends OriginEntity> extends ResourceProtoc
      * @return
      */
     public List<TableInfo> showTablesInfo(DataSource datasource);
+    
+    /**
+     * 根据表查询所有列信息
+     * @param datasource
+     * @param table(表名、sql、 collection 等等)
+     * @return
+     */
+    public List<ColInfo> showColsInfo(DataSource datasource, String table);
+    
+    /**
+     * 查询表数量
+     * @param datasource
+     * @param tableName
+     * @return
+     */
+    public int tableCount(DataSource datasource, String table);
+    
+    /**
+     * 读取数据
+     * @param table
+     * @param limit(limit为0时 不限制)
+     * @return
+     */
+    public List<Map<String,Object>> loadData(String table, String limit);
+    
 
     /**
      * 检测数据源的连通性(针对于jdbc)

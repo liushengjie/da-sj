@@ -61,7 +61,7 @@ public class DataSourceAbility {
      * @param tableName
      * @return
      */
-    public List<Map<String, Object>> showColsInfo(String datasourceId, String tableName){
+    public List<Map<String, Object>> showColsInfo(DataSource datasource, String tableName){
         return null;
     }
     
@@ -71,7 +71,7 @@ public class DataSourceAbility {
      * @param sql
      * @return
      */
-    public List<Map<String, Object>> showColsInfoBySQL(String datasourceId, String sql){
+    public List<Map<String, Object>> showColsInfoBySQL(DataSource datasource, String sql){
         return null;
     }
     
@@ -82,7 +82,7 @@ public class DataSourceAbility {
      * @param tableName
      * @return
      */
-    public int tableCount(String datasourceId, String tableName) {
+    public int tableCount(DataSource datasource, String tableName) {
         return 0;
     }
 }

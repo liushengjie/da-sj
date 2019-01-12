@@ -3,6 +3,7 @@ package cn.bocom.r_service.datasource.plugin;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import cn.bocom.mapper.business.R_MysqlHandlerMapper;
 import cn.bocom.other.common.Constant;
 import cn.bocom.other.util.RandomUtil;
+import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
 import cn.bocom.r_entity.datasource.TableInfo;
@@ -94,6 +96,24 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
         List<TableInfo> ret = mysqlHandlerMapper.showTablesInfo(mysql.getDatabase());
         return ret;
     }
+
+    @Override
+    public List<ColInfo> showColsInfo(DataSource datasource, String table) {
+        return null;
+    }
+
+    @Override
+    public int tableCount(DataSource datasource, String table) {
+        return 0;
+    }
+
+    @Override
+    public List<Map<String, Object>> loadData(String table, String limit) {
+        return null;
+    }
+    
+    
+    
 }
 
 
