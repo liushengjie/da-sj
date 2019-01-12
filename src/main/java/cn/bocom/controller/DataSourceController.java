@@ -66,10 +66,10 @@ public class DataSourceController {
     // 分页查询数据源
     @ApiOperation(value = "分页查询数据源")
     @RequestMapping(value = "/selectDsByPage", method = RequestMethod.GET)
-    public DataResponse selectDsByPage(DataSource dataSource,
+    public DataResponse selectDsByPage(cn.bocom.r_entity.datasource.DataSource dataSource,
             @RequestParam("currentPage") int currentPage, @RequestParam("pageSize") int pageSize) {
         return new DataResponse(
-                dataSourceService.selectDsByPage(dataSource, currentPage, pageSize));
+        		datasourceOrigin.selectDataSourceByPage(dataSource, currentPage, pageSize));
     }
 
     // 新增数据源

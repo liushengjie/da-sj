@@ -1,5 +1,6 @@
 package cn.bocom.r_service.datasource.plugin;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import cn.bocom.other.common.Constant;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.DataSource;
+import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
 import cn.bocom.r_entity.datasource.form.MySQL;
 import cn.bocom.r_service.datasource.OriginPlugin;
 
@@ -41,7 +43,34 @@ public class MysqlPlugin implements OriginPlugin<MySQL>{
 
     @Override
     public MySQL converOrigin(DataSource datasource) {
-        return null;
+    	MySQL mysql = new MySQL();
+    	mysql.setId(datasource.getId());
+    	mysql.setName(datasource.getName());
+    	mysql.setType((datasource.getType()==null||datasource.getType().equals(""))?0:Integer.parseInt(datasource.getType()));
+    	mysql.setTypeName(DataSourceEnum.MYSQL.getName());
+    	mysql.setDriver(datasource.getDriver());
+    	
+    	String url = datasource.getUrl();// 数据源url
+        if (url != null && !url.equals("")) {
+            String url0 = url.replace("jdbc:mysql://", "")
+                    .replace("?useUnicode=true&characterEncoding=utf8", "");
+            String ip = url0.split(":")[0];
+            mysql.setIp(ip);
+            String port = url0.split(":")[1].split("/")[0];
+            mysql.setPort(port);
+            String db = url0.split(":")[1].split("/")[1];
+            mysql.setDatabase(db);
+        }
+        
+        mysql.setModel((datasource.getDataMode()==null||datasource.getDataMode().equals(""))?0:Integer.parseInt(datasource.getDataMode()));
+        mysql.setStatus((datasource.getState()==null||datasource.getState().equals(""))?0:Integer.parseInt(datasource.getState()));
+    	mysql.setXa(datasource.getXa());
+		mysql.setUsername(datasource.getUsername());
+		mysql.setPwd(datasource.getPwd());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		mysql.setCreateTime(sdf.format(datasource.getCreateTime()));
+		mysql.setCreateUser(datasource.getCreateUser());
+		return mysql;
     }
 
     @Override
