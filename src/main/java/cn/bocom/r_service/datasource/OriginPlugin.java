@@ -34,7 +34,7 @@ public interface OriginPlugin<T extends OriginEntity> {
     public T converOrigin(DataSource datasource);
 
     /**
-     * 检测数据源的连通性
+     * 检测数据源的连通性(针对于jdbc)
      * 
      * @param originObj
      * @param typeCode
