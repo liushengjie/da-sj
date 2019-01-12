@@ -14,7 +14,7 @@
 	
 	<select id="showTablesInfo" resultMap="tableInfo" parameterType="string">
 		select CONCAT(TABLE_SCHEMA , '.' , TABLE_NAME) AS ID,TABLE_NAME,TABLE_ROWS,DATE_FORMAT(UPDATE_TIME, '%Y-%m-%d %H:%i:%S') AS UPDATE_TIME,TABLE_COMMENT,REPLACE(TABLE_TYPE,'BASE ','') AS OBJ_TYPE from
-		information_schema.TABLES where TABLE_SCHEMA = #{database} ORDER BY TABLE_TYPE,TABLE_NAME
+		information_schema.TABLES where TABLE_SCHEMA = #{database} ORDER BY TABLE_TYPE,CREATE_TIME
 	</select>
 	<select id="preloadData" resultType="HashMap" parameterType="string">
 		select * from ${tableName} limit 0,${limit}
