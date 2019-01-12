@@ -71,8 +71,16 @@ public  class DataSourceOrigin {
      * @param datasourceId
      * @return
      */
-    public DataSource selectDataSourceById(String datasourceId) {
-        return null;
+    public OriginEntity selectDataSourceById(String datasourceId) {
+    	DataSource ds = new DataSource();
+        ds.setId(datasourceId);
+        List<DataSource> docs = dataSourceMapper.selectDs(ds);
+        if(docs==null||docs.size()==0) {
+        	return null;
+        }
+        DataSource d = docs.get(0);
+        OriginPlugin<? extends OriginEntity> op = (OriginPlugin<? extends OriginEntity>)DatasourceUtil.originPlugin(Integer.parseInt(d.getType()));
+        return op.converOrigin(d);
     }
     
     /**

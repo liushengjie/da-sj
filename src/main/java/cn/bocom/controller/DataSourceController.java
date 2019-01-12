@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.bocom.entity.Alias;
-import cn.bocom.entity.DataSource;
 import cn.bocom.entity.DsParam;
 import cn.bocom.other.common.DataResponse;
 import cn.bocom.other.util.DateUtil;
@@ -35,6 +34,7 @@ import cn.bocom.other.util.FileUtil;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.other.util.excel.ExcelSheetPO;
 import cn.bocom.other.util.excel.POIExcelUtil;
+import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_service.datasource.ability.DataSourceAbility;
 import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 import cn.bocom.service.AliasService;
@@ -69,10 +69,18 @@ public class DataSourceController {
     // 分页查询数据源
     @ApiOperation(value = "分页查询数据源")
     @RequestMapping(value = "/selectDsByPage", method = RequestMethod.GET)
-    public DataResponse selectDsByPage(cn.bocom.r_entity.datasource.DataSource dataSource,
+    public DataResponse selectDsByPage(DataSource dataSource,
             @RequestParam("currentPage") int currentPage, @RequestParam("pageSize") int pageSize) {
         return new DataResponse(
         		datasourceOrigin.selectDataSourceByPage(dataSource, currentPage, pageSize));
+    }
+    
+    // 根据ID查询数据源信息
+    @ApiOperation(value = "根据ID查询数据源信息")
+    @RequestMapping(value = "/selectDsById", method = RequestMethod.GET)
+    public DataResponse selectDsById(@RequestParam("datasourceId") String datasourceId) {
+        return new DataResponse(
+        		datasourceOrigin.selectDataSourceById(datasourceId));
     }
 
     // 新增数据源
