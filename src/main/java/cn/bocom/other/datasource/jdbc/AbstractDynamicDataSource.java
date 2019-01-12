@@ -5,7 +5,7 @@
  * @author: liushengjie   
  * @date: 2018年8月10日 下午5:48:34 
  */
-package cn.bocom.other.datasource;
+package cn.bocom.other.datasource.jdbc;
 
 import java.util.Map;
 import java.util.function.Function;
