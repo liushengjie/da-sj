@@ -16,7 +16,7 @@ import com.github.pagehelper.PageInfo;
 import cn.bocom.mapper.main.R_DataSourceMapper;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
-import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
+import cn.bocom.r_service.datasource.DatasourceUtil;
 import cn.bocom.r_service.datasource.OriginPlugin;
 
 /**
@@ -39,8 +39,8 @@ public  class DataSourceOrigin {
      */
     @SuppressWarnings("unchecked")
     public <T extends OriginEntity> int insertDataSource(int type, String obj) {
-        OriginPlugin<T> op = (OriginPlugin<T>)originPlugin(type);
-        Class<? extends OriginEntity> oe = originEntity(type);
+        OriginPlugin<T> op = (OriginPlugin<T>)DatasourceUtil.originPlugin(type);
+        Class<? extends OriginEntity> oe = DatasourceUtil.originEntity(type);
         
         T originObj = (T)JSON.parseObject(obj, oe);
         DataSource datasource = op.convertDataSource(originObj, type);
@@ -56,10 +56,10 @@ public  class DataSourceOrigin {
      * @return
      */
     public PageInfo<? extends OriginEntity> selectDataSourceByPage(DataSource datasource, int currentPage, int pageSize) {
-    	Page page = PageHelper.startPage(currentPage, pageSize);
+    	Page<Object> page = PageHelper.startPage(currentPage, pageSize);
         List<DataSource> docs = dataSourceMapper.selectDs(datasource);
         PageInfo<? extends OriginEntity> pageInfo = new PageInfo<>(docs.stream().map(x -> {
-        	OriginPlugin<? extends OriginEntity> op = (OriginPlugin<? extends OriginEntity>)originPlugin(Integer.parseInt(x.getType()));
+        	OriginPlugin<? extends OriginEntity> op = (OriginPlugin<? extends OriginEntity>)DatasourceUtil.originPlugin(Integer.parseInt(x.getType()));
             return op.converOrigin(x);
         }).collect(Collectors.toList()));   
         pageInfo.setTotal(page.getTotal());
@@ -93,27 +93,6 @@ public  class DataSourceOrigin {
      */
     public int deleteDataSource(String datasourceId) {
         return 0;
-    }
-    
-    
-    /**
-     * 源对象处理插件
-     * @param type
-     * @return
-     */
-    private OriginPlugin<?> originPlugin(int type){
-        DataSourceEnum datasourceEnum = DataSourceEnum.match(type, null);
-        return datasourceEnum!=null?datasourceEnum.getPluginClass():null;
-    }
-    
-    /**
-     * 源对象实体类
-     * @param type
-     * @return
-     */
-    private Class<? extends OriginEntity> originEntity(int type){
-        DataSourceEnum datasourceEnum = DataSourceEnum.match(type, null);
-        return datasourceEnum!=null?datasourceEnum.getEntityClass():null;
     }
 }
 

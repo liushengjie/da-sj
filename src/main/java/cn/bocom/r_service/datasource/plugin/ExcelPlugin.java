@@ -25,10 +25,6 @@ public class ExcelPlugin implements OriginPlugin<Excel>{
         return null;
     }
 
-    @Override
-    public boolean connect(Excel originObj, int typeCode) {
-        return false;
-    }
     
 
 }

@@ -73,11 +73,4 @@ public class MysqlPlugin implements OriginPlugin<MySQL>{
 		return mysql;
     }
 
-    @Override
-    public boolean connect(MySQL originObj, int typeCode) {
-        return false;
-    }
-    
-    
-
 }

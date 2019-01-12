@@ -35,6 +35,7 @@ import cn.bocom.other.util.FileUtil;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.other.util.excel.ExcelSheetPO;
 import cn.bocom.other.util.excel.POIExcelUtil;
+import cn.bocom.r_service.datasource.ability.DataSourceAbility;
 import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 import cn.bocom.service.AliasService;
 import cn.bocom.service.datasource.DataSourceService;
@@ -62,6 +63,8 @@ public class DataSourceController {
     private AliasService aliasService;
     @Autowired
     private DataSourceOrigin datasourceOrigin;
+    @Autowired
+    private DataSourceAbility datasourceAbility;
 
     // 分页查询数据源
     @ApiOperation(value = "分页查询数据源")
@@ -96,8 +99,8 @@ public class DataSourceController {
     // 数据源连接是否成功
     @ApiOperation(value = "数据源连接是否成功")
     @RequestMapping(value = "/connectDs", method = RequestMethod.POST)
-    public DataResponse connectDs(@RequestBody DsParam ds) {
-        return new DataResponse(dataSourceService.connect(ds), 0, "查询数据源连接");
+    public DataResponse connectDs(@RequestParam int type, @RequestBody String obj) {
+        return new DataResponse(datasourceAbility.connect(type, obj), 0, "查询数据源连接");
     }
 
     // 获取数据源的所有表
