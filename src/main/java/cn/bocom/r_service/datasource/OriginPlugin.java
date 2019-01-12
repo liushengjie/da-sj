@@ -1,12 +1,12 @@
 package cn.bocom.r_service.datasource;
 
 import java.sql.Connection;
-
-import com.alibaba.fastjson.JSON;
+import java.util.List;
 
 import cn.bocom.other.datasource.AtomikosDynamicDataSource;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
+import cn.bocom.r_entity.datasource.TableInfo;
 
 /**
  * 插件接口
@@ -32,6 +32,13 @@ public interface OriginPlugin<T extends OriginEntity> {
      * @return
      */
     public T converOrigin(DataSource datasource);
+    
+    /**
+     * 获取datasource下的所有表信息
+     * @param datasourceId
+     * @return
+     */
+    public List<TableInfo> showTablesInfo(DataSource datasource);
 
     /**
      * 检测数据源的连通性(针对于jdbc)

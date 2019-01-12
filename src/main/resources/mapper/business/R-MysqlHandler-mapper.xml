@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.business.R_MysqlHandlerMapper">
+
+	<resultMap id="tableInfo" type="cn.bocom.r_entity.datasource.TableInfo" >
+		<result column="ID" property="id" />
+		<result column="TABLE_NAME" property="tableName" />
+		<result column="TABLE_ROWS" property="tableRows" />
+		<result column="UPDATE_TIME" property="updataTime" />
+		<result column="TABLE_COMMENT" property="tableComment" />
+		<result column="OBJ_TYPE" property="objType" />
+	</resultMap>
+	
+	<select id="findTables" resultType="tableInfo" parameterType="string">
+		select CONCAT(TABLE_SCHEMA , '.' , TABLE_NAME) AS ID,TABLE_NAME,TABLE_ROWS,DATE_FORMAT(UPDATE_TIME, '%Y-%m-%d %H:%i:%S') AS UPDATE_TIME,TABLE_COMMENT,REPLACE(TABLE_TYPE,'BASE ','') AS OBJ_TYPE from
+		information_schema.TABLES where TABLE_SCHEMA = #{database} ORDER BY TABLE_TYPE,TABLE_NAME
+	</select>
+	<select id="preloadData" resultType="HashMap" parameterType="string">
+		select * from ${tableName} limit 0,${limit}
+	</select>
+	<select id="preloadSQLData" resultType="HashMap" parameterType="string">
+		${sql} limit 0,${limit}
+	</select>
+	<select id="findCountByTable" resultType="int" parameterType="string">
+		select count(1) from ${tableName}
+	</select>
+</mapper>

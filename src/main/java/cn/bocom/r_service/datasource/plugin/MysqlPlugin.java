@@ -2,14 +2,18 @@ package cn.bocom.r_service.datasource.plugin;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.bocom.mapper.business.R_MysqlHandlerMapper;
 import cn.bocom.other.common.Constant;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
+import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.MySQL;
 import cn.bocom.r_service.datasource.OriginPlugin;
 
@@ -20,6 +24,9 @@ import cn.bocom.r_service.datasource.OriginPlugin;
  */
 public class MysqlPlugin implements OriginPlugin<MySQL>{
     private static Logger logger = LoggerFactory.getLogger(MysqlPlugin.class);
+    
+    @Autowired
+    private R_MysqlHandlerMapper mysqlHandlerMapper;
 
     @Override
     public DataSource convertDataSource(MySQL originObj, int typeCode) {
@@ -73,4 +80,51 @@ public class MysqlPlugin implements OriginPlugin<MySQL>{
 		return mysql;
     }
 
+    @Override
+    public List<TableInfo> showTablesInfo(DataSource datasource) {
+        MySQL mysql = converOrigin(datasource);
+        List<TableInfo> ret = mysqlHandlerMapper.showTablesInfo(mysql.getDatabase());
+        return ret;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

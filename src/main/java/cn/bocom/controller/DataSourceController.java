@@ -115,7 +115,7 @@ public class DataSourceController {
     @ApiOperation(value = "获取数据源的所有表")
     @RequestMapping(value = "/findTables", method = RequestMethod.GET)
     public DataResponse findTables(String dataSource) {
-        return new DataResponse(dataSourceService.findTables(dataSource));
+        return new DataResponse(datasourceAbility.showTablesInfo(dataSource));
     }
 
     /************************* 数据源备注start ***********************************/

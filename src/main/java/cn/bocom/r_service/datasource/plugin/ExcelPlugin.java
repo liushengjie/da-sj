@@ -1,9 +1,13 @@
 package cn.bocom.r_service.datasource.plugin;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.bocom.r_entity.datasource.DataSource;
+import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.Excel;
 import cn.bocom.r_service.datasource.OriginPlugin;
 
@@ -23,6 +27,16 @@ public class ExcelPlugin implements OriginPlugin<Excel>{
     @Override
     public Excel converOrigin(DataSource datasource) {
         return null;
+    }
+
+    @Override
+    public List<TableInfo> showTablesInfo(DataSource datasource) {
+        return null;
+    }
+
+    @Override
+    public boolean connect(DataSource datasource) {
+        return true;
     }
 
     
