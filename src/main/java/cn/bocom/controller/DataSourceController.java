@@ -93,8 +93,8 @@ public class DataSourceController {
     // 修改数据源
     @ApiOperation(value = "修改数据源")
     @RequestMapping(value = "/updateDs", method = RequestMethod.POST)
-    public DataResponse updateDs(@RequestBody DsParam ds) {
-        return new DataResponse(dataSourceService.updateDs(ds));
+    public DataResponse updateDs(@RequestParam int type, @RequestBody String obj) {
+        return new DataResponse(datasourceOrigin.updateDataSource(type, obj));
     }
 
     // 删除数据源

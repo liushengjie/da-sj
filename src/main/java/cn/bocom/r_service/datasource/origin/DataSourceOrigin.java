@@ -88,8 +88,15 @@ public  class DataSourceOrigin {
      * @param obj
      * @return
      */
-    public <T extends OriginEntity> int updateDataSource(int type, String obj) {
-        return 0;
+    @SuppressWarnings("unchecked")
+	public <T extends OriginEntity> int updateDataSource(int type, String obj) {
+    	OriginPlugin<T> op = (OriginPlugin<T>)DatasourceUtil.originPlugin(type);
+        Class<? extends OriginEntity> oe = DatasourceUtil.originEntity(type);
+        
+        T originObj = (T)JSON.parseObject(obj, oe);
+        DataSource datasource = op.convertDataSource(originObj, type);
+        
+        return dataSourceMapper.updateDs(datasource);
     }
     
     

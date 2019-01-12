@@ -63,7 +63,7 @@
 	</insert>
 	
 	<!-- 修改数据源 -->
-	<update id="updateDs" parameterType="cn.bocom.entity.DataSource">
+	<update id="updateDs" parameterType="Map">
 		update t_data_source t set 
 		
 		<if test="name!=null and name!=''">
