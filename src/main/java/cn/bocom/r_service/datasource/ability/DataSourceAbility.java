@@ -14,7 +14,7 @@ import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_service.datasource.DatasourceUtil;
-import cn.bocom.r_service.datasource.OriginPlugin;
+import cn.bocom.r_service.datasource.DataSourcePlugin;
 import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 
 /**
@@ -36,7 +36,7 @@ public class DataSourceAbility {
      */
     @SuppressWarnings("unchecked")
     public <T extends OriginEntity> boolean connect(int type, String obj) {
-        OriginPlugin<T> op = (OriginPlugin<T>)DatasourceUtil.originPlugin(type);
+        DataSourcePlugin<T> op = (DataSourcePlugin<T>)DatasourceUtil.originPlugin(type);
         Class<? extends OriginEntity> oe = DatasourceUtil.originEntity(type);
         
         T originObj = (T)JSON.parseObject(obj, oe);
@@ -50,7 +50,7 @@ public class DataSourceAbility {
      * @return
      */
     public List<TableInfo> showTablesInfo(String datasourceId) {
-        OriginPlugin<?> op = DatasourceUtil.originPluginById(datasourceId);
+        DataSourcePlugin<?> op = DatasourceUtil.originPluginById(datasourceId);
         DataSource datasource = datasourceOrigin.selectDataSourceById(datasourceId);
         return op.showTablesInfo(datasource);
     }

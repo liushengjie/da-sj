@@ -17,7 +17,7 @@ import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.MySQL;
 import cn.bocom.r_service.datasource.DatasourceUtil;
-import cn.bocom.r_service.datasource.OriginPlugin;
+import cn.bocom.r_service.datasource.DataSourcePlugin;
 import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 
 /**
@@ -26,7 +26,7 @@ import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
  * @version $Id: MysqlPlugin.java, v 0.1 2019年1月11日 下午2:20:10 liushengjie Exp $
  */
 @Component
-public class MysqlPlugin implements OriginPlugin<MySQL>{
+public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     private static Logger logger = LoggerFactory.getLogger(MysqlPlugin.class);
     
     private static R_MysqlHandlerMapper mysqlHandlerMapper;

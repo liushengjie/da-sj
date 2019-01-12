@@ -9,14 +9,14 @@ import org.slf4j.LoggerFactory;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.Excel;
-import cn.bocom.r_service.datasource.OriginPlugin;
+import cn.bocom.r_service.datasource.DataSourcePlugin;
 
 /**
  * excel 插件类
  * @author liushengjie
  * @version $Id: ExcelPlugin.java, v 0.1 2019年1月11日 下午2:20:25 liushengjie Exp $
  */
-public class ExcelPlugin implements OriginPlugin<Excel>{
+public class ExcelPlugin implements DataSourcePlugin<Excel>{
     private static Logger logger = LoggerFactory.getLogger(ExcelPlugin.class);
 
     @Override

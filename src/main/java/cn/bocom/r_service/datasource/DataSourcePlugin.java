@@ -7,6 +7,7 @@ import cn.bocom.other.datasource.AtomikosDynamicDataSource;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_entity.datasource.TableInfo;
+import cn.bocom.r_service.resource.res_transform.ResourceProtocol;
 
 /**
  * 插件接口
@@ -15,7 +16,7 @@ import cn.bocom.r_entity.datasource.TableInfo;
  * @version $Id: OriginPlugin.java, v 0.1 2019年1月11日 下午2:22:06 liushengjie Exp $
  */
 
-public interface OriginPlugin<T extends OriginEntity> {
+public interface DataSourcePlugin<T extends OriginEntity> extends ResourceProtocol{
 
     /**
      * 转换为DataSource对象，进行数据存储

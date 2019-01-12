@@ -17,7 +17,7 @@ import cn.bocom.mapper.main.R_DataSourceMapper;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_service.datasource.DatasourceUtil;
-import cn.bocom.r_service.datasource.OriginPlugin;
+import cn.bocom.r_service.datasource.DataSourcePlugin;
 
 /**
  * 数据源对象处理类
@@ -39,7 +39,7 @@ public  class DataSourceOrigin {
      */
     @SuppressWarnings("unchecked")
     public <T extends OriginEntity> int insertDataSource(int type, String obj) {
-        OriginPlugin<T> op = (OriginPlugin<T>)DatasourceUtil.originPlugin(type);
+        DataSourcePlugin<T> op = (DataSourcePlugin<T>)DatasourceUtil.originPlugin(type);
         Class<? extends OriginEntity> oe = DatasourceUtil.originEntity(type);
         
         T originObj = (T)JSON.parseObject(obj, oe);
@@ -59,7 +59,7 @@ public  class DataSourceOrigin {
     	Page<Object> page = PageHelper.startPage(currentPage, pageSize);
         List<DataSource> docs = dataSourceMapper.selectDs(datasource);
         PageInfo<? extends OriginEntity> pageInfo = new PageInfo<>(docs.stream().map(x -> {
-        	OriginPlugin<? extends OriginEntity> op = (OriginPlugin<? extends OriginEntity>)DatasourceUtil.originPlugin(Integer.parseInt(x.getType()));
+        	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPlugin(Integer.parseInt(x.getType()));
             return op.converOrigin(x);
         }).collect(Collectors.toList()));   
         pageInfo.setTotal(page.getTotal());
@@ -90,7 +90,7 @@ public  class DataSourceOrigin {
      */
     @SuppressWarnings("unchecked")
 	public <T extends OriginEntity> int updateDataSource(int type, String obj) {
-    	OriginPlugin<T> op = (OriginPlugin<T>)DatasourceUtil.originPlugin(type);
+    	DataSourcePlugin<T> op = (DataSourcePlugin<T>)DatasourceUtil.originPlugin(type);
         Class<? extends OriginEntity> oe = DatasourceUtil.originEntity(type);
         
         T originObj = (T)JSON.parseObject(obj, oe);
