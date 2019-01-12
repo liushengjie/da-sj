@@ -24,4 +24,15 @@ public interface OriginPlugin <T extends OriginEntity>{
      * @return
      */
     public T converOrigin(DataSource datasource);
+    
+    /**
+     * 检测数据源的连通性
+     * @param originObj
+     * @param typeCode
+     * @return
+     */
+    public boolean connect(T originObj, int typeCode);
+    
+    
+    
 }

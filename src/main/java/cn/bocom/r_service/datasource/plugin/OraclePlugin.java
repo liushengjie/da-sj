@@ -24,4 +24,9 @@ public class OraclePlugin implements OriginPlugin<Oracle>{
     public Oracle converOrigin(DataSource datasource) {
         return null;
     }
+
+    @Override
+    public boolean connect(Oracle originObj, int typeCode) {
+        return false;
+    }
 }
