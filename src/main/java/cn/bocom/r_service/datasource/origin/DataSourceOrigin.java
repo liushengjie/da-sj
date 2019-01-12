@@ -1,11 +1,16 @@
 package cn.bocom.r_service.datasource.origin;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.bocom.mapper.main.R_DataSourceMapper;
@@ -51,7 +56,14 @@ public  class DataSourceOrigin {
      * @return
      */
     public PageInfo<? extends OriginEntity> selectDataSourceByPage(DataSource datasource, int currentPage, int pageSize) {
-        return null;
+    	Page page = PageHelper.startPage(currentPage, pageSize);
+        List<DataSource> docs = dataSourceMapper.selectDs(datasource);
+        PageInfo<? extends OriginEntity> pageInfo = new PageInfo<>(docs.stream().map(x -> {
+        	OriginPlugin<? extends OriginEntity> op = (OriginPlugin<? extends OriginEntity>)originPlugin(Integer.parseInt(x.getType()));
+            return op.converOrigin(x);
+        }).collect(Collectors.toList()));   
+        pageInfo.setTotal(page.getTotal());
+        return pageInfo;
     }
     
     /**

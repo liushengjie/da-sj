@@ -3,7 +3,7 @@
 
 <mapper namespace="cn.bocom.mapper.main.R_DataSourceMapper">
 	<!-- 分页查询数据源 -->
-	<select id="selectDs" resultType="cn.bocom.entity.DataSource" parameterType="cn.bocom.entity.DataSource">
+	<select id="selectDs" resultType="cn.bocom.r_entity.datasource.DataSource" parameterType="cn.bocom.r_entity.datasource.DataSource">
 		select t.id,t.name,
 		t.type,(select name from v_sys_code a where a.type_code='datasouce_type' and a.code=t.type) as typeName,
 		t.driver,t.url,t.username,t.pwd,t.xa,t.create_user as createUser,

@@ -11,6 +11,7 @@ public class OriginEntity implements Serializable{
     private static final long serialVersionUID = 1L;
     private String id;           //数据源ID
     private String name;         //数据源名称
+    private int type;		 //类型名称
     private String typeName;     //类型名称
     private String createUser;    //创建人
     private String createTime;    //创建日期
@@ -53,7 +54,14 @@ public class OriginEntity implements Serializable{
     public void setModel(int model) {
         this.model = model;
     }
-    public String getTypeName() {
+    
+    public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public String getTypeName() {
         return typeName;
     }
     public void setTypeName(String typeName) {
