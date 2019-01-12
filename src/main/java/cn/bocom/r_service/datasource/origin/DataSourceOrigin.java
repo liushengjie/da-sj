@@ -55,7 +55,7 @@ public  class DataSourceOrigin {
      * @param pageSize
      * @return
      */
-    public PageInfo<? extends OriginEntity> selectDataSourceByPage(DataSource datasource, int currentPage, int pageSize) {
+    public PageInfo<? extends OriginEntity> selectOriginListByPage(DataSource datasource, int currentPage, int pageSize) {
     	Page<Object> page = PageHelper.startPage(currentPage, pageSize);
         List<DataSource> docs = dataSourceMapper.selectDs(datasource);
         PageInfo<? extends OriginEntity> pageInfo = new PageInfo<>(docs.stream().map(x -> {
@@ -71,7 +71,7 @@ public  class DataSourceOrigin {
      * @param datasourceId
      * @return
      */
-    public OriginEntity selectDataSourceById(String datasourceId) {
+    public DataSource selectDataSourceById(String datasourceId) {
     	DataSource ds = new DataSource();
         ds.setId(datasourceId);
         List<DataSource> docs = dataSourceMapper.selectDs(ds);
@@ -79,8 +79,7 @@ public  class DataSourceOrigin {
         	return null;
         }
         DataSource d = docs.get(0);
-        OriginPlugin<? extends OriginEntity> op = (OriginPlugin<? extends OriginEntity>)DatasourceUtil.originPlugin(Integer.parseInt(d.getType()));
-        return op.converOrigin(d);
+        return d;
     }
     
     /**

@@ -72,7 +72,7 @@ public class DataSourceController {
     public DataResponse selectDsByPage(DataSource dataSource,
             @RequestParam("currentPage") int currentPage, @RequestParam("pageSize") int pageSize) {
         return new DataResponse(
-        		datasourceOrigin.selectDataSourceByPage(dataSource, currentPage, pageSize));
+        		datasourceOrigin.selectOriginListByPage(dataSource, currentPage, pageSize));
     }
     
     // 根据ID查询数据源信息
