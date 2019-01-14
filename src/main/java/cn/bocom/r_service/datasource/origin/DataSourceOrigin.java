@@ -1,6 +1,7 @@
 package cn.bocom.r_service.datasource.origin;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.bocom.mapper.main.R_DataSourceMapper;
+import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_service.datasource.DatasourceUtil;
@@ -115,6 +117,40 @@ public  class DataSourceOrigin {
     		return -1;
     	}
     }
+    
+    /**
+     * 根据表查询所有列信息
+     * @param datasource
+     * @param table(表名、sql、 collection 等等)
+     * @return
+     */
+    public List<ColInfo> showColsInfo(String datasourceId, String table){
+    	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPluginById(datasourceId);
+    	return op.showColsInfo(table);
+    };
+    
+    /**
+     * 查询表数量
+     * @param datasource
+     * @param tableName
+     * @return
+     */
+    public int tableCount(String datasourceId, String table) {
+    	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPluginById(datasourceId);
+        int result = op.tableCount(table);
+        return result;
+    };
+    
+    /**
+     * 读取数据
+     * @param table
+     * @param limit(limit为0时 不限制)
+     * @return
+     */
+    public List<Map<String,Object>> loadData(String table, String limit){
+    	return null;
+    };
+    
 }
 
 

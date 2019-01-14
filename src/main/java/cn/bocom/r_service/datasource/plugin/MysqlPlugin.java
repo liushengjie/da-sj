@@ -104,7 +104,7 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
 
     @Override
     public int tableCount(String table) {
-        return 0;
+    	return mysqlHandlerMapper.tableCount(table);
     }
 
     @Override

@@ -22,7 +22,7 @@
 	<select id="preloadSQLData" resultType="HashMap" parameterType="string">
 		${sql} limit 0,${limit}
 	</select>
-	<select id="findCountByTable" resultType="int" parameterType="string">
+	<select id="tableCount" resultType="int" parameterType="string">
 		select count(1) from ${tableName}
 	</select>
 </mapper>

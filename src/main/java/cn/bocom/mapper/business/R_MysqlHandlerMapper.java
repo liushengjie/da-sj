@@ -27,6 +27,6 @@ public interface R_MysqlHandlerMapper {
     
     List preloadSQLData(@Param("sql")String sql, @Param("limit")String limit);
     
-    int findCountByTable(@Param("tableName")String tableName);
+    int tableCount(@Param("tableName")String tableName);
 
 }

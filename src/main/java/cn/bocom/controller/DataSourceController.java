@@ -29,11 +29,11 @@ import org.springframework.web.multipart.MultipartFile;
 import cn.bocom.entity.Alias;
 import cn.bocom.entity.DsParam;
 import cn.bocom.other.common.DataResponse;
+import cn.bocom.other.datasource.excel.ExcelSheetPO;
+import cn.bocom.other.datasource.excel.POIExcelUtil;
 import cn.bocom.other.util.DateUtil;
 import cn.bocom.other.util.FileUtil;
 import cn.bocom.other.util.RandomUtil;
-import cn.bocom.other.util.excel.ExcelSheetPO;
-import cn.bocom.other.util.excel.POIExcelUtil;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_service.datasource.ability.DataSourceAbility;
 import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
@@ -139,7 +139,7 @@ public class DataSourceController {
     @ApiOperation(value = "获取表的所有列及别名")
     @RequestMapping(value = "/findColsByTable", method = RequestMethod.GET)
     public DataResponse findColsByTable(String dataSource, String tableName) {
-        List list = dataSourceService.findColsByTable(dataSource, tableName);
+        List list = datasourceOrigin.showColsInfo(dataSource, tableName);
         if (list == null) {
             return new DataResponse(false, -1, "获取字段信息错误！");
         } else {
@@ -178,7 +178,7 @@ public class DataSourceController {
     @ApiOperation(value = "获取表数据量")
     @RequestMapping(value = "/findCountByTable", method = RequestMethod.GET)
     public DataResponse findCountByTable(String dataSource, String tableName) {
-        return new DataResponse(dataSourceService.findCountByTable(dataSource, tableName));
+        return new DataResponse(datasourceOrigin.tableCount(dataSource, tableName));
     }
 
     /**
