@@ -3,7 +3,7 @@ package cn.bocom.r_service.datasource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.bocom.other.datasource.DBContextHolder;
+import cn.bocom.other.datasource.jdbc.DBContextHolder;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;

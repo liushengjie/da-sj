@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.bocom.entity.DataSource;
 import cn.bocom.entity.DsParam;
-import cn.bocom.other.datasource.AtomikosDynamicDataSource;
+import cn.bocom.other.datasource.jdbc.AtomikosDynamicDataSource;
 import cn.bocom.other.util.DBUtil;
 
 /**

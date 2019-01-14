@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
-import cn.bocom.other.datasource.AtomikosDynamicDataSource;
+import cn.bocom.other.datasource.jdbc.AtomikosDynamicDataSource;
 import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;

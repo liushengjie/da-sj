@@ -1,4 +1,4 @@
-package cn.bocom.other.util.excel;
+package cn.bocom.other.datasource.excel;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -101,7 +101,7 @@ public class POIExcelUtil {
                 readRowCount = sheet.getPhysicalNumberOfRows();
             } else {
                 readRowCount = rowCount;
-            }           
+            }
             // 解析sheet 的行
             for (int j = sheet.getFirstRowNum(); j < readRowCount; j++) {
                 Row row = sheet.getRow(j);
@@ -131,8 +131,8 @@ public class POIExcelUtil {
                 dataListCell.add(rowCell);
             }
             if (headerMode.equals("first")) {
-            	if(dataList.size()>0){
-            		List<Object> rowVal = dataList.get(0);
+                if (dataList.size() > 0) {
+                    List<Object> rowVal = dataList.get(0);
                     List<String> rowCells = dataListCell.get(0);
 
                     headers = new String[rowVal.size()];
@@ -147,11 +147,11 @@ public class POIExcelUtil {
                     sheetPO.setHeaderTypes(headertypes);
                     dataList.remove(0);
                     dataListCell.remove(0);
-            	}              
+                }
 
             } else if (headerMode.equals("auto")) {
-            	if(dataList.size()>0){
-            		List<Object> rowVal = dataList.get(0);
+                if (dataList.size() > 0) {
+                    List<Object> rowVal = dataList.get(0);
                     List<String> rowCells = dataListCell.get(1);
                     headertypes = new String[rowCells.size()];
                     headers = new String[rowVal.size()];
@@ -161,7 +161,7 @@ public class POIExcelUtil {
                     }
                     sheetPO.setHeaders(headers);
                     sheetPO.setHeaderTypes(headertypes);
-            	}               
+                }
             }
             sheetPO.setRowCount(dataList.size());
             sheetPOs.add(sheetPO);

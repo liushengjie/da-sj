@@ -22,9 +22,9 @@ import org.springframework.util.ResourceUtils;
 import cn.bocom.entity.DataSource;
 import cn.bocom.entity.DataSource.DSTypeIdEnum;
 import cn.bocom.entity.DsParam;
+import cn.bocom.other.datasource.excel.ExcelSheetPO;
+import cn.bocom.other.datasource.excel.POIExcelUtil;
 import cn.bocom.other.util.RandomUtil;
-import cn.bocom.other.util.excel.ExcelSheetPO;
-import cn.bocom.other.util.excel.POIExcelUtil;
 
 /**
  * @ClassName: ExcelHandler

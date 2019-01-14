@@ -5,7 +5,7 @@
  * @author: liu   
  * @date: 2018年8月10日 下午5:38:43 
  */
-package cn.bocom.other.datasource;
+package cn.bocom.other.datasource.jdbc;
 
 /** 
  * @ClassName: DBContextHolder 

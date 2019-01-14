@@ -18,7 +18,7 @@ import com.google.common.collect.Maps;
 
 import cn.bocom.entity.DataSource;
 import cn.bocom.entity.DsParam;
-import cn.bocom.other.datasource.DBContextHolder;
+import cn.bocom.other.datasource.jdbc.DBContextHolder;
 import cn.bocom.service.datasource.handler.AbstractDsHandler;
 
 /**

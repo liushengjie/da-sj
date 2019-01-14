@@ -5,7 +5,7 @@
  * @author: liushengjie
  * @date: 2018年8月13日 下午3:10:52
  */
-package cn.bocom.other.datasource;
+package cn.bocom.other.datasource.jdbc;
 
 import java.sql.SQLException;
 import java.util.List;
