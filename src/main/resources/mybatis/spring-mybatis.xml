@@ -40,7 +40,7 @@
 	</bean>
 
 	<!-- 定义中间表使用的数据源、sqlSessionFactory等 -->
-	<bean id="atomikosDynamicDataSource" class="cn.bocom.other.datasource.AtomikosDynamicDataSource" >
+	<bean id="atomikosDynamicDataSource" class="cn.bocom.other.datasource.jdbc.AtomikosDynamicDataSource" >
         <property name="defaultTargetDataSource" ref="defaultDataSource"></property> 
         <property name="targetDataSources">
             <map>

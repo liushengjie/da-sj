@@ -126,7 +126,8 @@ public  class DataSourceOrigin {
      */
     public List<ColInfo> showColsInfo(String datasourceId, String table){
     	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPluginById(datasourceId);
-    	return op.showColsInfo(table);
+    	DataSource ds = selectDataSourceById(datasourceId);
+    	return op.showColsInfo(ds, table);
     };
     
     /**

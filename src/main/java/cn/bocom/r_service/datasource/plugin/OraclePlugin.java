@@ -36,7 +36,7 @@ public class OraclePlugin implements DataSourcePlugin<Oracle>{
     }
 
     @Override
-    public List<ColInfo> showColsInfo(String table) {
+    public List<ColInfo> showColsInfo(DataSource datasource, String table) {
         return null;
     }
 

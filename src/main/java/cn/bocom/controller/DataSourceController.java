@@ -34,6 +34,7 @@ import cn.bocom.other.datasource.excel.POIExcelUtil;
 import cn.bocom.other.util.DateUtil;
 import cn.bocom.other.util.FileUtil;
 import cn.bocom.other.util.RandomUtil;
+import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_service.datasource.ability.DataSourceAbility;
 import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
@@ -136,10 +137,10 @@ public class DataSourceController {
     /************************* 数据源备注end ***********************************/
 
 
-    @ApiOperation(value = "获取表的所有列及别名")
+    @ApiOperation(value = "获取表的所有列及主键、索引信息")
     @RequestMapping(value = "/findColsByTable", method = RequestMethod.GET)
     public DataResponse findColsByTable(String dataSource, String tableName) {
-        List list = datasourceOrigin.showColsInfo(dataSource, tableName);
+        List<ColInfo> list = datasourceOrigin.showColsInfo(dataSource, tableName);
         if (list == null) {
             return new DataResponse(false, -1, "获取字段信息错误！");
         } else {

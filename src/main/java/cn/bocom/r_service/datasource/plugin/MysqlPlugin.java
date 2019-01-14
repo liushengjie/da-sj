@@ -18,9 +18,7 @@ import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.MySQL;
-import cn.bocom.r_service.datasource.DatasourceUtil;
 import cn.bocom.r_service.datasource.DataSourcePlugin;
-import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 
 /**
  * mysql 插件类
@@ -98,8 +96,8 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     }
 
     @Override
-    public List<ColInfo> showColsInfo(String table) {
-        return null;
+    public List<ColInfo> showColsInfo(DataSource datasource, String table) {
+		return findAllColsByTable(datasource, table, converOrigin(datasource).getDatabase());
     }
 
     @Override

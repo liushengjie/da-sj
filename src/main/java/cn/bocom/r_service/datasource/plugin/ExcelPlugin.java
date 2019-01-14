@@ -41,7 +41,7 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
     }
 
     @Override
-    public List<ColInfo> showColsInfo(String table) {
+    public List<ColInfo> showColsInfo(DataSource datasource, String table) {
         return null;
     }
 
