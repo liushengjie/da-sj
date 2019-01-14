@@ -37,6 +37,8 @@ public class IgniteConfig {
 
         cfg.setPeerClassLoadingEnabled(true);
         
+        cfg.setMetricsLogFrequency(0);
+        
         Map userAttrs = new HashMap();
         userAttrs.put("cache.service.node", false);
         cfg.setUserAttributes(userAttrs);

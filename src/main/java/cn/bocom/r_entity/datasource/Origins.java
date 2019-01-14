@@ -89,12 +89,12 @@ public class Origins {
 
     }
 
-    public enum ConnStyleEnum { // 连接类型枚举
+    public enum ConnModelEnum { // 连接类型枚举
         JDBC(0), EXCEL(1);
 
         private int code;
 
-        private ConnStyleEnum(int code) {
+        private ConnModelEnum(int code) {
             this.code = code;
         }
 

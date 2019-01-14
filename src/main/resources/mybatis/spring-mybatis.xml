@@ -7,6 +7,12 @@
    http://www.springframework.org/schema/tx 
    http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
    ">
+   
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">      
+	    <property name="location">  
+             <value>mybatis/my-config.properties</value>        
+	   	</property> 
+	</bean>   
 	<!-- 默认的dataSource -->
 	<bean id="defaultDataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" destroy-method="close" primary="true">
 		<!-- 该数据源唯一的名称，不能重复 -->
@@ -18,10 +24,10 @@
         <property name="maxLifetime" value="0" />     
 		<property name="xaProperties">
 	        <props>
-	            <prop key="driverClassName">com.mysql.jdbc.Driver</prop>    
-	            <prop key="url">jdbc:mysql://192.168.124.240:3306/da_sj?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;allowMultiQueries=true</prop>    
-	            <prop key="username">root</prop>    
-	            <prop key="password">sjz@Hiynn1111</prop>    
+	            <prop key="driverClassName">${jdbc.driverClassName}</prop>    
+	            <prop key="url">${jdbc.url}</prop>    
+	            <prop key="username">${jdbc.username}</prop>    
+	            <prop key="password">${jdbc.password}</prop>    
 	            <prop key="initialSize">10</prop>    
 	            <prop key="minIdle">2</prop>    
 	            <prop key="maxActive">30</prop>    
