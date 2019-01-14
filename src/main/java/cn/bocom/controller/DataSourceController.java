@@ -162,9 +162,9 @@ public class DataSourceController {
     }
 
     @ApiOperation(value = "预加载指定表中指定数量的数据")
-    @RequestMapping(value = "/preloadData", method = RequestMethod.GET)
+    @RequestMapping(value = "/loadData", method = RequestMethod.GET)
     public DataResponse preloadData(String dataSource, String tableName, String limit) {
-        return new DataResponse(dataSourceService.preloadData(dataSource, tableName, limit));
+        return new DataResponse(datasourceOrigin.loadData(dataSource, tableName, limit));
     }
 
     @ApiOperation(value = "预加载指定SQL指定数量的数据,Map中含有三个参数：dataSource、sql、limit")

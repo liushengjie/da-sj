@@ -148,8 +148,9 @@ public  class DataSourceOrigin {
      * @param limit(limit为0时 不限制)
      * @return
      */
-    public List<Map<String,Object>> loadData(String table, String limit){
-    	return null;
+    public List<Map<String,Object>> loadData(String datasourceId, String table, String limit){
+    	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPluginById(datasourceId);
+    	return op.loadData(table, limit);
     };
     
 }
