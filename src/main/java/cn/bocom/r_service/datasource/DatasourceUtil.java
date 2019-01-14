@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import cn.bocom.other.datasource.jdbc.AtomikosDynamicDataSource;
 import cn.bocom.other.datasource.jdbc.DBContextHolder;
-import cn.bocom.other.util.DBUtil;
 import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
@@ -82,7 +81,7 @@ public class DatasourceUtil {
      * @author lishipeng
      * @date 2018年9月14日上午10:34:45
      */
-    public static Connection getConnection(DataSource ds) {
+    public static Connection getJDBCConnection(DataSource ds) {
     	Connection conn = null;
     	try {
             AtomikosDynamicDataSource atomikosDynamicDataSource = new AtomikosDynamicDataSource();
@@ -111,7 +110,7 @@ public class DatasourceUtil {
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
         try {
-        	conn = getConnection(datasource);
+        	conn = getJDBCConnection(datasource);
         	if(conn==null) {
         		return result;
         	}

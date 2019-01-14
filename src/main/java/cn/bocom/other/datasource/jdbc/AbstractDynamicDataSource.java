@@ -33,7 +33,7 @@ import cn.bocom.other.cache.CacheProviderService;
  * @date: 2018年8月10日 下午5:48:34
  */
 public abstract class AbstractDynamicDataSource<T extends DataSource> extends AbstractRoutingDataSource
-		implements ApplicationContextAware {
+		implements ApplicationContextAware{
 	/** 日志 */
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -54,7 +54,7 @@ public abstract class AbstractDynamicDataSource<T extends DataSource> extends Ab
 		ctx = applicationContext;
 	}
 
-	public static ApplicationContext getApplicationContext() {
+    public static ApplicationContext getApplicationContext() {
 		return ctx;
 	}
 
@@ -126,11 +126,13 @@ public abstract class AbstractDynamicDataSource<T extends DataSource> extends Ab
 	 * @author liushengjie
 	 * @date 2018年8月10日下午6:01:57
 	 */
-	private String verifyAndInitDataSource() {
+	protected String verifyAndInitDataSource() {
 		String dataSourceKey = DBContextHolder.getDBType();
-		Object obj = this.targetDataSources.get(dataSourceKey);
-		if (obj != null) {
-			return dataSourceKey;
+		if(this.targetDataSources != null) {
+		    Object obj = this.targetDataSources.getOrDefault(dataSourceKey,null);
+		    if (obj != null) {
+		        return dataSourceKey;
+		    }
 		}
 		logger.info("【初始化数据源】");
 		

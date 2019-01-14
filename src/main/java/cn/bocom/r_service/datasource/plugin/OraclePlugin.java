@@ -10,6 +10,8 @@ import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.Oracle;
+import cn.bocom.r_entity.resource.ResourceCol;
+import cn.bocom.r_entity.resource.ResourceData;
 import cn.bocom.r_service.datasource.DataSourcePlugin;
 
 /**
@@ -49,7 +51,15 @@ public class OraclePlugin implements DataSourcePlugin<Oracle>{
     public List<Map<String, Object>> loadData(String table, String limit) {
         return null;
     }
-    
-    
+
+    @Override
+    public ResourceData convertToResData(TableInfo tbi) {
+        return null;
+    }
+
+    @Override
+    public ResourceCol convertToResCol(ColInfo col) {
+        return null;
+    }
     
 }

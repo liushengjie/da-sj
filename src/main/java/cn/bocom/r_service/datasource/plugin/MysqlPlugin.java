@@ -19,6 +19,8 @@ import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.Origins.DataSourceEnum;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.MySQL;
+import cn.bocom.r_entity.resource.ResourceCol;
+import cn.bocom.r_entity.resource.ResourceData;
 import cn.bocom.r_service.datasource.DataSourcePlugin;
 import cn.bocom.r_service.datasource.DatasourceUtil;
 import cn.bocom.r_service.system.alias.AliasService;
@@ -129,8 +131,16 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     public List<Map<String, Object>> loadData(String table, String limit) {
         return null;
     }
-    
-    
+
+    @Override
+    public ResourceData convertToResData(TableInfo tbi) {
+        return null;
+    }
+
+    @Override
+    public ResourceCol convertToResCol(ColInfo col) {
+        return null;
+    }
     
 }
 

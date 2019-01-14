@@ -5,10 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import cn.bocom.other.util.RandomUtil;
-import cn.bocom.r_entity.datasource.DataSource;
+import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_entity.resource.ResourceBody;
 import cn.bocom.r_entity.resource.ResourceData;
+import cn.bocom.r_service.datasource.DataSourcePlugin;
+import cn.bocom.r_service.datasource.DatasourceUtil;
 
 /**
  * 资源转换层
@@ -24,7 +26,8 @@ public class ResourceTrans {
      * @param datasource
      * @return
      */
-    public Resource convert(DataSource datasource, String table) {
+    public Resource convertToRes(String datasourceId, TableInfo table) {
+        Resource resource = new Resource();
         //1、设置body属性
         ResourceBody res_body = new ResourceBody();
         String resId = RandomUtil.getRandomId(18);  
@@ -32,12 +35,14 @@ public class ResourceTrans {
         res_body.setId(resId);
         res_body.setCacheTable(cacheTable);
         
-        //2、设置data属性
-        ResourceData res_data = new ResourceData();
-        res_data.setResId(resId);
-        res_data.setDsId(datasource.getId());
-        res_data.setTableName(table);
+        @SuppressWarnings("rawtypes")
+        DataSourcePlugin dp = DatasourceUtil.originPluginById(datasourceId);
+        ResourceData res_data = dp.convertToResData(table);
         
+       // dp.showColsInfo(datasource, table)
+        
+        resource.setResourceBody(res_body);
+        resource.setResourceData(res_data);
         
         
         return null;

@@ -9,6 +9,7 @@ package cn.bocom.other.datasource.jdbc;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -152,5 +153,11 @@ public class AtomikosDynamicDataSource extends AbstractDynamicDataSource<DataSou
                 if (!found) targetList.add(add);
             }
         }
+    }
+    
+    public javax.sql.DataSource getDataSource(String key){
+        verifyAndInitDataSource();
+        Map<Object, Object> sources = getTargetDataSources();
+        return (DataSource) sources.getOrDefault(key, null);
     }
 }

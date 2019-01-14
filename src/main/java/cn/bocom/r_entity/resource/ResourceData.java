@@ -44,49 +44,9 @@ public class ResourceData implements Serializable {
     @ColumnType(jdbcType=JdbcType.VARCHAR)
     private String tableName;
 
-    /**
-     * 是否是自定义sql（1是 0否）
-     */
-    @ApiModelProperty(value ="是否是自定义sql（1是 0否）",required = false)
-    @ColumnType(jdbcType=JdbcType.VARCHAR)
-    private String diy;
 
-    /**
-     * sql
-     */
-    @Column(name = "diy_sql")
-    @ApiModelProperty(value ="diy_sql",required = false)
-    @ColumnType(jdbcType=JdbcType.VARCHAR)
-    private String diySql;
-
-    /**
-     * 创建日期
-     */
-    @Column(name = "create_time")
-    @ApiModelProperty(value ="创建日期",required = false)
-    @ColumnType(jdbcType=JdbcType.TIMESTAMP)
-    private Date createTime;
-    
-    
-    /**
-     * 别名ID
-     */
-    @Column(name = "alias_id")
-    @ApiModelProperty(value ="别名ID",required = false)
-    @ColumnType(jdbcType=JdbcType.VARCHAR)
-    private String aliasId;
-    
-    @Transient
-    private String alias;
-
-	public String getAlias() {
-		return alias;
-	}
-
-	public void setAlias(String alias) {
-		this.alias = alias;
-	}
-
+    /**  连接方式*/
+    private String connModel;
 
     /**
      * 获取ID
@@ -164,70 +124,14 @@ public class ResourceData implements Serializable {
         return this;
     }
 
-    /**
-     * 获取是否是自定义sql（1是 0否）
-     *
-     * @return diy - 是否是自定义sql（1是 0否）
-     */
-    public String getDiy() {
-        return diy;
+    public String getConnModel() {
+        return connModel;
     }
 
-    /**
-     * 设置是否是自定义sql（1是 0否）
-     *
-     * @param diy 是否是自定义sql（1是 0否）
-     */
-    public ResourceData setDiy(String diy) {
-        this.diy = diy == null ? null : diy.trim();
-        return this;
-    }
-
-    /**
-     * 获取sql
-     *
-     * @return diy_sql - sql
-     */
-    public String getDiySql() {
-        return diySql;
-    }
-
-    /**
-     * 设置sql
-     *
-     * @param diySql sql
-     */
-    public ResourceData setDiySql(String diySql) {
-        this.diySql = diySql == null ? null : diySql.trim();
-        return this;
-    }
-
-    /**
-     * 获取创建日期
-     *
-     * @return create_time - 创建日期
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * 设置创建日期
-     *
-     * @param createTime 创建日期
-     */
-    public ResourceData setCreateTime(Date createTime) {
-        this.createTime = createTime;
-        return this;
+    public void setConnModel(String connModel) {
+        this.connModel = connModel;
     }
     
     
 
-    public String getAliasId() {
-		return aliasId;
-	}
-
-	public void setAliasId(String aliasId) {
-		this.aliasId = aliasId;
-	}
 }
