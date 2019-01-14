@@ -106,7 +106,7 @@ public class DatasourceUtil {
      * @author lishipeng
      * @date 2018年9月17日下午15:08:53
      */
-    public static List<ColInfo> findAllColsByTable(DataSource datasource, String tableName, String database) {
+    public static List<ColInfo> findColsByJDBC(DataSource datasource, String tableName, String database) {
     	List<ColInfo> result = null;
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
@@ -129,7 +129,6 @@ public class DatasourceUtil {
                 
                 col.setCol(columnName.toLowerCase());
                 col.setType(columnType);
-                col.setChangeType(DBUtil.changeDBType(columnType));
                 col.setLength(length);
                 col.setNullable(isNullAble);
                 

@@ -157,5 +157,12 @@ public class ListUtil {
             }
         }
     }
+    
+    public static Object pick(List<Map<String, Object>> mainList, String whereKey, String whereVal, String valueKey) {
+        Map<String, Object> pickMap = mainList.stream().filter(m -> {
+            return m.get(whereKey).equals(whereVal);
+        }).findFirst().orElse(null);
+        if(pickMap != null) return pickMap.get(valueKey); else return null;
+    }
 
 }

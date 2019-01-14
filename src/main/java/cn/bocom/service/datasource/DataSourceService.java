@@ -28,7 +28,7 @@ import cn.bocom.mapper.main.DataSourceMapper;
 import cn.bocom.other.util.BeanUtil;
 import cn.bocom.other.util.ListUtil;
 import cn.bocom.other.util.MapUtil;
-import cn.bocom.service.AliasService;
+import cn.bocom.r_service.system.alias.AliasService;
 import cn.bocom.service.datasource.factory.DsHandlerFactory;
 import cn.bocom.service.datasource.handler.AbstractDsHandler;
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import cn.bocom.mapper.business.R_MysqlHandlerMapper;
 import cn.bocom.other.common.Constant;
+import cn.bocom.other.util.ListUtil;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
@@ -20,6 +21,7 @@ import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.datasource.form.MySQL;
 import cn.bocom.r_service.datasource.DataSourcePlugin;
 import cn.bocom.r_service.datasource.DatasourceUtil;
+import cn.bocom.r_service.system.alias.AliasService;
 
 /**
  * mysql 插件类
@@ -31,6 +33,12 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     private static Logger logger = LoggerFactory.getLogger(MysqlPlugin.class);
     
     private static R_MysqlHandlerMapper mysqlHandlerMapper;
+    private static AliasService aliasService;
+    
+    @Autowired  
+    public void setAliasService(AliasService aliasService) {  
+        MysqlPlugin.aliasService = aliasService;  
+    } 
     
     @Autowired  
     public void setMapper(R_MysqlHandlerMapper mysqlHandlerMapper) {  
@@ -93,12 +101,23 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     public List<TableInfo> showTablesInfo(DataSource datasource) {
         MySQL mysql = converOrigin(datasource);
         List<TableInfo> ret = mysqlHandlerMapper.showTablesInfo(mysql.getDatabase());
+        List<Map<String, Object>> aliasList = aliasService.getTableAlias(datasource.getId());
+        ret.stream().forEach(m -> {
+            Object alias = ListUtil.pick(aliasList, "tablename", m.getTableName(), "alias");
+            m.setAlias(alias == null ? "" : alias.toString());
+        });
         return ret;
     }
 
     @Override
     public List<ColInfo> showColsInfo(DataSource datasource, String table) {
-		return DatasourceUtil.findAllColsByTable(datasource, table, converOrigin(datasource).getDatabase());
+        List<ColInfo> ret = DatasourceUtil.findColsByJDBC(datasource, table, converOrigin(datasource).getDatabase());
+        List<Map<String, Object>> aliasList = aliasService.getColAlias(datasource.getId(), table);
+        ret.stream().forEach(m -> {
+            Object alias = ListUtil.pick(aliasList, "colname", m.getCol(), "alias");
+            m.setAlias(alias == null ? "" : alias.toString());
+        });
+		return ret;
     }
 
     @Override

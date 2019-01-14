@@ -17,8 +17,8 @@ public class ColInfo implements Serializable{
     private String col;
     /**  列类型*/
     private String type;
-    /**  列转换后类型*/
-    private String changeType;
+    /**  列别名*/
+    private String alias;
     /**  长度*/
     private int length;
     /**  是否为空*/
@@ -44,12 +44,12 @@ public class ColInfo implements Serializable{
         this.type = type;
     }
 
-    public String getChangeType() {
-        return changeType;
+    public String getAlias() {
+        return alias;
     }
 
-    public void setChangeType(String changeType) {
-        this.changeType = changeType;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public int getLength() {

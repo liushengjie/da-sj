@@ -1,15 +1,10 @@
 package cn.bocom.r_service.datasource;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import cn.bocom.other.datasource.jdbc.AtomikosDynamicDataSource;
-import cn.bocom.other.util.DBUtil;
 import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;

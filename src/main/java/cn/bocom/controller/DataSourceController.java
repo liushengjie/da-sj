@@ -38,7 +38,7 @@ import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_service.datasource.ability.DataSourceAbility;
 import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
-import cn.bocom.service.AliasService;
+import cn.bocom.r_service.system.alias.AliasService;
 import cn.bocom.service.datasource.DataSourceService;
 import cn.bocom.service.datasource.factory.DsHandlerFactory;
 import cn.bocom.service.datasource.handler.AbstractDsHandler;

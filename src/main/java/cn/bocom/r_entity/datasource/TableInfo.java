@@ -10,6 +10,8 @@ public class TableInfo {
     private String id;
     /** 表名 */
     private String tableName;
+    /** 表别名*/
+    private String alias;
     /** 单表数据量 */
     private int tableRows;
     /** 最后更新时间 */
@@ -30,6 +32,12 @@ public class TableInfo {
     }
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+    public String getAlias() {
+        return alias;
+    }
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
     public int getTableRows() {
         return tableRows;
