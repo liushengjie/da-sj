@@ -53,12 +53,12 @@ public class OraclePlugin implements DataSourcePlugin<Oracle>{
     }
 
     @Override
-    public ResourceData convertToResData(TableInfo tbi) {
+    public ResourceData convertToResData(String resourceId, String datasourceId, TableInfo tbi) {
         return null;
     }
 
     @Override
-    public ResourceCol convertToResCol(ColInfo col) {
+    public ResourceCol convertToResCol(String resourceId, ColInfo col) {
         return null;
     }
     

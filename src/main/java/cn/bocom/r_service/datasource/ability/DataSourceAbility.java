@@ -52,7 +52,7 @@ public class DataSourceAbility {
      */
     public List<TableInfo> showTablesInfo(String datasourceId) {
         DataSourcePlugin<?> op = DatasourceUtil.originPluginById(datasourceId);
-        DataSource datasource = datasourceOrigin.selectDataSourceById(datasourceId);
+       
         return op.showTablesInfo(datasourceId);
     }
     

@@ -1,13 +1,18 @@
 package cn.bocom.r_service.resource.res_transform;
 
+import java.util.List;
+
+import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import cn.bocom.other.util.RandomUtil;
+import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_entity.resource.ResourceBody;
+import cn.bocom.r_entity.resource.ResourceCol;
 import cn.bocom.r_entity.resource.ResourceData;
 import cn.bocom.r_service.datasource.DataSourcePlugin;
 import cn.bocom.r_service.datasource.DatasourceUtil;
@@ -35,17 +40,20 @@ public class ResourceTrans {
         res_body.setId(resId);
         res_body.setCacheTable(cacheTable);
         
-        @SuppressWarnings("rawtypes")
-        DataSourcePlugin dp = DatasourceUtil.originPluginById(datasourceId);
-        ResourceData res_data = dp.convertToResData(table);
+        DataSourcePlugin<?> dp = DatasourceUtil.originPluginById(datasourceId);
+        ResourceData res_data = dp.convertToResData(resId, datasourceId, table);
         
-       // dp.showColsInfo(datasource, table)
+        List<ColInfo> cols = dp.showColsInfo(datasourceId, table.getTableName());
+        List<ResourceCol> res_cols = Lists.newArrayList();
+        cols.forEach(c -> {
+            res_cols.add(dp.convertToResCol(resId, c));
+        });
         
         resource.setResourceBody(res_body);
         resource.setResourceData(res_data);
+        resource.setResourceCols(res_cols);
         
-        
-        return null;
+        return resource;
     }
     
 

@@ -16,12 +16,12 @@ public interface ResourceProtocol {
      * @param tbi
      * @return
      */
-    public ResourceData convertToResData(TableInfo tbi);
+    public ResourceData convertToResData(String resourceId, String datasourceId, TableInfo tbi);
     
     /**
      * 协议：将列对象转换为资源列对象
      * @param col
      * @return
      */
-    public ResourceCol convertToResCol(ColInfo col);
+    public ResourceCol convertToResCol(String resourceId, ColInfo col);
 }

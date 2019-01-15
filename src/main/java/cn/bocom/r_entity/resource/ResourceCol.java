@@ -53,12 +53,6 @@ public class ResourceCol implements Serializable {
     @ColumnType(jdbcType=JdbcType.VARCHAR)
     private String type;
 
-    /**
-     * 属性(00：维度 01：度量 10：自定义维度 11：自定义度量)
-     */
-    @ApiModelProperty(value ="属性(00：维度 01：度量 10：自定义维度 11：自定义度量)",required = false)
-    @ColumnType(jdbcType=JdbcType.VARCHAR)
-    private String attr;
 
     /**
      * 源列ID
@@ -93,7 +87,7 @@ public class ResourceCol implements Serializable {
      */
     @ApiModelProperty(value ="字典ID",required = false)
     @ColumnType(jdbcType=JdbcType.VARCHAR)
-    private String dic;
+    private String dict;
 
     /**
      * 状态(0:隐藏 1:可用)
@@ -112,14 +106,6 @@ public class ResourceCol implements Serializable {
     @ApiModelProperty(value ="排序",required = false)
     @ColumnType(jdbcType=JdbcType.VARCHAR)
     private String sort;
-    
-    /**
-     * 创建时间
-     */
-    @Column(name = "create_time")
-    @ApiModelProperty(value ="创建时间",required = false)
-    @ColumnType(jdbcType=JdbcType.TIMESTAMP)
-    private Date createTime;
 
 	public String getChangeType() {
 		return changeType;
@@ -167,8 +153,6 @@ public class ResourceCol implements Serializable {
         return this;
     }
 
-
-
     public String getAliasId() {
 		return aliasId;
 	}
@@ -201,25 +185,6 @@ public class ResourceCol implements Serializable {
      */
     public ResourceCol setType(String type) {
         this.type = type == null ? null : type.trim();
-        return this;
-    }
-
-    /**
-     * 获取属性(00：维度 01：度量 10：自定义维度 11：自定义度量)
-     *
-     * @return attr - 属性(00：维度 01：度量 10：自定义维度 11：自定义度量)
-     */
-    public String getAttr() {
-        return attr;
-    }
-
-    /**
-     * 设置属性(00：维度 01：度量 10：自定义维度 11：自定义度量)
-     *
-     * @param attr 属性(00：维度 01：度量 10：自定义维度 11：自定义度量)
-     */
-    public ResourceCol setAttr(String attr) {
-        this.attr = attr == null ? null : attr.trim();
         return this;
     }
 
@@ -280,23 +245,12 @@ public class ResourceCol implements Serializable {
         return this;
     }
 
-    /**
-     * 获取字典ID
-     *
-     * @return dic - 字典ID
-     */
-    public String getDic() {
-        return dic;
+    public String getDict() {
+        return dict;
     }
 
-    /**
-     * 设置字典ID
-     *
-     * @param dic 字典ID
-     */
-    public ResourceCol setDic(String dic) {
-        this.dic = dic == null ? null : dic.trim();
-        return this;
+    public void setDict(String dict) {
+        this.dict = dict;
     }
 
     /**
@@ -332,13 +286,5 @@ public class ResourceCol implements Serializable {
 
 	public void setSort(String sort) {
 		this.sort = sort;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
 	}
 }
