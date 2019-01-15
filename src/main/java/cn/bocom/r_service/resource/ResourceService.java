@@ -3,9 +3,11 @@ package cn.bocom.r_service.resource;
 import java.util.List;
 import java.util.Map;
 
+import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.bocom.r_entity.resource.ResColInfo;
 import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_entity.resource.ResourceCol;
 
@@ -22,7 +24,12 @@ public class ResourceService {
      * @param resource
      * @return
      */
-    public List<ResourceCol> showResourceCols(Resource resource){
+    public List<ResColInfo> showResourceCols(Resource resource){
+        List<ResourceCol> res_cols = resource.getResourceCols();
+        List<ResColInfo> ret = Lists.newArrayList();
+        res_cols.forEach(c -> {
+            
+        });
         return null;
     }
     

@@ -156,7 +156,7 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     @Override
     public ResourceCol convertToResCol(String resourceId, ColInfo col) {
         ResourceCol res_col = new ResourceCol();
-        res_col.setAliasId(col.getAlias());
+        res_col.setAlias(col.getAlias());
         res_col.setCol(col.getCol());
         res_col.setChangeType(DBUtil.changeDBType(col.getType()));
         res_col.setColCache(col.getCol() + "_" + resourceId);

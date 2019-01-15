@@ -36,7 +36,7 @@ public class ResourceCol implements Serializable {
     @Column(name = "alias_id")
     @ApiModelProperty(value ="别名ID",required = false)
     @ColumnType(jdbcType=JdbcType.VARCHAR)
-    private String aliasId;
+    private String alias;
     
     /**
      * 缓存列名
@@ -153,15 +153,15 @@ public class ResourceCol implements Serializable {
         return this;
     }
 
-    public String getAliasId() {
-		return aliasId;
-	}
+	public String getAlias() {
+        return alias;
+    }
 
-	public void setAliasId(String aliasId) {
-		this.aliasId = aliasId;
-	}
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
 
-	public String getColCache() {
+    public String getColCache() {
 		return colCache;
 	}
 
