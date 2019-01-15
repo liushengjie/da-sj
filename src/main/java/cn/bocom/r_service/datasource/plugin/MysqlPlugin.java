@@ -23,6 +23,7 @@ import cn.bocom.r_entity.resource.ResourceCol;
 import cn.bocom.r_entity.resource.ResourceData;
 import cn.bocom.r_service.datasource.DataSourcePlugin;
 import cn.bocom.r_service.datasource.DatasourceUtil;
+import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 import cn.bocom.r_service.system.alias.AliasService;
 
 /**
@@ -36,6 +37,7 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     
     private static R_MysqlHandlerMapper mysqlHandlerMapper;
     private static AliasService aliasService;
+    private static DataSourceOrigin datasourceOrigin;
     
     @Autowired  
     public void setAliasService(AliasService aliasService) {  
@@ -46,6 +48,11 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     public void setMapper(R_MysqlHandlerMapper mysqlHandlerMapper) {  
         MysqlPlugin.mysqlHandlerMapper = mysqlHandlerMapper;  
     } 
+    
+    @Autowired  
+    public void setDatasourceOrigin(DataSourceOrigin datasourceOrigin) {  
+        MysqlPlugin.datasourceOrigin = datasourceOrigin;  
+    }
 
     @Override
     public DataSource convertDataSource(MySQL originObj, int typeCode) {
@@ -100,7 +107,8 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     }
 
     @Override
-    public List<TableInfo> showTablesInfo(DataSource datasource) {
+    public List<TableInfo> showTablesInfo(String datasourceId) {
+        DataSource datasource = datasourceOrigin.selectDataSourceById(datasourceId);
         MySQL mysql = converOrigin(datasource);
         List<TableInfo> ret = mysqlHandlerMapper.showTablesInfo(mysql.getDatabase());
         List<Map<String, Object>> aliasList = aliasService.getTableAlias(datasource.getId());
@@ -112,7 +120,8 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     }
 
     @Override
-    public List<ColInfo> showColsInfo(DataSource datasource, String table) {
+    public List<ColInfo> showColsInfo(String datasourceId, String table) {
+        DataSource datasource = datasourceOrigin.selectDataSourceById(datasourceId);
         List<ColInfo> ret = DatasourceUtil.findColsByJDBC(datasource, table, converOrigin(datasource).getDatabase());
         List<Map<String, Object>> aliasList = aliasService.getColAlias(datasource.getId(), table);
         ret.stream().forEach(m -> {

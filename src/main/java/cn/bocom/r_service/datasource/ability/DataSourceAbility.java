@@ -53,7 +53,7 @@ public class DataSourceAbility {
     public List<TableInfo> showTablesInfo(String datasourceId) {
         DataSourcePlugin<?> op = DatasourceUtil.originPluginById(datasourceId);
         DataSource datasource = datasourceOrigin.selectDataSourceById(datasourceId);
-        return op.showTablesInfo(datasource);
+        return op.showTablesInfo(datasourceId);
     }
     
     /**
@@ -65,7 +65,7 @@ public class DataSourceAbility {
     public List<ColInfo> showColsInfo(String datasourceId, String tableName){
     	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPluginById(datasourceId);
     	DataSource ds = datasourceOrigin.selectDataSourceById(datasourceId);
-    	return op.showColsInfo(ds, tableName);
+    	return op.showColsInfo(datasourceId, tableName);
     }
     
     /**

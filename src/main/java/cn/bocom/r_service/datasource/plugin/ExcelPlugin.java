@@ -33,7 +33,12 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
     }
 
     @Override
-    public List<TableInfo> showTablesInfo(DataSource datasource) {
+    public List<TableInfo> showTablesInfo(String datasourceId) {
+        return null;
+    }
+
+    @Override
+    public List<ColInfo> showColsInfo(String datasourceId, String table) {
         return null;
     }
 
@@ -42,10 +47,6 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
         return true;
     }
 
-    @Override
-    public List<ColInfo> showColsInfo(DataSource datasource, String table) {
-        return null;
-    }
 
     @Override
     public int tableCount(String table) {

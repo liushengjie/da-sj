@@ -33,12 +33,12 @@ public class OraclePlugin implements DataSourcePlugin<Oracle>{
     }
 
     @Override
-    public List<TableInfo> showTablesInfo(DataSource datasource) {
+    public List<TableInfo> showTablesInfo(String datasourceId) {
         return null;
     }
 
     @Override
-    public List<ColInfo> showColsInfo(DataSource datasource, String table) {
+    public List<ColInfo> showColsInfo(String datasourceId, String table) {
         return null;
     }
 

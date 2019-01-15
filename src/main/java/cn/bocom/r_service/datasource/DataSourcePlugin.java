@@ -43,7 +43,7 @@ public interface DataSourcePlugin<T extends OriginEntity> extends ResourceProtoc
      * @param datasourceId
      * @return
      */
-    public List<TableInfo> showTablesInfo(DataSource datasource);
+    public List<TableInfo> showTablesInfo(String datasourceId);
     
     /**
      * 根据表查询所有列信息
@@ -51,7 +51,7 @@ public interface DataSourcePlugin<T extends OriginEntity> extends ResourceProtoc
      * @param table(表名、sql、 collection 等等)
      * @return
      */
-    public List<ColInfo> showColsInfo(DataSource datasource, String table);
+    public List<ColInfo> showColsInfo(String datasourceId, String table);
     
     /**
      * 查询表数量
