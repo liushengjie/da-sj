@@ -140,7 +140,7 @@ public class DataSourceController {
     @ApiOperation(value = "获取表的所有列及主键、索引信息")
     @RequestMapping(value = "/findColsByTable", method = RequestMethod.GET)
     public DataResponse findColsByTable(String dataSource, String tableName) {
-        List<ColInfo> list = datasourceOrigin.showColsInfo(dataSource, tableName);
+        List<ColInfo> list = datasourceAbility.showColsInfo(dataSource, tableName);
         if (list == null) {
             return new DataResponse(false, -1, "获取字段信息错误！");
         } else {
@@ -164,7 +164,7 @@ public class DataSourceController {
     @ApiOperation(value = "预加载指定表中指定数量的数据")
     @RequestMapping(value = "/loadData", method = RequestMethod.GET)
     public DataResponse preloadData(String dataSource, String tableName, String limit) {
-        return new DataResponse(datasourceOrigin.loadData(dataSource, tableName, limit));
+        return new DataResponse(datasourceAbility.loadData(dataSource, tableName, limit));
     }
 
     @ApiOperation(value = "预加载指定SQL指定数量的数据,Map中含有三个参数：dataSource、sql、limit")
@@ -179,7 +179,7 @@ public class DataSourceController {
     @ApiOperation(value = "获取表数据量")
     @RequestMapping(value = "/findCountByTable", method = RequestMethod.GET)
     public DataResponse findCountByTable(String dataSource, String tableName) {
-        return new DataResponse(datasourceOrigin.tableCount(dataSource, tableName));
+        return new DataResponse(datasourceAbility.tableCount(dataSource, tableName));
     }
 
     /**

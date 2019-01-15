@@ -10,11 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 
+import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.datasource.OriginEntity;
 import cn.bocom.r_entity.datasource.TableInfo;
-import cn.bocom.r_service.datasource.DatasourceUtil;
 import cn.bocom.r_service.datasource.DataSourcePlugin;
+import cn.bocom.r_service.datasource.DatasourceUtil;
 import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 
 /**
@@ -61,8 +62,10 @@ public class DataSourceAbility {
      * @param tableName
      * @return
      */
-    public List<Map<String, Object>> showColsInfo(String datasourceId, String tableName){
-        return null;
+    public List<ColInfo> showColsInfo(String datasourceId, String tableName){
+    	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPluginById(datasourceId);
+    	DataSource ds = datasourceOrigin.selectDataSourceById(datasourceId);
+    	return op.showColsInfo(ds, tableName);
     }
     
     /**
@@ -83,6 +86,19 @@ public class DataSourceAbility {
      * @return
      */
     public int tableCount(String datasourceId, String tableName) {
-        return 0;
+    	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPluginById(datasourceId);
+        int result = op.tableCount(tableName);
+        return result;
     }
+    
+    /**
+     * 读取数据
+     * @param table
+     * @param limit(limit为0时 不限制)
+     * @return
+     */
+    public List<Map<String,Object>> loadData(String datasourceId, String table, String limit){
+    	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPluginById(datasourceId);
+    	return op.loadData(table, limit);
+    };
 }
