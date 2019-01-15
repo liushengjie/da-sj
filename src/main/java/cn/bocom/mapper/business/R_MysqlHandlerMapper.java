@@ -8,10 +8,10 @@
 package cn.bocom.mapper.business;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import cn.bocom.entity.DsParam;
 import cn.bocom.r_entity.datasource.TableInfo;
 
 /**
@@ -23,7 +23,7 @@ public interface R_MysqlHandlerMapper {
 
     List<TableInfo> showTablesInfo(String database);
     
-    List preloadData(@Param("tableName")String tableName, @Param("limit")String limit);
+    List<Map<String,Object>> loadData(@Param("tableName")String tableName, @Param("limit")String limit);
     
     List preloadSQLData(@Param("sql")String sql, @Param("limit")String limit);
     

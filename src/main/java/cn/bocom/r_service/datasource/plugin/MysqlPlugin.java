@@ -129,7 +129,7 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
 
     @Override
     public List<Map<String, Object>> loadData(String table, String limit) {
-        return null;
+    	return mysqlHandlerMapper.loadData(table,limit);
     }
 
     @Override
