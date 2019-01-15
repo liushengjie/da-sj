@@ -1,11 +1,15 @@
 package cn.bocom.r_entity.datasource;
 
+import java.io.Serializable;
+
 /**
  * 表信息
  * @author liushengjie
  * @version $Id: TableInfo.java, v 0.1 2019年1月12日 下午1:53:32 liushengjie Exp $
  */
-public class TableInfo {
+public class TableInfo implements Serializable{
+    /**  */
+    private static final long serialVersionUID = 1L;
     /** id */
     private String id;
     /** 表名 */
