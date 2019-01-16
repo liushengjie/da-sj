@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.main.R_ResourceMapper">
+
+	<!-- 根据条件查询资源信息 -->
+	<select id="selectResourceList" resultType="Map" parameterType="cn.bocom.r_entity.resource.Resource">
+		select
+		t1.id,t1.name,t1.category,t1.connect_type,t1.num,t1.cache_table,t1.schema_flag,t1.status,
+		t1.create_user,DATE_FORMAT(t1.create_time, '%Y-%m-%d %H:%i:%S') as create_time,DATE_FORMAT(t1.update_time, '%Y-%m-%d %H:%i:%S') as update_time,
+		t2.id as col_id,t2.res_id as col_res_id,t2.type as col_type,t2.attr as col_attr,t2.col as col_col,t2.change_type as col_change_type,t2.alias as col_alias,
+		t2.col_cache as col_col_cache,t2.pk as col_pk,t2.idx as col_idx,t2.dic as col_dic,t2.status as col_status,t2.origin as col_origin,t2.sort as col_sort,
+		t3.id as data_id,t3.res_id as data_res_id,t3.ds_id as data_ds_id,t3.table_name as data_table_name,t3.connmodel as data_connmodel,
+		t4.name as ds_name
+		from t_res t1 
+		left join t_res_col t2 on t1.id=t2.res_id 
+		left join t_res_data t3 on t1.id=t3.res_id 
+		left join t_data_source t4 on t3.ds_id=t4.id
+		<if test="resourceBody != null">
+			<if test="resourceBody.id != null and resourceBody.id != ''">
+		       and t1.id=#{resourceBody.id}
+		    </if>
+		    <if test="resourceBody.name != null and resourceBody.name != ''">
+		       and t1.name like CONCAT('%',#{resourceBody.name},'%')
+		    </if>
+		    <if test="resourceBody.category != null and resourceBody.category != ''">
+		       and t1.category=#{resourceBody.category}
+		    </if>
+		    <if test="resourceBody.connect_type != null and resourceBody.connect_type != ''">
+		       and t1.connect_type =#{resourceBody.connect_type}
+		    </if>
+		    <if test="resourceBody.status != null and resourceBody.status != ''">
+		       and t1.status =#{resourceBody.status}
+		    </if>
+		</if>
+		<if test="resourceCols != null">
+		
+		</if>
+		<if test="resourceData != null">
+			<if test="ds_id != null and ds_id != ''">
+		       and t3.ds_id=#{resourceData.ds_id}
+		    </if>
+		</if>
+		<!-- 
+		<if test="ds_name != null and ds_name != ''">
+	       and t4.name like CONCAT('%',#{ds_name},'%')
+	    </if>
+		 -->
+	     order by t1.id,t3.id,t2.id
+	</select>
+</mapper>

@@ -31,10 +31,10 @@ public class ResourceCol implements Serializable {
     private String resId;
 
     /**
-     * 别名ID
+     * 别名
      */
-    @Column(name = "alias_id")
-    @ApiModelProperty(value ="别名ID",required = false)
+    @Column(name = "alias")
+    @ApiModelProperty(value ="别名",required = false)
     @ColumnType(jdbcType=JdbcType.VARCHAR)
     private String alias;
     
