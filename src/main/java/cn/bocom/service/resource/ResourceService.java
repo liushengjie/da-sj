@@ -58,7 +58,6 @@ import cn.sj.common.CacheServer;
  * @author: liushengjie
  * @date: 2018年9月13日 下午2:16:51  
  */
-@Component
 public class ResourceService{
 	
 	@Autowired
