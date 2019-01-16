@@ -28,6 +28,7 @@ import cn.bocom.r_service.resource.res_transform.ResourceTrans;
  * @author liushengjie
  * @version $Id: ResourceService.java, v 0.1 2019年1月12日 下午4:35:35 liushengjie Exp $
  */
+@Component
 public class ResourceService {
     private static Logger logger = LoggerFactory.getLogger(ResourceService.class);
     
