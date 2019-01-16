@@ -36,13 +36,13 @@ public class ResourceService {
      * @param resource
      * @return
      */
-    public List<ResColInfo> showResourceCols(Resource resource){
+    public List<ResourceCol> showResourceCols(Resource resource){
         List<ResourceCol> res_cols = resource.getResourceCols();
-        List<ResColInfo> ret = Lists.newArrayList();
-        res_cols.forEach(c -> {
-            ret.add(resourceTrans.convertToResColInfo(c));
-        });
-        return ret;
+//        List<ResColInfo> ret = Lists.newArrayList();
+//        res_cols.forEach(c -> {
+//            ret.add(resourceTrans.convertToResColInfo(c));
+//        });
+        return res_cols;
     }
     
     
