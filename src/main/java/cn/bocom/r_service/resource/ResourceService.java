@@ -43,6 +43,7 @@ public class ResourceService {
         return resourceTrans.convertToRes(datasourceId, table);
     }
     
+    
     /**
      * 根据资源获取列信息
      * @param resource
