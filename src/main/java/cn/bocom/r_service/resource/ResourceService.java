@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import cn.bocom.mapper.main.R_DataSourceMapper;
+import cn.bocom.mapper.main.R_ResourceMapper;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.resource.ResColInfo;
 import cn.bocom.r_entity.resource.Resource;
@@ -33,7 +33,7 @@ public class ResourceService {
     private static Logger logger = LoggerFactory.getLogger(ResourceService.class);
     
     @Autowired
-    private R_DataSourceMapper resMapper;
+    private R_ResourceMapper resMapper;
     
     
     @Autowired
