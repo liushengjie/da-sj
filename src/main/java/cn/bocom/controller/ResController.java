@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.bocom.other.common.DataResponse;
 import cn.bocom.r_entity.datasource.TableInfo;
-import cn.bocom.r_entity.resource.ResColInfo;
 import cn.bocom.r_entity.resource.Resource;
+import cn.bocom.r_entity.resource.ResourceCol;
 import cn.bocom.r_service.resource.ResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -94,7 +94,7 @@ public class ResController {
     @ApiOperation(value = "获取资源对象的列信息")
     @RequestMapping(value = "/loadResourceCols", method = RequestMethod.POST)
     public DataResponse loadResourceCols(@RequestBody Resource resource) {
-        List<ResColInfo> ret = resourceService.showResourceCols(resource);
+        List<ResourceCol> ret = resourceService.showResourceCols(resource);
         return new DataResponse(ret);
     }
 }
