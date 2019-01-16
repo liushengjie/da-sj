@@ -1,11 +1,13 @@
 package cn.bocom.r_entity.resource;
 
+import java.io.Serializable;
+
 /**
  * 资源列表单对象
  * @author liushengjie
  * @version $Id: ResColInfo.java, v 0.1 2019年1月15日 下午2:05:25 liushengjie Exp $
  */
-public class ResColInfo {
+public class ResColInfo implements Serializable{
     
     private String id;
     private String resId;

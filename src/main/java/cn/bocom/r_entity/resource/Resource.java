@@ -3,6 +3,8 @@ package cn.bocom.r_entity.resource;
 import java.io.Serializable;
 import java.util.List;
 
+import cn.bocom.r_entity.process.ProcessEntity;
+
 /**
  * 資源基類
  * @author liushengjie
@@ -15,6 +17,7 @@ public class Resource implements Serializable{
     private ResourceBody resourceBody;
     private List<ResourceCol> resourceCols;
     private ResourceData resourceData;
+    private List<? extends ProcessEntity> processors;
     
     public ResourceBody getResourceBody() {
         return resourceBody;
@@ -34,5 +37,11 @@ public class Resource implements Serializable{
     }
     public void setResourceData(ResourceData resourceData) {
         this.resourceData = resourceData;
+    }
+    public List<? extends ProcessEntity> getProcessors() {
+        return processors;
+    }
+    public void setProcessors(List<? extends ProcessEntity> processors) {
+        this.processors = processors;
     }
 }

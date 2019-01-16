@@ -15,6 +15,10 @@ import cn.bocom.r_service.datasource.DataSourcePlugin;
 import cn.bocom.r_service.datasource.plugin.ExcelPlugin;
 import cn.bocom.r_service.datasource.plugin.MysqlPlugin;
 import cn.bocom.r_service.datasource.plugin.OraclePlugin;
+import cn.bocom.r_service.process.IProcess;
+import cn.bocom.r_service.process.impl.ListProcess;
+import cn.bocom.r_service.process.impl.MySQLProcess;
+import cn.bocom.r_service.process.impl.OracleProcess;
 
 /**
  * 上游数据源枚举类
@@ -24,25 +28,33 @@ import cn.bocom.r_service.datasource.plugin.OraclePlugin;
  */
 public class Origins {
     public enum DataSourceEnum {
-        // 源名称、编号、entity类、插件名称
-        MYSQL("MYSQL", 0, MySQL.class, MysqlPlugin.class, "relationData"), 
-        ORACLE("ORACLE", 1,Oracle.class, OraclePlugin.class,"relationData"), 
-        EXCEL("EXCEL", 2, Excel.class, ExcelPlugin.class, "noSQLData");
+        
+        MYSQL("MYSQL", 0, MySQL.class, MysqlPlugin.class, MySQLProcess.class, "relationData"), 
+        ORACLE("ORACLE", 1, Oracle.class, OraclePlugin.class, OracleProcess.class, "relationData"), 
+        EXCEL("EXCEL", 2, Excel.class, ExcelPlugin.class, ListProcess.class, "noSQLData");
 
+        /**  源名称*/
         private String name;
+        /**  编号*/
         private int code;
+        /**  表单Entity*/
         private Class<? extends OriginEntity> entityClass;
+        /**  源插件类*/
         @SuppressWarnings("rawtypes")
         private Class<? extends DataSourcePlugin> pluginClass;
+        /**  处理器类*/
+        private Class<? extends IProcess> processClass;
+        /**  归类*/
         private String category;
 
         @SuppressWarnings("rawtypes")
         private DataSourceEnum(String name, int code, Class<? extends OriginEntity> entityClass,
-                Class<? extends DataSourcePlugin> pluginClass, String categoty) {
+                Class<? extends DataSourcePlugin> pluginClass, Class<? extends IProcess> processClass, String categoty) {
             this.name = name;
             this.code = code;
             this.entityClass = entityClass;
             this.pluginClass = pluginClass;
+            this.processClass = processClass;
             this.category = categoty;
         }
 
@@ -67,6 +79,14 @@ public class Origins {
             return entityClass;
         }
 
+        public IProcess getProcessClass() {
+            try {
+                return processClass.newInstance();
+            } catch (Exception e) {
+                throw new SjException(e);
+            }
+        }
+
         @SuppressWarnings("rawtypes")
         public DataSourcePlugin getPluginClass() {
             try {
@@ -86,7 +106,6 @@ public class Origins {
             }
             return ret;
         }
-
     }
 
     public enum ConnModelEnum { // 连接类型枚举
