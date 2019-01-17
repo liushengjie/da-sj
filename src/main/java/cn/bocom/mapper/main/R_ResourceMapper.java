@@ -5,9 +5,12 @@ import java.util.Map;
 
 import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_entity.resource.ResourceBody;
+import cn.bocom.r_entity.resource.ResourceCol;
+import cn.bocom.r_entity.resource.ResourceData;
+import tk.mybatis.mapper.common.Mapper;
 
 
-public interface R_ResourceMapper  {//extends Mapper<Resource>
+public interface R_ResourceMapper extends Mapper<ResourceBody> {
 	
 	public List<Map<String, Object>> selectResourceList(Resource resource);
 
@@ -16,6 +19,8 @@ public interface R_ResourceMapper  {//extends Mapper<Resource>
 	public int deleteResourceData(String resourceId);
 	
 	public int saveResourceBody(ResourceBody resourceBody);
+	public int saveResourceData(ResourceData resourceData);
+	public int saveResourceCol(ResourceCol resourceCol);
 	
 	
 }

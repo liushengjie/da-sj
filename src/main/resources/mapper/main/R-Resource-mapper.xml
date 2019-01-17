@@ -80,13 +80,69 @@
 		)
 	</update>
 	
+	<update id="saveResourceData" parameterType="cn.bocom.r_entity.resource.ResourceData">
+		REPLACE INTO t_res_data(
+			<if test="id!=null and id!=''">id,</if>
+			<if test="resId!=null and resId!=''">res_id,</if>
+			<if test="dsId!=null and dsId!=''">ds_id,</if>
+			<if test="tableName!=null and tableName!=''">table_name,</if>
+			<if test="connModel!=null and connModel!=''">connmodel,</if>
+			create_time
+		) values (
+			<if test="id!=null and id!=''">#{id},</if>
+			<if test="resId!=null and resId!=''">#{resId},</if>
+			<if test="dsId!=null and dsId!=''">#{dsId},</if>
+			<if test="tableName!=null and tableName!=''">#{tableName},</if>
+			<if test="connModel!=null and connModel!=''">#{connModel},</if>
+			now()
+		)
+	</update>
+	
+	<update id="saveResourceCol" parameterType="cn.bocom.r_entity.resource.ResourceCol">
+		REPLACE INTO t_res_col(
+			<trim suffixOverrides=",">
+				<if test="id!=null and id!=''">id,</if>
+				<if test="resId!=null and resId!=''">res_id,</if>
+				<if test="alias!=null and alias!=''">alias,</if>
+				<if test="type!=null and type!=''">type,</if>
+				<if test="col!=null and col!=''">col,</if>
+				<if test="pk!=null and pk!=''">pk,</if>
+				<if test="idx!=null and idx!=''">idx,</if>
+				<if test="dict!=null and dict!=''">dic,</if>
+				<if test="status!=null and status!=''">status,</if>
+				<if test="origin!=null and origin!=''">origin,</if>
+				<if test="changeType!=null and changeType!=''">change_type,</if>
+				<if test="colCache!=null and colCache!=''">col_cache,</if>
+				<if test="sort!=null and sort!=''">sort,</if>
+				create_time
+			</trim>
+		) values (
+			<trim suffixOverrides=",">
+				<if test="id!=null and id!=''">#{id},</if>
+				<if test="resId!=null and resId!=''">#{resId},</if>
+				<if test="alias!=null and alias!=''">#{alias},</if>
+				<if test="type!=null and type!=''">#{type},</if>
+				<if test="col!=null and col!=''">#{col},</if>
+				<if test="pk!=null and pk!=''">#{pk},</if>
+				<if test="idx!=null and idx!=''">#{idx},</if>
+				<if test="dict!=null and dict!=''">#{dict},</if>
+				<if test="status!=null and status!=''">#{status},</if>
+				<if test="origin!=null and origin!=''">#{origin},</if>
+				<if test="changeType!=null and changeType!=''">#{changeType},</if>
+				<if test="colCache!=null and colCache!=''">#{colCache},</if>
+				<if test="sort!=null and sort!=''">#{sort},</if>
+				now()
+			</trim>
+		)
+	</update>
+	
 	<delete id="deleteResourceBody" parameterType="string">
-		delete from t_res where id=#{id}
+		delete from t_res where id=#{resourceId}
 	</delete>
 	<delete id="deleteResourceCol" parameterType="string">
-		delete from t_res_col where res_id=#{id}
+		delete from t_res_col where res_id=#{resourceId}
 	</delete>
 	<delete id="deleteResourceData" parameterType="string">
-		delete from t_res_data where res_id=#{id}
+		delete from t_res_data where res_id=#{resourceId}
 	</delete>
 </mapper>

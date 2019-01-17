@@ -43,6 +43,9 @@ public class ResController {
     @Autowired
     private ResourceService resourceService;
     
+    @Autowired
+    private cn.bocom.r_service.resource.ResourceService r_resService;
+    
 //    @ApiOperation(value = "预览sql")
 //    @RequestMapping(value = "/previewData", method = RequestMethod.POST)
 //    public DataResponse previewData(@RequestBody ResBean resBean, String limit) {
@@ -97,5 +100,43 @@ public class ResController {
     public DataResponse loadResourceCols(@RequestBody Resource resource) {
         List<ResourceCol> ret = resourceService.showResourceCols(resource);
         return new DataResponse(ret);
+    }
+    
+    @ApiOperation(value = "获取全部资源库信息")
+    @RequestMapping(value = "/selectResourceList", method = RequestMethod.GET)
+    public DataResponse selectResourceList() {
+        return new DataResponse(r_resService.selectResourceList(new Resource()));
+    }
+    
+    @ApiOperation(value = "获取分页资源库信息")
+    @RequestMapping(value = "/selectResourceListByPage", method = RequestMethod.GET)
+    public DataResponse selectResourceListByPage(@RequestBody Resource resource, 
+    		@RequestParam("currentPage") int currentPage, 
+    		@RequestParam("pageSize") int pageSize) {
+        return new DataResponse(r_resService.selectResourceListByPage(resource,currentPage,pageSize));
+    }
+    
+    @ApiOperation(value = "根据id获取资源库信息")
+    @RequestMapping(value = "/selectResourceById", method = RequestMethod.GET)
+    public DataResponse selectResourceById(String id) {
+        return new DataResponse(r_resService.selectResourceById(id));
+    }
+    
+    @ApiOperation(value = "根据类型获取资源库信息")
+    @RequestMapping(value = "/selectResourceByCategory", method = RequestMethod.GET)
+    public DataResponse selectResourceByCategory(String category) {
+        return new DataResponse(r_resService.selectResourceByCategory(category));
+    }
+    
+    @ApiOperation(value = "保存资源信息，有记录则更新反之插入")
+    @RequestMapping(value = "/saveResource", method = RequestMethod.GET)
+    public DataResponse saveResource(@RequestBody Resource resource) {
+        return new DataResponse(r_resService.saveResource(resource));
+    }
+    
+    @ApiOperation(value = "刪除资源库信息")
+    @RequestMapping(value = "/deleteResource", method = RequestMethod.GET)
+    public DataResponse deleteResource(String id) {
+        return new DataResponse(r_resService.deleteResource(id));
     }
 }
