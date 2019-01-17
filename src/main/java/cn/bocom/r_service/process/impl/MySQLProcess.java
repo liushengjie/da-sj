@@ -16,7 +16,7 @@ import cn.bocom.r_service.process.ProcessUtil;
 public class MySQLProcess implements IProcess{
     
     /** 可用功能名称*/
-    public static List<String> availableFunction = Lists.newArrayList("CONTENTPROC","DATEPROC","NOTNULLPROC","SPLITPROC","SUBSTRPROC"); 
+    public static List<String> availableFunction = Lists.newArrayList("content","date","notnull","split","substr"); 
 
 
     @Override

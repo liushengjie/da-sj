@@ -2,6 +2,7 @@ package cn.bocom.r_service.process;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.assertj.core.util.Lists;
 
@@ -26,13 +27,12 @@ public class ProcessUtil {
             processList.add(p);
         });
 
-        processList.stream()
-        .filter(p -> p.getProcType().equals(procType))
-        .forEach(p -> {
-            Map<String, Object> m = ImmutableMap.<String, Object>builder().put("id", p.getId())
-                    .put("name", p.getName()).put("procType", p.getProcType()).build();
-            ret.add(m);
-        });
+        ret = processList.stream()
+            .filter(p -> p.getProcType().equals(procType))
+            .map(p -> {
+                return  ImmutableMap.<String, Object>builder().put("id", p.getId())
+                        .put("name", p.getName()).put("desc", p.getDesc()).put("procType", p.getProcType()).build();
+            }).collect(Collectors.toList());
         return ret;
     }
     
