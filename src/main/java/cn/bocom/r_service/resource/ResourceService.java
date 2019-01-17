@@ -17,6 +17,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.bocom.mapper.main.R_ResourceMapper;
+import cn.bocom.other.util.DBUtil;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.resource.ResColInfo;
@@ -227,16 +228,13 @@ public class ResourceService {
     	List<ResourceCol> resColList = resource.getResourceCols();//资源表结构信息
     	
     	if(resBody==null||resData==null||resColList==null||resColList.size()==0) {
-    		//return 0;
+    		return 0;
     	}
     	
-    	//定义资源id
-    	String resId = RandomUtil.getRandomId(18);
-    	
-    	//设置id并保存ResourceBody
+    	//>>>>设置id并保存ResourceBody
     	if(StringUtils.isBlank(resBody.getId())) {//新增则生成id
-    		resBody.setId(resId);
-    		resBody.setCacheTable("res_" + resId);
+    		resBody.setId(RandomUtil.getRandomId(18));
+    		resBody.setCacheTable("res_" + RandomUtil.getRandomId(18));
     	}else{//更新则先删后插
     		//查询库中Resource
     		Resource resOld = selectResourceById(resBody.getId());
@@ -248,11 +246,41 @@ public class ResourceService {
     		resBody.setNum(resOld.getResourceBody().getNum());
     		resBody.setCacheTable(resOld.getResourceBody().getCacheTable());
     	}
-    	//执行保存ResourceBody
     	resMapper.saveResourceBody(resBody);
     	
+    	//>>>>设置id并保存ResourceData
+		resData.setResId(resBody.getId());
+		if(resData.getId()==null || "".equals(resData.getId())) {
+			resData.setId(RandomUtil.getRandomId(18));
+		}	    		
+    	resMapper.saveResourceData(resData);
     	
-   		
+    	//>>>>设置id并保存ResourceCol
+    	if(resColList!=null&&resColList.size()>0) {
+    		for(int i=0;i<resColList.size();i++) {
+    			ResourceCol resCol = resColList.get(i);
+    			resCol.setResId(resBody.getId());
+    			if(resCol.getId()==null || "".equals(resCol.getId())) {
+    				resCol.setId(RandomUtil.getRandomId(18));
+    			}
+        		if(StringUtils.isBlank(resCol.getPk())) {
+        			resCol.setPk("0");
+        		}
+        		if(StringUtils.isBlank(resCol.getIdx())) {
+        			resCol.setIdx("0");
+        		}
+        		if(StringUtils.isBlank(resCol.getStatus())) {
+        			resCol.setStatus("1");
+        		}
+        		if(StringUtils.isBlank(resCol.getChangeType())) {
+        			resCol.setChangeType(DBUtil.changeDBType(resCol.getType()));
+        		}
+        		resCol.setSort(String.valueOf(i+1));
+        		resCol.setColCache(resCol.getCol()+"_"+resBody.getId());
+        		resMapper.saveResourceCol(resCol);
+    		}
+    	}
+    	
    		return 1;
    	}
    	
