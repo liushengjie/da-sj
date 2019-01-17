@@ -16,6 +16,7 @@
 		left join t_res_col t2 on t1.id=t2.res_id 
 		left join t_res_data t3 on t1.id=t3.res_id 
 		left join t_data_source t4 on t3.ds_id=t4.id
+		where 1=1
 		<if test="resourceBody != null">
 			<if test="resourceBody.id != null and resourceBody.id != ''">
 		       and t1.id=#{resourceBody.id}
@@ -26,8 +27,8 @@
 		    <if test="resourceBody.category != null and resourceBody.category != ''">
 		       and t1.category=#{resourceBody.category}
 		    </if>
-		    <if test="resourceBody.connect_type != null and resourceBody.connect_type != ''">
-		       and t1.connect_type =#{resourceBody.connect_type}
+		    <if test="resourceBody.connectType != null and resourceBody.connectType != ''">
+		       and t1.connect_type =#{resourceBody.connectType}
 		    </if>
 		    <if test="resourceBody.status != null and resourceBody.status != ''">
 		       and t1.status =#{resourceBody.status}
@@ -48,4 +49,44 @@
 		 -->
 	     order by t1.id,t3.id,t2.id
 	</select>
+	
+	<update id="saveResourceBody" parameterType="cn.bocom.r_entity.resource.ResourceBody">
+		REPLACE INTO t_res(
+			<if test="id!=null and id!=''">id,</if>
+			<if test="name!=null and name!=''">name,</if>
+			<if test="category!=null and category!=''">category,</if>
+			<if test="connectType!=null and connectType!=''">connect_type,</if>
+			<if test="cacheTable!=null and cacheTable!=''">cache_table,</if>
+			<if test="createUser!=null and createUser!=''">create_user,</if>
+			<if test="num!=null">num,</if><!-- mysql里num为int类型，此值为0时mybatis会认为是'' -->
+			<if test="status!=null and status!=''">status,</if>
+			<if test="schemaFlag!=null and schemaFlag!=''">schema_flag,</if>
+			<if test="createTime!=null">create_time,</if>
+			<if test="createTime==null">create_time,</if>
+			update_time
+		) values (
+			<if test="id!=null and id!=''">#{id},</if>
+			<if test="name!=null and name!=''">#{name},</if>
+			<if test="category!=null and category!=''">#{category},</if>
+			<if test="connectType!=null and connectType!=''">#{connectType},</if>
+			<if test="cacheTable!=null and cacheTable!=''">#{cacheTable},</if>
+			<if test="createUser!=null and createUser!=''">#{createUser},</if>
+			<if test="num!=null">#{num},</if>
+			<if test="status!=null and status!=''">#{status},</if>
+			<if test="schemaFlag!=null and schemaFlag!=''">#{schemaFlag},</if>
+			<if test="createTime!=null">#{createTime},</if>
+			<if test="createTime==null">now(),</if>
+			now()
+		)
+	</update>
+	
+	<delete id="deleteResourceBody" parameterType="string">
+		delete from t_res where id=#{id}
+	</delete>
+	<delete id="deleteResourceCol" parameterType="string">
+		delete from t_res_col where res_id=#{id}
+	</delete>
+	<delete id="deleteResourceData" parameterType="string">
+		delete from t_res_data where res_id=#{id}
+	</delete>
 </mapper>

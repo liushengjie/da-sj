@@ -4,16 +4,18 @@ import java.util.List;
 import java.util.Map;
 
 import cn.bocom.r_entity.resource.Resource;
-import tk.mybatis.mapper.common.Mapper;
+import cn.bocom.r_entity.resource.ResourceBody;
 
 
 public interface R_ResourceMapper  {//extends Mapper<Resource>
 	
 	public List<Map<String, Object>> selectResourceList(Resource resource);
 
-	//public List<Resource> queryResListByPage(Resource res);
+	public int deleteResourceBody(String resourceId);
+	public int deleteResourceCol(String resourceId);
+	public int deleteResourceData(String resourceId);
 	
-	//public int saveResource(Resource res);
+	public int saveResourceBody(ResourceBody resourceBody);
 	
-	//public int delResource(String resId);
+	
 }

@@ -1,10 +1,12 @@
 package cn.bocom.r_service.resource;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.bocom.mapper.main.R_ResourceMapper;
+import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.resource.ResColInfo;
 import cn.bocom.r_entity.resource.Resource;
@@ -76,11 +79,8 @@ public class ResourceService {
 	 * @date 2019年1月15日
     */ 
     public List<Resource> selectResourceList(Resource resource) {
-    	System.out.println("::::::::::::::::::::::::::::::::");
-        
     	//根据条件查询资源信息
     	List<Map<String, Object>> resList = resMapper.selectResourceList(resource);
-    	System.out.println("================="+resList.size());
     	if(resList==null||resList.size()==0) {
     		return null;
     	}
@@ -105,23 +105,27 @@ public class ResourceService {
     			colsList = new ArrayList<ResourceCol>();
     			resData = new ResourceData();
     			
-    			resBody.setId("");
-    			resBody.setName("");
-    			resBody.setCategory("");
-    			resBody.setConnectType("");
-    			resBody.setNum(0);
-    			resBody.setCacheTable("");
-    			resBody.setSchemaFlag("");
-    			resBody.setStatus("");
-    			resBody.setCreateUser("");
-    			resBody.setCreateTime(null);
-    			resBody.setUpdateTime(null);
+    			resBody.setId(map.get("id").toString());
+    			resBody.setName(map.get("name")==null?"":map.get("name").toString());
+    			resBody.setCategory(map.get("category")==null?"":map.get("category").toString());
+    			resBody.setConnectType(map.get("connect_type")==null?"":map.get("connect_type").toString());
+    			resBody.setNum(map.get("num")==null?0:Integer.parseInt(map.get("num").toString()));
+    			resBody.setCacheTable(map.get("cache_table")==null?"":map.get("cache_table").toString());
+    			resBody.setSchemaFlag(map.get("schema_flag")==null?"":map.get("schema_flag").toString());
+    			resBody.setStatus(map.get("status")==null?"":map.get("status").toString());
+    			resBody.setCreateUser(map.get("create_user")==null?"":map.get("create_user").toString());
+    			try {
+					resBody.setCreateTime(sdf.parse(map.get("create_time").toString()));
+					resBody.setUpdateTime(sdf.parse(map.get("update_time").toString()));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
     			
-    			resData.setId("");
-    			resData.setResId("");
-    			resData.setDsId("");
-    			resData.setTableName("");
-    			resData.setConnModel("");
+    			resData.setId(map.get("data_id")==null?"":map.get("data_id").toString());
+    			resData.setResId(map.get("data_res_id")==null?"":map.get("data_res_id").toString());
+    			resData.setDsId(map.get("data_ds_id")==null?"":map.get("data_ds_id").toString());
+    			resData.setTableName(map.get("data_table_name")==null?"":map.get("data_table_name").toString());
+    			resData.setConnModel(map.get("data_connmodel")==null?"":map.get("data_connmodel").toString());
     			
     			res.setResourceBody(resBody);
     			res.setResourceData(resData);
@@ -129,7 +133,19 @@ public class ResourceService {
     		
     		ResourceCol resCol = new ResourceCol();
     		
-    		
+    		resCol.setId(map.get("col_id")==null?"":map.get("col_id").toString());
+    		resCol.setResId(map.get("col_res_id")==null?"":map.get("col_res_id").toString());
+    		resCol.setType(map.get("col_type")==null?"":map.get("col_type").toString());
+    		resCol.setCol(map.get("col_col")==null?"":map.get("col_col").toString());
+    		resCol.setChangeType(map.get("col_change_type")==null?"":map.get("col_change_type").toString());
+    		resCol.setAlias(map.get("col_alias")==null?"":map.get("col_alias").toString());
+    		resCol.setColCache(map.get("col_col_cache")==null?"":map.get("col_col_cache").toString());
+    		resCol.setPk(map.get("col_pk")==null?"":map.get("col_pk").toString());
+    		resCol.setIdx(map.get("col_idx")==null?"":map.get("col_idx").toString());
+    		resCol.setDict(map.get("col_dic")==null?"":map.get("col_dic").toString());
+    		resCol.setStatus(map.get("col_status")==null?"":map.get("col_status").toString());
+    		resCol.setOrigin(map.get("col_origin")==null?"":map.get("col_origin").toString());
+    		resCol.setSort(map.get("col_sort")==null?"":map.get("col_sort").toString());
     		
     		colsList.add(resCol);
     		
@@ -139,7 +155,6 @@ public class ResourceService {
     			retList.add(res);
     		}
     	}
-    	System.out.println("*********************"+retList.size());
     	return retList;
     }
     
@@ -169,8 +184,14 @@ public class ResourceService {
 	 * @date 2019年1月15日
      */ 
 	public Resource selectResourceById(String resourceId) {
-		
-		return null;
+		Resource resource = new Resource();
+		resource.setResourceBody(new ResourceBody().setId(resourceId));
+		List<Resource> list = selectResourceList(resource);
+		if(list==null||list.size()==0) {
+			return null;
+		} else {
+			return list.get(0);
+		}
 	}
     
 	/** 
@@ -182,7 +203,10 @@ public class ResourceService {
 	 * @date 2019年1月15日
      */ 
 	public List<Resource> selectResourceByCategory(String category) {
-		return null;
+		Resource resource = new Resource();
+		resource.setResourceBody(new ResourceBody().setCategory(category));
+		List<Resource> list = selectResourceList(resource);
+		return list;
 	}
 	
     /** 
@@ -195,7 +219,41 @@ public class ResourceService {
      */ 
     //@Transactional
    	public int saveResource(Resource resource) {
-   		return 0;
+   		if(resource==null) {
+    		return 0;
+    	}
+    	ResourceBody resBody = resource.getResourceBody();//资源信息
+    	ResourceData resData = resource.getResourceData();//资源数据信息
+    	List<ResourceCol> resColList = resource.getResourceCols();//资源表结构信息
+    	
+    	if(resBody==null||resData==null||resColList==null||resColList.size()==0) {
+    		//return 0;
+    	}
+    	
+    	//定义资源id
+    	String resId = RandomUtil.getRandomId(18);
+    	
+    	//设置id并保存ResourceBody
+    	if(StringUtils.isBlank(resBody.getId())) {//新增则生成id
+    		resBody.setId(resId);
+    		resBody.setCacheTable("res_" + resId);
+    	}else{//更新则先删后插
+    		//查询库中Resource
+    		Resource resOld = selectResourceById(resBody.getId());
+    		//将库中的Resource部分属性赋值到新Resource里
+    		resBody.setCreateUser(resOld.getResourceBody().getCreateUser());
+    		resBody.setCreateTime(resOld.getResourceBody().getCreateTime());
+    		resBody.setSchemaFlag(resOld.getResourceBody().getSchemaFlag());
+    		resBody.setStatus(resOld.getResourceBody().getStatus());
+    		resBody.setNum(resOld.getResourceBody().getNum());
+    		resBody.setCacheTable(resOld.getResourceBody().getCacheTable());
+    	}
+    	//执行保存ResourceBody
+    	resMapper.saveResourceBody(resBody);
+    	
+    	
+   		
+   		return 1;
    	}
    	
    	/** 
@@ -207,14 +265,14 @@ public class ResourceService {
 	 * @date 2019年1月15日
     */ 
     public int deleteResource(String resourceId) {
-    	/*try {
-    		DataSource ds = new DataSource();
-            ds.setId(datasourceId);
-        	return dataSourceMapper.deleteByPrimaryKey(ds);	
+    	try {
+        	resMapper.deleteResourceBody(resourceId);
+        	resMapper.deleteResourceCol(resourceId);
+        	resMapper.deleteResourceData(resourceId);
     	} catch(Exception e) {
     		e.printStackTrace();
     		return -1;
-    	}*/
-    	return 0;
+    	}
+    	return 1;
     }
 }
