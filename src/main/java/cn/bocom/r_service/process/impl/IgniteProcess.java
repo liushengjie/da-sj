@@ -5,8 +5,17 @@ import java.util.Map;
 
 import cn.bocom.r_service.process.IProcess;
 
+/**
+ * 内存处理器
+ * @author liushengjie
+ * @version $Id: IgniteProcess.java, v 0.1 2019年1月17日 上午11:17:55 liushengjie Exp $
+ */
 public class IgniteProcess implements IProcess{
 
+    @Override
+    public List<Map<String, Object>> availableFunction(String procType) {
+        return null;
+    }
     @Override
     public String notNull(String col, String params) {
         return null;
@@ -31,12 +40,4 @@ public class IgniteProcess implements IProcess{
     public String split(String col, String params) {
         return null;
     }
-
-    @Override
-    public List<Map<String, Object>> getProcess() {
-        return null;
-    }
-    
-    
-
 }

@@ -42,10 +42,9 @@ public class ResourceService {
     @Autowired
     private ResourceTrans resourceTrans;
     
-    public Resource loadResource(String datasourceId, TableInfo table) {
+    public Resource loadResourceObj(String datasourceId, TableInfo table) {
         return resourceTrans.convertToRes(datasourceId, table);
     }
-    
     
     /**
      * 根据资源获取列信息

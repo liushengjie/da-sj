@@ -23,7 +23,6 @@ public class FilterProcessor {
 	@Autowired
 	private DataSourceService dataSourceService;
 	
-	@Autowired
 	private ProcessorService processorService;
 	
 	public String generateFilterStr(ResData resData, List<ResFilter> resFilterList) {

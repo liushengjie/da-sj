@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bocom.entity.Processor;
 import cn.bocom.other.common.DataResponse;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.resource.Resource;
@@ -83,11 +84,11 @@ public class ResController {
 //    		return new DataResponse(resBean);
 //    	}
 //    }
-    
+
     @ApiOperation(value = "获取资源对象")
-    @RequestMapping(value = "/loadResource", method = RequestMethod.POST)
-    public DataResponse loadResource(@RequestParam("datasourceId") String datasourceId, @RequestBody TableInfo table) {
-        Resource ret = resourceService.loadResource(datasourceId, table);
+    @RequestMapping(value = "/loadResourceObj", method = RequestMethod.POST)
+    public DataResponse loadResourceObj(@RequestParam("datasourceId") String datasourceId, @RequestBody TableInfo table) {
+        Resource ret = resourceService.loadResourceObj(datasourceId, table);
         return new DataResponse(ret);
     }
     

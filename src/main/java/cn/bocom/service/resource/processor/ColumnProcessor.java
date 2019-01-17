@@ -36,7 +36,6 @@ public class ColumnProcessor {
 	@Autowired
 	private DataSourceService dataSourceService;
 	
-	@Autowired
 	private ProcessorService processorService;
 	
 	public String generateColStr(ResData resData, List<ResCol> resColList, boolean saveFlag) {

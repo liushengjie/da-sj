@@ -5,7 +5,18 @@ import java.util.Map;
 
 import cn.bocom.r_service.process.IProcess;
 
+/**
+ * List对象处理器
+ * @author liushengjie
+ * @version $Id: ListProcess.java, v 0.1 2019年1月17日 上午11:17:07 liushengjie Exp $
+ */
 public class ListProcess implements IProcess{
+    
+
+    @Override
+    public List<Map<String, Object>> availableFunction(String procType) {
+        return null;
+    }
 
     @Override
     public String notNull(String col, String params) {
@@ -31,12 +42,4 @@ public class ListProcess implements IProcess{
     public String split(String col, String params) {
         return null;
     }
-
-    @Override
-    public List<Map<String, Object>> getProcess() {
-        return null;
-    }
-    
-    
-
 }

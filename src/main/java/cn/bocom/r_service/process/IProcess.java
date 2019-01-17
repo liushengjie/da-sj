@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface IProcess {
-    
     /**
      * 获取可用的处理器
      * @return
      */
-    public List<Map<String, Object>> getProcess();
+    public List<Map<String, Object>> availableFunction(String procType);
     
     /**
      * 行非空
