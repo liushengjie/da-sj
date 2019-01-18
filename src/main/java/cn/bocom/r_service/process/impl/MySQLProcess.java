@@ -25,27 +25,33 @@ public class MySQLProcess implements IProcess<String>{
     }
 
     @Override
-    public String notNull(String col, String params) {
+    public String notNull(String data, String params) {
         return null;
     }
+
 
     @Override
     public String date(String col, String params) {
         return null;
     }
 
+
     @Override
     public String content(String col, String params) {
         return null;
     }
+
 
     @Override
     public String substr(String col, String params) {
         return null;
     }
 
+
     @Override
     public String split(String col, String params) {
         return null;
     }
+
+
 }

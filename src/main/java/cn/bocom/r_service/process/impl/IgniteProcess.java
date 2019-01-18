@@ -16,28 +16,30 @@ public class IgniteProcess implements IProcess{
     public List<Map<String, Object>> availableFunction(String procType) {
         return null;
     }
+
     @Override
-    public String notNull(String col, String params) {
+    public Object notNull(Object data, String params) {
         return null;
     }
 
     @Override
-    public String date(String col, String params) {
+    public Object date(Object col, String params) {
         return null;
     }
 
     @Override
-    public String content(String col, String params) {
+    public Object content(Object col, String params) {
         return null;
     }
 
     @Override
-    public String substr(String col, String params) {
+    public Object substr(Object col, String params) {
         return null;
     }
 
     @Override
-    public String split(String col, String params) {
+    public Object split(Object col, String params) {
         return null;
     }
+    
 }

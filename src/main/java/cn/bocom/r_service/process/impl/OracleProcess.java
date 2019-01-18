@@ -18,7 +18,7 @@ public class OracleProcess implements IProcess<String>{
     }
 
     @Override
-    public String notNull(String col, String params) {
+    public String notNull(String data, String params) {
         return null;
     }
 
@@ -41,4 +41,6 @@ public class OracleProcess implements IProcess<String>{
     public String split(String col, String params) {
         return null;
     }
+
+
 }

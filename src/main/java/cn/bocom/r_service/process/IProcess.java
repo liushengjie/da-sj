@@ -16,7 +16,7 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T notNull(String col, String params);
+    public T notNull(T data, String params);
 
     /**
      * 行日期选择
@@ -24,7 +24,7 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T date(String col, String params);
+    public T date(T col, String params);
     
     /**
      * 行内容选择
@@ -32,7 +32,7 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T content(String col, String params);
+    public T content(T col, String params);
     
     /**
      * 列截取
@@ -40,7 +40,7 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T substr(String col, String params);
+    public T substr(T col, String params);
 
     /**
      * 列拆分
@@ -48,5 +48,5 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T split(String col, String params);
+    public T split(T col, String params);
 }
