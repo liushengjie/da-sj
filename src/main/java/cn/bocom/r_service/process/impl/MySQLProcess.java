@@ -1,7 +1,6 @@
 package cn.bocom.r_service.process.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,32 +36,32 @@ public class MySQLProcess implements IProcess<String>{
     //测试主函数
     public static void main(String[] q) {
     	//System.out.println(new MySQLProcess().notNull(null, "{\"col\":\"name\"}"));
-    	System.out.println(new MySQLProcess().substr(null, "{\"subType\":\"2\",\"col\":\"name\",\"startIndex\":\"2\",\"endIndex\":\"3\"}"));
-    	System.out.println(new MySQLProcess().substr(null, "{\"subType\":\"1\",\"col\":\"name\",\"len\":\"3\"}"));
-    	System.out.println(new MySQLProcess().substr(null, "{\"subType\":\"0\",\"col\":\"name\",\"len\":\"5\"}"));
+    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"2\",\"startIndex\":\"2\",\"endIndex\":\"3\"}"));
+    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"1\",\"len\":\"3\"}"));
+    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"0\",\"len\":\"5\"}"));
     	//System.out.println(new MySQLProcess().date(null, "{\"col\":\"name\",\"oper\":\"between\",\"time1\":\""+new Date().getTime()+"\",\"\":\""+new Date().getTime()+"\"}"));
     }
     
     @Override
-    public String notNull(String data, String params) {
+    public String notNull(String col, String data, String params) {
     	NotNullProc n = convertObj(params, NotNullProc.class);
     	if(n==null) {
     		return null;
     	}
     	if(data==null||data.equals("")) {
-    		data = n.getCol();
+    		col = n.getCol();
     	} else {
-    		data = "(" + data + ")";
+    		col = "(" + data + ")";
     	}
     	
     	ST st = new ST(NOTNULL);
-    	st.add("col", data);
+    	st.add("col", col);
         return st.render();
     }
 
 
     @Override
-    public String date(String data, String params) {
+    public String date(String col, String data, String params) {
     	DateProc d = convertObj(params, DateProc.class);
     	if(d==null) {
     		return null;
@@ -88,21 +87,19 @@ public class MySQLProcess implements IProcess<String>{
 
 
     @Override
-    public String content(String col, String params) {
+    public String content(String col, String data, String params) {
         return null;
     }
 
 
     @Override
-    public String substr(String data, String params) {
+    public String substr(String col, String data, String params) {
     	SubstrProc s = convertObj(params, SubstrProc.class);
     	if(s==null) {
     		return null;
     	}
-    	if(data==null||data.equals("")) {
-    		data = s.getCol();
-    	} else {
-    		data = "(" + data + ")";
+    	if(data!=null&&!data.equals("")) {
+    		col = "(" + data + ")";
     	}
     	
     	int origin = 1;//起始位置，默认1
@@ -118,11 +115,11 @@ public class MySQLProcess implements IProcess<String>{
     		origin = startIndex;
     		len = endIndex - startIndex + 1;
     	} else {
-    		return data;
+    		return col;
     	}
     	
     	ST st = new ST(SUBSTR);
-    	st.add("col", data);
+    	st.add("col", col);
     	st.add("flag", (subType.equals("0")||subType.equals("2")));
     	st.add("origin", origin);
     	st.add("len", len);
@@ -131,7 +128,7 @@ public class MySQLProcess implements IProcess<String>{
 
 
     @Override
-    public String split(String col, String params) {
+    public String split(String col, String data, String params) {
         return null;
     }
 

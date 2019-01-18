@@ -19,27 +19,27 @@ public class ListProcess implements IProcess<List<Map<String, Object>>>{
     }
 
     @Override
-    public List<Map<String, Object>> notNull(List<Map<String, Object>> data, String params) {
+    public List<Map<String, Object>> notNull(String col, List<Map<String, Object>> data, String params) {
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> date(List<Map<String, Object>> col, String params) {
+    public List<Map<String, Object>> date(String col, List<Map<String, Object>> data, String params) {
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> content(List<Map<String, Object>> col, String params) {
+    public List<Map<String, Object>> content(String col, List<Map<String, Object>> data, String params) {
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> substr(List<Map<String, Object>> col, String params) {
+    public List<Map<String, Object>> substr(String col, List<Map<String, Object>> data, String params) {
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> split(List<Map<String, Object>> col, String params) {
+    public List<Map<String, Object>> split(String col, List<Map<String, Object>> data, String params) {
         return null;
     }
 

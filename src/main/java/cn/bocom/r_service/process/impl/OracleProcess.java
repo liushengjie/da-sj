@@ -18,27 +18,27 @@ public class OracleProcess implements IProcess<String>{
     }
 
     @Override
-    public String notNull(String data, String params) {
+    public String notNull(String col, String data, String params) {
         return null;
     }
 
     @Override
-    public String date(String col, String params) {
+    public String date(String col, String data, String params) {
         return null;
     }
 
     @Override
-    public String content(String col, String params) {
+    public String content(String col, String data, String params) {
         return null;
     }
 
     @Override
-    public String substr(String col, String params) {
+    public String substr(String col, String data, String params) {
         return null;
     }
 
     @Override
-    public String split(String col, String params) {
+    public String split(String col, String data, String params) {
         return null;
     }
 

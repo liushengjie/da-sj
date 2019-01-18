@@ -18,27 +18,27 @@ public class IgniteProcess implements IProcess{
     }
 
     @Override
-    public Object notNull(Object data, String params) {
+    public Object notNull(String col, Object data, String params) {
         return null;
     }
 
     @Override
-    public Object date(Object col, String params) {
+    public Object date(String col, Object data, String params) {
         return null;
     }
 
     @Override
-    public Object content(Object col, String params) {
+    public Object content(String col, Object data, String params) {
         return null;
     }
 
     @Override
-    public Object substr(Object col, String params) {
+    public Object substr(String col, Object data, String params) {
         return null;
     }
 
     @Override
-    public Object split(Object col, String params) {
+    public Object split(String col, Object data, String params) {
         return null;
     }
     

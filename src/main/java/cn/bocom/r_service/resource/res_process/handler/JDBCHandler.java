@@ -120,13 +120,8 @@ public class JDBCHandler implements IHandler<String> {
         list.add(p);
         
         ProcessEntity p1 = new ProcessEntity();
-<<<<<<< HEAD
         p1.setProcessName("substr");
         p1.setProcessType("col");
-=======
-        p1.setProcessName("notNull");
-        p1.setProcessType("row");
->>>>>>> branch 'master' of http://192.168.124.240/liushengjie/da-sj.git
         p1.setProcessCol("a");
         p1.setParams("{'col':'a'}");
         
