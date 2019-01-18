@@ -13,6 +13,7 @@ public class ProcessEntity implements Serializable{
     
     private String processName;
     private String processType;
+    private String processCol;
     private String datasourceType;
     private String params;
     
@@ -28,6 +29,12 @@ public class ProcessEntity implements Serializable{
     public void setProcessType(String processType) {
         this.processType = processType;
     }
+    public String getProcessCol() {
+        return processCol;
+    }
+    public void setProcessCol(String processCol) {
+        this.processCol = processCol;
+    }
     public String getDatasourceType() {
         return datasourceType;
     }
@@ -40,7 +47,4 @@ public class ProcessEntity implements Serializable{
     public void setParams(String params) {
         this.params = params;
     }
-    
-    
-    
 }

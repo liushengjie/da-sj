@@ -26,7 +26,7 @@ public class MySQLProcess implements IProcess<String>{
 
     @Override
     public String notNull(String data, String params) {
-        return null;
+        return "abc";
     }
 
 

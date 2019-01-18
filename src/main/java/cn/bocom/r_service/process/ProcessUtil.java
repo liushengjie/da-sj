@@ -41,7 +41,7 @@ public class ProcessUtil {
      * @param datasourceType
      * @return
      */
-    public static IProcess processObj(int datasourceType) {
+    public static IProcess<?> processObj(int datasourceType) {
         DataSourceEnum datasourceEnum = DataSourceEnum.match(datasourceType, null);
         return datasourceEnum.getProcessClass();
     }

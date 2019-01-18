@@ -14,12 +14,12 @@ import cn.bocom.r_service.resource.res_process.IHandler;
 public class ListHandler implements IHandler<List<Map<String, Object>>>{
 
     @Override
-    public List<Map<String, Object>> handlerCol(List<ProcessEntity> processors) {
+    public List<Map<String, Object>> handlerCol(int datasourceType, List<ProcessEntity> processors) {
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> handlerRow(List<ProcessEntity> processors) {
+    public List<Map<String, Object>> handlerRow(int datasourceType, List<ProcessEntity> processors) {
         return null;
     }
 
