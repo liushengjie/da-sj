@@ -38,11 +38,11 @@ public class MySQLProcess implements IProcess<String>{
     public static void main(String[] q) {
     	//System.out.println(new MySQLProcess().notNull(null, "{\"col\":\"name\"}"));
     	//System.out.println(new MySQLProcess().substr(null, "{\"str\":\"name\",\"origin\":\"2\",\"len\":\"3\"}"));
-    	System.out.println(new MySQLProcess().date(null, "{\"col\":\"name\",\"oper\":\"between\",\"time1\":\""+new Date().getTime()+"\",\"\":\""+new Date().getTime()+"\"}"));
+    	System.out.println(new MySQLProcess().date("", null, "{\"col\":\"name\",\"oper\":\"between\",\"time1\":\""+new Date().getTime()+"\",\"\":\""+new Date().getTime()+"\"}"));
     }
     
     @Override
-    public String notNull(String data, String params) {
+    public String notNull(String col, String data, String params) {
     	NotNullProc n = convertObj(params, NotNullProc.class);
     	if(n==null) {
     		return null;
@@ -60,7 +60,7 @@ public class MySQLProcess implements IProcess<String>{
 
 
     @Override
-    public String date(String data, String params) {
+    public String date(String col, String data, String params) {
     	DateProc d = convertObj(params, DateProc.class);
     	if(d==null) {
     		return null;
@@ -86,13 +86,13 @@ public class MySQLProcess implements IProcess<String>{
 
 
     @Override
-    public String content(String col, String params) {
+    public String content(String col, String data, String params) {
         return null;
     }
 
 
     @Override
-    public String substr(String data, String params) {
+    public String substr(String col, String data, String params) {
     	SubstrProc s = convertObj(params, SubstrProc.class);
     	if(s==null) {
     		return null;
@@ -115,9 +115,13 @@ public class MySQLProcess implements IProcess<String>{
 
 
     @Override
-    public String split(String col, String params) {
+    public String split(String col, String data, String params) {
         return null;
     }
 
+    @Override
+    public String changeType(String col, String data, String newType) {
+        return null;
+    }
 
 }

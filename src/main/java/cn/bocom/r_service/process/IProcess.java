@@ -54,6 +54,8 @@ public interface IProcess<T>{
      */
     public T split(String col, T data, String params);
     
+    public T changeType(String col, T data, String newType);
+    
     
 	default <E> E convertObj(String json, Class<E> c) {
     	try {
