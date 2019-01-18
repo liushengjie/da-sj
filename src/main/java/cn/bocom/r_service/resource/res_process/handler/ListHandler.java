@@ -3,6 +3,7 @@ package cn.bocom.r_service.resource.res_process.handler;
 import java.util.List;
 import java.util.Map;
 
+import cn.bocom.other.common.SjException;
 import cn.bocom.r_entity.process.ProcessEntity;
 import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_service.resource.res_process.IHandler;
@@ -15,12 +16,14 @@ import cn.bocom.r_service.resource.res_process.IHandler;
 public class ListHandler implements IHandler<List<Map<String, Object>>>{
 
     @Override
-    public List<Map<String, Object>> handlerCol(int datasourceType, List<ProcessEntity> processors) {
+    public List<Map<String, Object>> handlerCol(int datasourceType, String col,
+            List<ProcessEntity> processors) throws SjException {
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> handlerRow(int datasourceType, List<ProcessEntity> processors) {
+    public List<Map<String, Object>> handlerRow(int datasourceType,
+            List<ProcessEntity> processors) {
         return null;
     }
 
@@ -34,9 +37,5 @@ public class ListHandler implements IHandler<List<Map<String, Object>>>{
         return null;
     }
 
-    @Override
-    public List<Map<String, Object>> changeColType(String col, String type) {
-        return null;
-    }
     
 }

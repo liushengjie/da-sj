@@ -12,9 +12,7 @@ public class ProcessEntity implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private String processName;
-    private String processType;
     private String processCol;
-    private String datasourceType;
     private String params;
     
     public String getProcessName() {
@@ -23,23 +21,11 @@ public class ProcessEntity implements Serializable{
     public void setProcessName(String processName) {
         this.processName = processName;
     }
-    public String getProcessType() {
-        return processType;
-    }
-    public void setProcessType(String processType) {
-        this.processType = processType;
-    }
     public String getProcessCol() {
         return processCol;
     }
     public void setProcessCol(String processCol) {
         this.processCol = processCol;
-    }
-    public String getDatasourceType() {
-        return datasourceType;
-    }
-    public void setDatasourceType(String datasourceType) {
-        this.datasourceType = datasourceType;
     }
     public String getParams() {
         return params;
