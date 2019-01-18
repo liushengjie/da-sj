@@ -50,6 +50,38 @@
 	     order by t1.id,t3.id,t2.id
 	</select>
 	
+	<select id="selectResourceViewListByPage" resultType="cn.bocom.r_entity.resource.ResourceView" parameterType="cn.bocom.r_entity.resource.ResourceView">
+		select t1.*,
+		(select t4.name from t_category t4 where t1.category=t4.id) as category_name,
+		(case t1.connect_type when 0 then '实时'  else '数据提取' End ) as connect_type_name,
+		(case t1.status when 0 then '未缓存'  else '已缓存' End ) as status_name,
+		DATE_FORMAT(t1.create_time, '%Y-%m-%d %H:%i:%S') as create_time_str,
+		t3.id as ds_id,t3.name as ds_name 
+		from t_res t1,t_res_data t2,t_data_source t3 where t1.id=t2.res_id and t2.ds_id=t3.id
+	    <if test="id != null and id != ''">
+	       and t1.id=#{id}
+	    </if>
+	     <if test="name != null and name != ''">
+	       and t1.name like CONCAT('%',#{name},'%')
+	    </if>
+	    <if test="category != null and category != ''">
+	       and t1.category=#{category}
+	    </if>
+	    <if test="ds_id != null and ds_id != ''">
+	       and t2.ds_id=#{ds_id}
+	    </if>
+	    <if test="ds_name != null and ds_name != ''">
+	       and t3.name like CONCAT('%',#{ds_name},'%')
+	    </if>
+	    <if test="connect_type != null and connect_type != ''">
+	       and t1.connect_type =#{connect_type}
+	    </if>
+	    <if test="status != null and status != ''">
+	       and t1.status =#{status}
+	    </if>
+	     order by create_time desc
+	</select>
+	
 	<update id="saveResourceBody" parameterType="cn.bocom.r_entity.resource.ResourceBody">
 		REPLACE INTO t_res(
 			<if test="id!=null and id!=''">id,</if>

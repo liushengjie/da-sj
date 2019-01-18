@@ -57,8 +57,8 @@ public class SrvService {
     private SrvEdgeMapper srvEdgeMapper;
 	@Autowired
     private BaseSQLProc baseSQLProc;
-	@Autowired
-    private Ignite ignite;
+//	@Autowired
+//    private Ignite ignite;
 	
 	private static Logger logger = LoggerFactory.getLogger(SrvService.class);
 
@@ -66,10 +66,10 @@ public class SrvService {
 		
 		String sql = generateSql(map, targetNode);
 		logger.info("预览SQL:"+sql);	
-		CacheServer cacheService = ignite.services().serviceProxy(CacheServer.SERVICE_NAME, CacheServer.class, false);
-		List<Map<String, Object>> result = cacheService.qryCacheDatas(sql, Integer.parseInt(limit), null);
+//		CacheServer cacheService = ignite.services().serviceProxy(CacheServer.SERVICE_NAME, CacheServer.class, false);
+//		List<Map<String, Object>> result = cacheService.qryCacheDatas(sql, Integer.parseInt(limit), null);
 		
-		return result;
+		return null;
 	}
 	
 	public String previewDebug(Map<String,Object> map, String targetNode) throws Exception{
