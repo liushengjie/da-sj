@@ -23,7 +23,7 @@ public class ProcessService {
      * @return
      */
     public List<Map<String, Object>> fetchAvailableFunc(int datasourceType, String procType) {
-        IProcess processor = ProcessUtil.processObj(datasourceType);
+        IProcess<?> processor = ProcessUtil.processObj(datasourceType);
         return processor.availableFunction(procType);
     }
 }

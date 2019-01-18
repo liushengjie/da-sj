@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import cn.bocom.mapper.main.R_ResourceMapper;
 import cn.bocom.other.util.DBUtil;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.TableInfo;
-import cn.bocom.r_entity.resource.ResColInfo;
 import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_entity.resource.ResourceBody;
 import cn.bocom.r_entity.resource.ResourceCol;
@@ -46,21 +44,6 @@ public class ResourceService {
     public Resource loadResourceObj(String datasourceId, TableInfo table) {
         return resourceTrans.convertToRes(datasourceId, table);
     }
-    
-    /**
-     * 根据资源获取列信息
-     * @param resource
-     * @return
-     */
-    public List<ResourceCol> showResourceCols(Resource resource){
-        List<ResourceCol> res_cols = resource.getResourceCols();
-//        List<ResColInfo> ret = Lists.newArrayList();
-//        res_cols.forEach(c -> {
-//            ret.add(resourceTrans.convertToResColInfo(c));
-//        });
-        return res_cols;
-    }
-    
     
     //TODO:根据资源获取数据预览
     public List<Map<String, Object>> loadDataByResource(Resource resource){

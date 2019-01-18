@@ -53,12 +53,6 @@ public class ResController {
         return new DataResponse(ret);
     }
     
-    @ApiOperation(value = "获取资源对象的列信息")
-    @RequestMapping(value = "/loadResourceCols", method = RequestMethod.POST)
-    public DataResponse loadResourceCols(@RequestBody Resource resource) {
-        List<ResourceCol> ret = resourceService.showResourceCols(resource);
-        return new DataResponse(ret);
-    }
     
     @ApiOperation(value = "获取全部资源库信息")
     @RequestMapping(value = "/selectResourceList", method = RequestMethod.GET)
