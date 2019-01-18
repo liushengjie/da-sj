@@ -8,9 +8,7 @@ import org.springframework.stereotype.Component;
 import cn.bocom.entity.Processor;
 import cn.bocom.mapper.main.ProcessorMapper;
 
-@Component
 public class ProcessorService {
-    @Autowired
     private ProcessorMapper mapper;
 
     public List<Processor> queryProcessor(Processor processor) {
