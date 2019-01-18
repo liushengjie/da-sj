@@ -1,7 +1,6 @@
 package cn.bocom.r_service.process.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +25,7 @@ public class MySQLProcess implements IProcess<String>{
     public static List<String> availableFunction = Lists.newArrayList("content","date","notnull","split","substr"); 
 
     private static String NOTNULL = "<col> is not null and <col> \\<> ''";
-    private static String SUBSTR = "substr(<str>,<origin><if(flag)>,<len><endif>)";
+    private static String SUBSTR = "substr(<col><if(flag)>,<origin><endif>,<len>)";
     private static String DATE = "<if(flag)><col> between STR_TO_DATE(<time1>, '%Y-%m-%d %H:%i:%S') and STR_TO_DATE(<time2>, '%Y-%m-%d %H:%i:%S')<else><col> <oper> STR_TO_DATE(<time1>, '%Y-%m-%d %H:%i:%S')<endif>";
     
     @Override
@@ -37,8 +36,10 @@ public class MySQLProcess implements IProcess<String>{
     //测试主函数
     public static void main(String[] q) {
     	//System.out.println(new MySQLProcess().notNull(null, "{\"col\":\"name\"}"));
-    	//System.out.println(new MySQLProcess().substr(null, "{\"str\":\"name\",\"origin\":\"2\",\"len\":\"3\"}"));
-    	System.out.println(new MySQLProcess().date("", null, "{\"col\":\"name\",\"oper\":\"between\",\"time1\":\""+new Date().getTime()+"\",\"\":\""+new Date().getTime()+"\"}"));
+    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"2\",\"startIndex\":\"2\",\"endIndex\":\"3\"}"));
+    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"1\",\"len\":\"3\"}"));
+    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"0\",\"len\":\"5\"}"));
+    	//System.out.println(new MySQLProcess().date(null, "{\"col\":\"name\",\"oper\":\"between\",\"time1\":\""+new Date().getTime()+"\",\"\":\""+new Date().getTime()+"\"}"));
     }
     
     @Override
@@ -48,13 +49,13 @@ public class MySQLProcess implements IProcess<String>{
     		return null;
     	}
     	if(data==null||data.equals("")) {
-    		data = n.getCol();
+    		col = n.getCol();
     	} else {
-    		data = "(" + data + ")";
+    		col = "(" + data + ")";
     	}
     	
     	ST st = new ST(NOTNULL);
-    	st.add("col", data);
+    	st.add("col", col);
         return st.render();
     }
 
@@ -71,9 +72,9 @@ public class MySQLProcess implements IProcess<String>{
     		data = "(" + data + ")";
     	}
     	
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    	String time1 = d.getTime1()==null?"":sdf.format(new Date(d.getTime1()));
-    	String time2 = d.getTime1()==null?"":sdf.format(new Date(d.getTime2()));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+    	String time1 = d.getTime1()==null?"":sdf.format(d.getTime1());
+    	String time2 = d.getTime1()==null?"":sdf.format(d.getTime2());
     	String oper = d.getOper();
     	ST st = new ST(DATE);
     	st.add("col", data);
@@ -97,18 +98,30 @@ public class MySQLProcess implements IProcess<String>{
     	if(s==null) {
     		return null;
     	}
-    	if(data==null||data.equals("")) {
-    		data = s.getStr();
-    	} else {
-    		data = "(" + data + ")";
+    	if(data!=null&&!data.equals("")) {
+    		col = "(" + data + ")";
     	}
     	
-    	String origin = s.getOrigin();
-    	String len = s.getLen();
+    	int origin = 1;//起始位置，默认1
+    	int len = 0;//长度
+    	String subType = s.getSubType();
+    	if(subType.equals("0")) {//0左截取：从最左侧开始按照长度截取
+    		len = s.getLen();
+    	} else if(subType.equals("1")) {//1右截取：从最右侧开始按照长度截取
+    		len = -s.getLen();
+    	} else if(subType.equals("2")) {//2范围截取：按照起始位置和结束位置截取
+    		int startIndex = s.getStartIndex();
+        	int endIndex = s.getEndIndex();
+    		origin = startIndex;
+    		len = endIndex - startIndex + 1;
+    	} else {
+    		return col;
+    	}
+    	
     	ST st = new ST(SUBSTR);
-    	st.add("str", data);
+    	st.add("col", col);
+    	st.add("flag", (subType.equals("0")||subType.equals("2")));
     	st.add("origin", origin);
-    	st.add("flag", (len!=null&&!len.equals("")));
     	st.add("len", len);
         return st.render();
     }
