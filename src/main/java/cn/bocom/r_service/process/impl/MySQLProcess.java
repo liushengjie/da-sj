@@ -69,7 +69,7 @@ public class MySQLProcess implements IProcess<String>{
     	}
     	
     	String time1 = d.getTime1();
-    	String time2 = d.getTime1();
+    	String time2 = d.getTime2();
     	String oper = d.getOper();
     	ST st = new ST(DATE);
     	st.add("col", col);
