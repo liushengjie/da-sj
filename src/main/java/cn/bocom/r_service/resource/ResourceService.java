@@ -23,6 +23,7 @@ import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_entity.resource.ResourceBody;
 import cn.bocom.r_entity.resource.ResourceCol;
 import cn.bocom.r_entity.resource.ResourceData;
+import cn.bocom.r_entity.resource.ResourceView;
 import cn.bocom.r_service.resource.res_transform.ResourceTrans;
 
 /**
@@ -155,6 +156,23 @@ public class ResourceService {
     	PageHelper.startPage(currentPage, pageSize);
         List<Resource> list = selectResourceList(resource);
         PageInfo<Resource> pageInfo = new PageInfo<Resource>(list);
+        return pageInfo;
+    }
+    
+    /** 
+	 * @Title: selectResourceViewListByPage 
+	 * @Description: 获取资源库分頁信息-展示表单
+	 * @param resource
+	 * @param currentPage
+	 * @param pageSize
+	 * @return PageInfo<ResourceView>
+	 * @author lishipeng
+	 * @date 2019年1月15日
+    */ 
+    public PageInfo<ResourceView> selectResourceViewListByPage(ResourceView resourceView, int currentPage, int pageSize) {
+    	PageHelper.startPage(currentPage, pageSize);
+        List<ResourceView> list = resMapper.selectResourceViewListByPage(resourceView);
+        PageInfo<ResourceView> pageInfo = new PageInfo<ResourceView>(list);
         return pageInfo;
     }
     

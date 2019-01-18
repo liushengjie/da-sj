@@ -93,8 +93,8 @@ public class ResourceService{
 	@Autowired
 	private DataSourceService dataSourceService;
 	
-	@Autowired
-    private Ignite ignite;
+	//@Autowired
+    //private Ignite ignite;
 	
 	@Autowired
     private CategoryMapper categoryMapper;

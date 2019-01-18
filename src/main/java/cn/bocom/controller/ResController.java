@@ -23,6 +23,7 @@ import cn.bocom.other.common.DataResponse;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_entity.resource.ResourceCol;
+import cn.bocom.r_entity.resource.ResourceView;
 import cn.bocom.r_service.resource.ResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -62,10 +63,18 @@ public class ResController {
     
     @ApiOperation(value = "获取分页资源库信息")
     @RequestMapping(value = "/selectResourceListByPage", method = RequestMethod.GET)
-    public DataResponse selectResourceListByPage(@RequestBody Resource resource, 
+    public DataResponse selectResourceListByPage(Resource resource, 
     		@RequestParam("currentPage") int currentPage, 
     		@RequestParam("pageSize") int pageSize) {
         return new DataResponse(r_resService.selectResourceListByPage(resource,currentPage,pageSize));
+    }
+    
+    @ApiOperation(value = "获取分页资源库信息-展示表单")
+    @RequestMapping(value = "/selectResourceViewListByPage", method = RequestMethod.GET)
+    public DataResponse selectResourceViewListByPage(ResourceView resourceView, 
+    		@RequestParam("currentPage") int currentPage, 
+    		@RequestParam("pageSize") int pageSize) {
+        return new DataResponse(r_resService.selectResourceViewListByPage(resourceView,currentPage,pageSize));
     }
     
     @ApiOperation(value = "根据id获取资源库信息")
@@ -81,7 +90,7 @@ public class ResController {
     }
     
     @ApiOperation(value = "保存资源信息，有记录则更新反之插入")
-    @RequestMapping(value = "/saveResource", method = RequestMethod.GET)
+    @RequestMapping(value = "/saveResource", method = RequestMethod.POST)
     public DataResponse saveResource(@RequestBody Resource resource) {
         return new DataResponse(r_resService.saveResource(resource));
     }
