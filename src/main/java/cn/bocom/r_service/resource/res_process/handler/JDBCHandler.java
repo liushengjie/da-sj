@@ -69,15 +69,15 @@ public class JDBCHandler implements IHandler<String> {
         p.setProcessName("notNull");
         p.setProcessType("col");
         p.setProcessCol("a");
-        p.setParams("");
+        p.setParams("{'col':'a'}");
         
         list.add(p);
         
         ProcessEntity p1 = new ProcessEntity();
-        p1.setProcessName("notNull");
+        p1.setProcessName("substr");
         p1.setProcessType("col");
         p1.setProcessCol("a");
-        p1.setParams("");
+        p1.setParams("{'col':'a'}");
         
         list.add(p1);
         
@@ -85,7 +85,7 @@ public class JDBCHandler implements IHandler<String> {
         p2.setProcessName("notNull");
         p2.setProcessType("col");
         p2.setProcessCol("b");
-        p2.setParams("");
+        p2.setParams("{'col':'b'}");
         
         list.add(p2);
         
