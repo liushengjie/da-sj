@@ -43,13 +43,13 @@ public class Origins {
         @SuppressWarnings("rawtypes")
         private Class<? extends DataSourcePlugin> pluginClass;
         /**  处理器类*/
-        private Class<? extends IProcess> processClass;
+        private Class<? extends IProcess<?>> processClass;
         /**  归类*/
         private String category;
 
         @SuppressWarnings("rawtypes")
         private DataSourceEnum(String name, int code, Class<? extends OriginEntity> entityClass,
-                Class<? extends DataSourcePlugin> pluginClass, Class<? extends IProcess> processClass, String categoty) {
+                Class<? extends DataSourcePlugin> pluginClass, Class<? extends IProcess<?>> processClass, String categoty) {
             this.name = name;
             this.code = code;
             this.entityClass = entityClass;
@@ -79,7 +79,7 @@ public class Origins {
             return entityClass;
         }
 
-        public IProcess getProcessClass() {
+        public IProcess<?> getProcessClass() {
             try {
                 return processClass.newInstance();
             } catch (Exception e) {
