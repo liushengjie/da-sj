@@ -4,16 +4,9 @@ package cn.bocom.r_entity.process.proc;
 public class DateProc{
 
 	
-	private String col;
 	private String oper;
 	private String time1;
 	private String time2;
-	public String getCol() {
-		return col;
-	}
-	public void setCol(String col) {
-		this.col = col;
-	}
 	public String getOper() {
 		return oper;
 	}
