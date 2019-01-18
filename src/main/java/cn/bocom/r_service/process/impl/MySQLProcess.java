@@ -43,6 +43,7 @@ public class MySQLProcess implements IProcess<String>{
     
     @Override
     public String notNull(String data, String params) {
+<<<<<<< HEAD
     	NotNullProc n = convertObj(params, NotNullProc.class);
     	if(n==null) {
     		return null;
@@ -56,6 +57,9 @@ public class MySQLProcess implements IProcess<String>{
     	ST st = new ST(NOTNULL);
     	st.add("col", data);
         return st.render();
+=======
+        return "abc";
+>>>>>>> branch 'master' of http://192.168.124.240/liushengjie/da-sj.git
     }
 
 
