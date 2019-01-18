@@ -3,6 +3,8 @@ package cn.bocom.r_service.process;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
+
 public interface IProcess<T>{
     /**
      * 获取可用的处理器
@@ -49,4 +51,16 @@ public interface IProcess<T>{
      * @return
      */
     public T split(T col, String params);
+    
+    
+    
+    @SuppressWarnings("hiding")
+	default <T> T convertObj(String json, Class<T> c) {
+    	try {
+            return JSONObject.parseObject(json, c);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
