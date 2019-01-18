@@ -35,22 +35,20 @@ public class MySQLProcess implements IProcess<String>{
 
     //测试主函数
     public static void main(String[] q) {
-    	//System.out.println(new MySQLProcess().notNull(null, "{\"col\":\"name\"}"));
-    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"2\",\"startIndex\":\"2\",\"endIndex\":\"3\"}"));
+    	System.out.println(new MySQLProcess().notNull("name", null, ""));
+    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"2\",\"startIndex\":\"2\",\"endIndex\":\"5\"}"));
     	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"1\",\"len\":\"3\"}"));
     	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"0\",\"len\":\"5\"}"));
-    	//System.out.println(new MySQLProcess().date(null, "{\"col\":\"name\",\"oper\":\"between\",\"time1\":\""+new Date().getTime()+"\",\"\":\""+new Date().getTime()+"\"}"));
+    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\"between\",\"time1\":\"2019-01-01 12:12:12\",\"\":\"2019-01-15 23:23:23\"}"));
+    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\"<\",\"time1\":\"2019-01-01 12:12:12\"}"));
+    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\"<=\",\"time1\":\"2019-01-01 12:12:12\"}"));
+    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\">\",\"time1\":\"2019-01-01 12:12:12\"}"));
+    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\">=\",\"time1\":\"2019-01-01 12:12:12\"}"));
     }
     
     @Override
     public String notNull(String col, String data, String params) {
-    	NotNullProc n = convertObj(params, NotNullProc.class);
-    	if(n==null) {
-    		return null;
-    	}
-    	if(data==null||data.equals("")) {
-    		col = n.getCol();
-    	} else {
+    	if(data!=null&&!data.equals("")) {
     		col = "(" + data + ")";
     	}
     	
@@ -66,18 +64,15 @@ public class MySQLProcess implements IProcess<String>{
     	if(d==null) {
     		return null;
     	}
-    	if(data==null||data.equals("")) {
-    		data = d.getCol();
-    	} else {
-    		data = "(" + data + ")";
+    	if(data!=null&&!data.equals("")) {
+    		col = "(" + data + ")";
     	}
     	
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-    	String time1 = d.getTime1()==null?"":sdf.format(d.getTime1());
-    	String time2 = d.getTime1()==null?"":sdf.format(d.getTime2());
+    	String time1 = d.getTime1();
+    	String time2 = d.getTime2();
     	String oper = d.getOper();
     	ST st = new ST(DATE);
-    	st.add("col", data);
+    	st.add("col", col);
     	st.add("oper", oper);
     	st.add("flag", oper.trim().equalsIgnoreCase("between"));
     	st.add("time1", time1);
