@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
 
+import cn.bocom.other.common.SjException;
+
 public interface IProcess<T>{
     /**
      * 获取可用的处理器
@@ -18,7 +20,7 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T notNull(T data, String params);
+    public T notNull(String col, T data, String params);
 
     /**
      * 行日期选择
@@ -26,7 +28,7 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T date(T col, String params);
+    public T date(String col, T data, String params);
     
     /**
      * 行内容选择
@@ -34,7 +36,7 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T content(T col, String params);
+    public T content(String col, T data, String params);
     
     /**
      * 列截取
@@ -42,7 +44,7 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T substr(T col, String params);
+    public T substr(String col, T data, String params);
 
     /**
      * 列拆分
@@ -50,17 +52,14 @@ public interface IProcess<T>{
      * @param params
      * @return
      */
-    public T split(T col, String params);
+    public T split(String col, T data, String params);
     
     
-    
-    @SuppressWarnings("hiding")
-	default <T> T convertObj(String json, Class<T> c) {
+	default <E> E convertObj(String json, Class<E> c) {
     	try {
             return JSONObject.parseObject(json, c);
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new SjException("处理器对象转换失败",e);
         }
     }
 }

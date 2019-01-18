@@ -1,13 +1,17 @@
 package cn.bocom.r_entity.resource;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.apache.ibatis.type.JdbcType;
+
+import cn.bocom.r_entity.process.ProcessEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 @Table(name = "t_res_col")
@@ -106,6 +110,8 @@ public class ResourceCol implements Serializable {
     @ApiModelProperty(value ="排序",required = false)
     @ColumnType(jdbcType=JdbcType.VARCHAR)
     private String sort;
+    
+    private List<ProcessEntity> colProcessor;
 
 	public String getChangeType() {
 		return changeType;
@@ -287,4 +293,12 @@ public class ResourceCol implements Serializable {
 	public void setSort(String sort) {
 		this.sort = sort;
 	}
+
+    public List<ProcessEntity> getColProcessor() {
+        return colProcessor;
+    }
+
+    public void setColProcessor(List<ProcessEntity> colProcessor) {
+        this.colProcessor = colProcessor;
+    }
 }

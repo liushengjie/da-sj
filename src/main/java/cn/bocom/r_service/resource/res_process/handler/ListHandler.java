@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.bocom.r_entity.process.ProcessEntity;
+import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_service.resource.res_process.IHandler;
 
 /**
@@ -24,8 +25,18 @@ public class ListHandler implements IHandler<List<Map<String, Object>>>{
     }
 
     @Override
-    public List<Map<String, Object>> readData(List<Map<String, Object>> pre) {
+    public List<Map<String, Object>> readData(Resource resource) {
         return null;
     }
 
+    @Override
+    public List<Map<String, Object>> pretreadment(Resource resource, boolean isCache) {
+        return null;
+    }
+
+    @Override
+    public List<Map<String, Object>> changeColType(String col, String type) {
+        return null;
+    }
+    
 }

@@ -4,8 +4,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
 import org.apache.ibatis.type.JdbcType;
+
+import cn.bocom.r_entity.process.ProcessEntity;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 @Table(name = "t_res_data")
@@ -47,6 +51,10 @@ public class ResourceData implements Serializable {
 
     /**  连接方式*/
     private String connModel;
+    
+    private List<ProcessEntity> dataProcessor;
+    
+    
 
     /**
      * 获取ID
@@ -131,7 +139,12 @@ public class ResourceData implements Serializable {
     public void setConnModel(String connModel) {
         this.connModel = connModel;
     }
-    
-    
 
+    public List<ProcessEntity> getDataProcessor() {
+        return dataProcessor;
+    }
+
+    public void setDataProcessor(List<ProcessEntity> dataProcessor) {
+        this.dataProcessor = dataProcessor;
+    }
 }
