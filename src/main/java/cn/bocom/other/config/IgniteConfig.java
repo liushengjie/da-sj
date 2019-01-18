@@ -26,9 +26,7 @@ import org.springframework.context.annotation.Configuration;
  * @date: 2018年8月13日 下午5:01:46  
  */
 
-@Configuration
 public class IgniteConfig {
-    @Bean
     public Ignite igniteInstance(){
         IgniteConfiguration cfg = new IgniteConfiguration();
 

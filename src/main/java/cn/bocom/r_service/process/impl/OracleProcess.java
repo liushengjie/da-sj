@@ -10,7 +10,7 @@ import cn.bocom.r_service.process.IProcess;
  * @author liushengjie
  * @version $Id: OracleProcess.java, v 0.1 2019年1月17日 上午11:17:19 liushengjie Exp $
  */
-public class OracleProcess implements IProcess{
+public class OracleProcess implements IProcess<String>{
     
     @Override
     public List<Map<String, Object>> availableFunction(String procType) {

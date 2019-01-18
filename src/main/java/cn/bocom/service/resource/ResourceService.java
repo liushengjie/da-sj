@@ -284,24 +284,24 @@ public class ResourceService{
         	String querySQL = buildQuerySQL(resBean, true);
         	logger.info("querySQL:"+querySQL);
         	
-        	new Thread() {
-    			public void run() {
-    				CacheServer cacheService = ignite.services().serviceProxy(CacheServer.SERVICE_NAME, CacheServer.class, false);
-    		        try {
-    		        	if("0".equals(res.getStatus())){
-    		        		String[] sql = createSQL.split(";");
-    		        		for(int i=0;i<sql.length;i++){
-    		        			if(StringUtils.isNotBlank(sql[i])){
-    		        				cacheService.cacheExecDDL(resData.getResId(), sql[i]);
-    		        			}        			
-    		        		}		        		
-    		        	}				
-    					cacheService.cacheDatasFull(resData.getResId(), resData.getDsId(), cacheName, querySQL);
-    				} catch (Exception e) {
-    					e.printStackTrace();
-    				}  
-    			}
-    		}.start();
+//        	new Thread() {
+//    			public void run() {
+//    				CacheServer cacheService = ignite.services().serviceProxy(CacheServer.SERVICE_NAME, CacheServer.class, false);
+//    		        try {
+//    		        	if("0".equals(res.getStatus())){
+//    		        		String[] sql = createSQL.split(";");
+//    		        		for(int i=0;i<sql.length;i++){
+//    		        			if(StringUtils.isNotBlank(sql[i])){
+//    		        				cacheService.cacheExecDDL(resData.getResId(), sql[i]);
+//    		        			}        			
+//    		        		}		        		
+//    		        	}				
+//    					cacheService.cacheDatasFull(resData.getResId(), resData.getDsId(), cacheName, querySQL);
+//    				} catch (Exception e) {
+//    					e.printStackTrace();
+//    				}  
+//    			}
+//    		}.start();
         }
 
     	

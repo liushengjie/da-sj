@@ -3,7 +3,7 @@ package cn.bocom.r_service.process;
 import java.util.List;
 import java.util.Map;
 
-public interface IProcess {
+public interface IProcess<T>{
     /**
      * 获取可用的处理器
      * @return
@@ -16,7 +16,7 @@ public interface IProcess {
      * @param params
      * @return
      */
-    public String notNull(String col, String params);
+    public T notNull(String col, String params);
 
     /**
      * 行日期选择
@@ -24,7 +24,7 @@ public interface IProcess {
      * @param params
      * @return
      */
-    public String date(String col, String params);
+    public T date(String col, String params);
     
     /**
      * 行内容选择
@@ -32,7 +32,7 @@ public interface IProcess {
      * @param params
      * @return
      */
-    public String content(String col, String params);
+    public T content(String col, String params);
     
     /**
      * 列截取
@@ -40,7 +40,7 @@ public interface IProcess {
      * @param params
      * @return
      */
-    public String substr(String col, String params);
+    public T substr(String col, String params);
 
     /**
      * 列拆分
@@ -48,5 +48,5 @@ public interface IProcess {
      * @param params
      * @return
      */
-    public String split(String col, String params);
+    public T split(String col, String params);
 }

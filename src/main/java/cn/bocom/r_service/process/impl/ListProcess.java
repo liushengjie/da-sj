@@ -10,7 +10,7 @@ import cn.bocom.r_service.process.IProcess;
  * @author liushengjie
  * @version $Id: ListProcess.java, v 0.1 2019年1月17日 上午11:17:07 liushengjie Exp $
  */
-public class ListProcess implements IProcess{
+public class ListProcess implements IProcess<List<Map<String, Object>>>{
     
 
     @Override
@@ -19,27 +19,27 @@ public class ListProcess implements IProcess{
     }
 
     @Override
-    public String notNull(String col, String params) {
+    public List<Map<String, Object>> notNull(String col, String params) {
         return null;
     }
 
     @Override
-    public String date(String col, String params) {
+    public List<Map<String, Object>> date(String col, String params) {
         return null;
     }
 
     @Override
-    public String content(String col, String params) {
+    public List<Map<String, Object>> content(String col, String params) {
         return null;
     }
 
     @Override
-    public String substr(String col, String params) {
+    public List<Map<String, Object>> substr(String col, String params) {
         return null;
     }
 
     @Override
-    public String split(String col, String params) {
+    public List<Map<String, Object>> split(String col, String params) {
         return null;
     }
 }

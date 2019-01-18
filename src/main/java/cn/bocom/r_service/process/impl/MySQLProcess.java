@@ -13,7 +13,7 @@ import cn.bocom.r_service.process.ProcessUtil;
  * @author liushengjie
  * @version $Id: MySQLProcess.java, v 0.1 2019年1月17日 上午9:35:31 liushengjie Exp $
  */
-public class MySQLProcess implements IProcess{
+public class MySQLProcess implements IProcess<String>{
     
     /** 可用功能名称*/
     public static List<String> availableFunction = Lists.newArrayList("content","date","notnull","split","substr"); 

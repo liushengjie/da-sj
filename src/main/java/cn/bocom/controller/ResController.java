@@ -46,48 +46,6 @@ public class ResController {
     @Autowired
     private cn.bocom.r_service.resource.ResourceService r_resService;
     
-//    @ApiOperation(value = "预览sql")
-//    @RequestMapping(value = "/previewData", method = RequestMethod.POST)
-//    public DataResponse previewData(@RequestBody ResBean resBean, String limit) {
-//        return new DataResponse(resService.previewData(resBean, limit));
-//    }
-//    
-//    @ApiOperation(value = "获取资源库信息")
-//    @RequestMapping(value = "/queryResListByPage", method = RequestMethod.GET)
-//    public DataResponse queryResListByPage(ResView res,
-//            @RequestParam("currentPage") int currentPage, @RequestParam("pageSize") int pageSize) {
-//        return new DataResponse(
-//        		resService.queryResListByPage(res, currentPage, pageSize));
-//    }
-//    
-//    @ApiOperation(value = "获取全部资源库信息")
-//    @RequestMapping(value = "/queryResAll", method = RequestMethod.GET)
-//    public DataResponse queryResAll() {
-//        return new DataResponse(resService.queryResAll());
-//    }
-//    
-//    @ApiOperation(value = "保存资源库信息")
-//    @RequestMapping(value = "/saveRes", method = RequestMethod.POST)
-//    public DataResponse saveRes(@RequestBody ResBean resBean) {
-//    	String ret = resService.saveRes(resBean);
-//    	if(ret==null) {
-//    		return new DataResponse(false, -1, "保存失败，请检查传入参数！");
-//    	}else {
-//    		return new DataResponse("保存成功！");
-//    	}
-//    }
-    
-//    @ApiOperation(value = "根据资源ID获取该资源信息")
-//    @RequestMapping(value = "/findResBean", method = RequestMethod.GET)
-//    public DataResponse findResBean(String resId) {
-//    	ResBean resBean = resService.findResBean(resId);
-//    	if(resBean==null) {
-//    		return new DataResponse(false, -1, "根据ID获取资源信息错误！");
-//    	}else {
-//    		return new DataResponse(resBean);
-//    	}
-//    }
-
     @ApiOperation(value = "获取资源对象")
     @RequestMapping(value = "/loadResourceObj", method = RequestMethod.POST)
     public DataResponse loadResourceObj(@RequestParam("datasourceId") String datasourceId, @RequestBody TableInfo table) {

@@ -10,6 +10,11 @@ import cn.bocom.r_entity.process.ProcessEntity;
  * @author liushengjie
  * @version $Id: Resource.java, v 0.1 2019年1月12日 下午4:32:15 liushengjie Exp $
  */
+/**
+ * 
+ * @author liushengjie
+ * @version $Id: Resource.java, v 0.1 2019年1月18日 下午12:57:30 liushengjie Exp $
+ */
 public class Resource implements Serializable{
     /**  */
     private static final long serialVersionUID = 1L;
@@ -17,7 +22,7 @@ public class Resource implements Serializable{
     private ResourceBody resourceBody;
     private List<ResourceCol> resourceCols;
     private ResourceData resourceData;
-    private List<? extends ProcessEntity> processors;
+    private List<ProcessEntity> processors;
     
     public ResourceBody getResourceBody() {
         return resourceBody;
@@ -38,10 +43,10 @@ public class Resource implements Serializable{
     public void setResourceData(ResourceData resourceData) {
         this.resourceData = resourceData;
     }
-    public List<? extends ProcessEntity> getProcessors() {
+    public List<ProcessEntity> getProcessors() {
         return processors;
     }
-    public void setProcessors(List<? extends ProcessEntity> processors) {
+    public void setProcessors(List<ProcessEntity> processors) {
         this.processors = processors;
     }
 }
