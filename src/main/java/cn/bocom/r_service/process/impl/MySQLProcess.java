@@ -25,7 +25,7 @@ public class MySQLProcess implements IProcess<String>{
 
     private static String NOTNULL = "<col> is not null and <col> \\<> ''";
     private static String SUBSTR = "substr(<col><if(flag)>,<origin><endif>,<len>)";
-    private static String DATE = "<if(flag)><col> between STR_TO_DATE(<time1>, '%Y-%m-%d %H:%i:%S') and STR_TO_DATE(<time2>, '%Y-%m-%d %H:%i:%S')<else><col> <oper> STR_TO_DATE(<time1>, '%Y-%m-%d %H:%i:%S')<endif>";
+    private static String DATE = "<if(flag)><col> between STR_TO_DATE('<time1>', '%Y-%m-%d %H:%i:%S') and STR_TO_DATE('<time2>', '%Y-%m-%d %H:%i:%S')<else><col> <oper> STR_TO_DATE('<time1>', '%Y-%m-%d %H:%i:%S')<endif>";
     private static String SPLIT = "replace(replace(substring_index(<col>,'<symbol>', <index>),substring_index(<col>,'<symbol>', <leftIndex>),''),'<symbol>','')";
     private static String CONTENT = "<col> <oper> <content>";
     
@@ -44,13 +44,15 @@ public class MySQLProcess implements IProcess<String>{
     	System.out.println(m.substr("name", null, "{\"subType\":\"1\",\"len\":\"3\"}"));
     	System.out.println(m.substr("name", null, "{\"subType\":\"0\",\"len\":\"5\"}"));*/
     	
-    	/*System.out.println(m.date("name", null, "{\"oper\":\"between\",\"time1\":\"2019-01-01 12:12:12\",\"\":\"2019-01-15 23:23:23\"}"));
+    	/*System.out.println(m.date("name", null, "{\"oper\":\"between\",\"time1\":\"2019-01-01 12:12:12\",\"time2\":\"2019-01-15 23:23:23\"}"));
     	System.out.println(m.date("name", null, "{\"oper\":\"<\",\"time1\":\"2019-01-01 12:12:12\"}"));
     	System.out.println(m.date("name", null, "{\"oper\":\"<=\",\"time1\":\"2019-01-01 12:12:12\"}"));
     	System.out.println(m.date("name", null, "{\"oper\":\">\",\"time1\":\"2019-01-01 12:12:12\"}"));
     	System.out.println(m.date("name", null, "{\"col\":\"name\",\"oper\":\">=\",\"time1\":\"2019-01-01 12:12:12\"}"));*/
     	
-    	//System.out.println(m.split("name", null, "{\"symbol\":\",\",\"index\":\"10\"}"));
+    	/*System.out.println(m.split("name", null, "{\"symbol\":\",\",\"index\":\"1\"}"));
+    	System.out.println(m.split("name", null, "{\"symbol\":\",\",\"index\":\"3\"}"));
+    	System.out.println(m.split("name", null, "{\"symbol\":\",\",\"index\":\"10\"}"));*/
     	
     	/*System.out.println(m.content("name", null, "{\"type\":\"0\",\"data\":[\"abcd\"]}"));
     	System.out.println(m.content("name", null, "{\"type\":\"1\",\"data\":[\"abcd\"]}"));
