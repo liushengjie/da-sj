@@ -21,7 +21,7 @@ public interface IHandler<T> {
      * @return
      * @throws SjException
      */
-    public T handlerCol(int datasourceType, List<ProcessEntity> processors) throws SjException;
+    public T handlerCol(int datasourceType, String col, List<ProcessEntity> processors) throws SjException;
     
     /**
      * 行处理器
@@ -31,7 +31,6 @@ public interface IHandler<T> {
      */
     public T handlerRow(int datasourceType, List<ProcessEntity> processors);
     
-    public T changeColType(String col, String type);
     
     /**
      * 预处理

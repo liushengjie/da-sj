@@ -53,5 +53,9 @@ public class ListProcess implements IProcess<List<Map<String, Object>>>{
         return null;
     }
 
-
+    @Override
+    public List<Map<String, Object>> setAlias(String col, List<Map<String, Object>> data,
+            String alias) {
+        return null;
+    }
 }
