@@ -35,7 +35,8 @@ public class MySQLProcess implements IProcess<String>{
 
     //测试主函数
     public static void main(String[] q) {
-    	MySQLProcess m = new MySQLProcess();
+    	//MySQLProcess m = new MySQLProcess();
+    	
     	//System.out.println(m.notNull("name", null, ""));
     	
     	/*System.out.println(m.substr("name", null, "{\"subType\":\"2\",\"startIndex\":\"2\",\"endIndex\":\"5\"}"));
@@ -59,8 +60,13 @@ public class MySQLProcess implements IProcess<String>{
     	System.out.println(m.content("name", null, "{\"type\":\"6\",\"data\":[\"abcd\"]}"));
     	System.out.println(m.content("name", null, "{\"type\":\"7\",\"data\":[\"abcd\"]}"));
     	System.out.println(m.content("name", null, "{\"type\":\"8\",\"data\":[\"abcd\"]}"));
-    	System.out.println(m.content("name", null, "{\"type\":\"9\",\"data\":[\"abcd\"]}"));
-    	System.out.println(m.content("name", null, "{\"type\":\"10\",\"data\":[\"abcd\"]}"));*/
+    	System.out.println(m.content("name", null, "{\"type\":\"9\",\"data\":[\"abcd\"]}"));*/
+    	
+    	/*System.out.println(m.changeType("name", null, "varchar"));
+    	System.out.println(m.changeType("name", null, "int"));
+    	System.out.println(m.changeType("name", null, "float"));
+    	System.out.println(m.changeType("name", null, "date"));
+    	System.out.println(m.changeType("name", null, "datetime"));*/
     }
     
     @Override
@@ -214,25 +220,25 @@ public class MySQLProcess implements IProcess<String>{
     public String changeType(String col, String data, String newType) {
     	switch (newType.toUpperCase()){
     	case "VARCHAR":
-    		
+    		col = "cast(" + col + " as CHAR)";
     		break;
 		case "INT":
-		    		
+			col = "cast(" + col + " as SIGNED)";
 		    break;
 		case "FLOAT":
-			
+			col = "cast(" + col + " as DECIMAL(7,2))";
 			break;
 		case "DATE":
-			
+			col = "STR_TO_DATE(" + col + ", '%Y-%m-%d')";
 			break;
 		case "DATETIME":
-			
+			col = "STR_TO_DATE(" + col + ", '%Y-%m-%d %H:%i:%S')";
 			break;
 		default:
-			
+			col = "cast(" + col + " as CHAR)";
 			break;
     	}
-        return null;
+        return col;
     }
 
     @Override
