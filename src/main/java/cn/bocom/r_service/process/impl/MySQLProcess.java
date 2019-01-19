@@ -1,6 +1,5 @@
 package cn.bocom.r_service.process.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +8,7 @@ import org.stringtemplate.v4.ST;
 import com.google.common.collect.Lists;
 
 import cn.bocom.r_entity.process.proc.DateProc;
-import cn.bocom.r_entity.process.proc.NotNullProc;
+import cn.bocom.r_entity.process.proc.SplitProc;
 import cn.bocom.r_entity.process.proc.SubstrProc;
 import cn.bocom.r_service.process.IProcess;
 import cn.bocom.r_service.process.ProcessUtil;
@@ -27,6 +26,7 @@ public class MySQLProcess implements IProcess<String>{
     private static String NOTNULL = "<col> is not null and <col> \\<> ''";
     private static String SUBSTR = "substr(<col><if(flag)>,<origin><endif>,<len>)";
     private static String DATE = "<if(flag)><col> between STR_TO_DATE(<time1>, '%Y-%m-%d %H:%i:%S') and STR_TO_DATE(<time2>, '%Y-%m-%d %H:%i:%S')<else><col> <oper> STR_TO_DATE(<time1>, '%Y-%m-%d %H:%i:%S')<endif>";
+    private static String SPLIT = "replace(replace(substring_index(<col>,'<symbol>', <index>),substring_index(<col>,'<symbol>', <leftIndex>),''),'<symbol>','')";
     
     @Override
     public List<Map<String, Object>> availableFunction(String procType) {
@@ -35,25 +35,22 @@ public class MySQLProcess implements IProcess<String>{
 
     //测试主函数
     public static void main(String[] q) {
-    	System.out.println(new MySQLProcess().notNull("name", null, ""));
-    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"2\",\"startIndex\":\"2\",\"endIndex\":\"5\"}"));
-    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"1\",\"len\":\"3\"}"));
-    	System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"0\",\"len\":\"5\"}"));
-    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\"between\",\"time1\":\"2019-01-01 12:12:12\",\"\":\"2019-01-15 23:23:23\"}"));
-    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\"<\",\"time1\":\"2019-01-01 12:12:12\"}"));
-    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\"<=\",\"time1\":\"2019-01-01 12:12:12\"}"));
-    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\">\",\"time1\":\"2019-01-01 12:12:12\"}"));
-    	System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\">=\",\"time1\":\"2019-01-01 12:12:12\"}"));
+    	//System.out.println(new MySQLProcess().notNull("name", null, ""));
+    	//System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"2\",\"startIndex\":\"2\",\"endIndex\":\"5\"}"));
+    	//System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"1\",\"len\":\"3\"}"));
+    	//System.out.println(new MySQLProcess().substr("name", null, "{\"subType\":\"0\",\"len\":\"5\"}"));
+    	//System.out.println(new MySQLProcess().date("name", null, "{\"oper\":\"between\",\"time1\":\"2019-01-01 12:12:12\",\"\":\"2019-01-15 23:23:23\"}"));
+    	//System.out.println(new MySQLProcess().date("name", null, "{\"oper\":\"<\",\"time1\":\"2019-01-01 12:12:12\"}"));
+    	//System.out.println(new MySQLProcess().date("name", null, "{\"oper\":\"<=\",\"time1\":\"2019-01-01 12:12:12\"}"));
+    	//System.out.println(new MySQLProcess().date("name", null, "{\"oper\":\">\",\"time1\":\"2019-01-01 12:12:12\"}"));
+    	//System.out.println(new MySQLProcess().date("name", null, "{\"col\":\"name\",\"oper\":\">=\",\"time1\":\"2019-01-01 12:12:12\"}"));
+    	//System.out.println(new MySQLProcess().split("name", null, "{\"symbol\":\",\",\"index\":\"10\"}"));
     }
     
     @Override
     public String notNull(String col, String data, String params) {
-    	if(data!=null&&!data.equals("")) {
-    		col = "(" + data + ")";
-    	}
-    	
     	ST st = new ST(NOTNULL);
-    	st.add("col", col);
+    	st.add("col", "(" + col + ")");
         return st.render();
     }
 
@@ -64,15 +61,12 @@ public class MySQLProcess implements IProcess<String>{
     	if(d==null) {
     		return null;
     	}
-    	if(data!=null&&!data.equals("")) {
-    		col = "(" + data + ")";
-    	}
     	
     	String time1 = d.getTime1();
     	String time2 = d.getTime2();
     	String oper = d.getOper();
     	ST st = new ST(DATE);
-    	st.add("col", col);
+    	st.add("col", "(" + col + ")");
     	st.add("oper", oper);
     	st.add("flag", oper.trim().equalsIgnoreCase("between"));
     	st.add("time1", time1);
@@ -93,9 +87,6 @@ public class MySQLProcess implements IProcess<String>{
     	if(s==null) {
     		return null;
     	}
-    	if(data!=null&&!data.equals("")) {
-    		col = "(" + data + ")";
-    	}
     	
     	int origin = 1;//起始位置，默认1
     	int len = 0;//长度
@@ -110,11 +101,11 @@ public class MySQLProcess implements IProcess<String>{
     		origin = startIndex;
     		len = endIndex - startIndex + 1;
     	} else {
-    		return col;
+    		return "(" + col + ")";
     	}
     	
     	ST st = new ST(SUBSTR);
-    	st.add("col", col);
+    	st.add("col", "(" + col + ")");
     	st.add("flag", (subType.equals("0")||subType.equals("2")));
     	st.add("origin", origin);
     	st.add("len", len);
@@ -124,7 +115,21 @@ public class MySQLProcess implements IProcess<String>{
 
     @Override
     public String split(String col, String data, String params) {
-        return null;
+    	SplitProc s = convertObj(params, SplitProc.class);
+    	if(s==null) {
+    		return null;
+    	}
+    	
+    	String symbol = s.getSymbol();//分割符号
+    	int index = Integer.parseInt(s.getIndex());//要取第几列
+    	int leftIndex = index - 1;
+    	
+    	ST st = new ST(SPLIT);
+    	st.add("col", "(" + col + ")");
+    	st.add("symbol", symbol);
+    	st.add("index", index);
+    	st.add("leftIndex", leftIndex);
+        return st.render();
     }
 
     @Override
