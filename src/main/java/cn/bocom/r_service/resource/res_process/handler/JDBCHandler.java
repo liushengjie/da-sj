@@ -114,10 +114,10 @@ public class JDBCHandler implements IHandler<String> {
                 isCache
                         ? resource.getResourceData().getTableName()
                         : resource.getResourceData().getTableName() + " as "
-                                + resource.getResourceBody().getCacheTable());
+                        + resource.getResourceBody().getCacheTable());
         sql.add("where", where_str);
 
-        return null;
+        return sql.toString();
     }
 
     @Override
