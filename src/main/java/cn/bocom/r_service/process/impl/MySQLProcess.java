@@ -27,6 +27,7 @@ public class MySQLProcess implements IProcess<String>{
     private static String SUBSTR = "substr(<col><if(flag)>,<origin><endif>,<len>)";
     private static String DATE = "<if(flag)><col> between STR_TO_DATE(<time1>, '%Y-%m-%d %H:%i:%S') and STR_TO_DATE(<time2>, '%Y-%m-%d %H:%i:%S')<else><col> <oper> STR_TO_DATE(<time1>, '%Y-%m-%d %H:%i:%S')<endif>";
     private static String SPLIT = "replace(replace(substring_index(<col>,'<symbol>', <index>),substring_index(<col>,'<symbol>', <leftIndex>),''),'<symbol>','')";
+    private static String CONTENT = "<col> <oper> <content>";
     
     @Override
     public List<Map<String, Object>> availableFunction(String procType) {
@@ -60,7 +61,8 @@ public class MySQLProcess implements IProcess<String>{
     	System.out.println(m.content("name", null, "{\"type\":\"6\",\"data\":[\"abcd\"]}"));
     	System.out.println(m.content("name", null, "{\"type\":\"7\",\"data\":[\"abcd\"]}"));
     	System.out.println(m.content("name", null, "{\"type\":\"8\",\"data\":[\"abcd\"]}"));
-    	System.out.println(m.content("name", null, "{\"type\":\"9\",\"data\":[\"abcd\"]}"));*/
+    	System.out.println(m.content("name", null, "{\"type\":\"9\",\"data\":[\"abcd\"]}"));
+    	System.out.println(m.content("name", null, "{\"type\":\"10\",\"data\":[\"abcd\"]}"));*/
     	
     	/*System.out.println(m.changeType("name", null, "varchar"));
     	System.out.println(m.changeType("name", null, "int"));
@@ -103,13 +105,11 @@ public class MySQLProcess implements IProcess<String>{
     	if(c==null) {
     		return null;
     	}
-    	String ret = "";
     	List<String> contentList = c.getData();
     	if(contentList==null||contentList.size()==0) {
     		return null;
     	}
-    	col = "(" + col + ")";
-    	StringBuffer sb = null;
+    	String oper = null;
     	String content = null;
     	int compareType = c.getType();
     	//0：=；1：<>；2：in；3：not in；
@@ -118,50 +118,63 @@ public class MySQLProcess implements IProcess<String>{
     	//8：rightlike(like val%)；9：not rightlike(not like val%)
     	switch (compareType) {
 		case 0://=
-			ret = col + " = '" + contentList.get(0) + "'";
+			oper = "=";
+			content = "'" + contentList.get(0) + "'";
 			break;
 		case 1://<>
-			ret = col + " <> '" + contentList.get(0) + "'";
+			oper = "<>";
+			content = "'" + contentList.get(0) + "'";
     		break;
 		case 2://in
-			sb = new StringBuffer("");
+			oper = "in";
+			StringBuffer sb = new StringBuffer("");
 			for(int i=0;i<contentList.size();i++) {
 				sb.append(",'" + contentList.get(i) + "'");
 			}
 			content = "(" + sb.toString().substring(1) + ")";
-			ret = col + " in " + content + ""; 
     		break;
 		case 3://not in
-			sb = new StringBuffer("");
+			oper = "not in";
+			StringBuffer sb1 = new StringBuffer("");
 			for(int i=0;i<contentList.size();i++) {
-				sb.append(",'" + contentList.get(i) + "'");
+				sb1.append(",'" + contentList.get(i) + "'");
 			}
-			content = "(" + sb.toString().substring(1) + ")";
-			ret = col + " not in " + content + ""; 
+			content = "(" + sb1.toString().substring(1) + ")";
     		break;
 		case 4://like(like %val%)
-			ret = col + " like '%" + contentList.get(0) + "%'";
+			oper = "like";
+			content = "'%" + contentList.get(0) + "%'";
     		break;
 		case 5://not like(not like %val%)
-			ret = col + " not like '%" + contentList.get(0) + "%'";
+			oper = "not like";
+			content = "'%" + contentList.get(0) + "%'";
     		break;
 		case 6://leftlike(like %val)
-			ret = col + " like '%" + contentList.get(0) + "'";
+			oper = "like";
+			content = "'%" + contentList.get(0) + "'";
     		break;
 		case 7://not leftlike(not like %val)
-			ret = col + " not like '%" + contentList.get(0) + "'";
+			oper = "not like";
+			content = "'%" + contentList.get(0) + "'";
     		break;
 		case 8://rightlike(like val%)
-			ret = col + " like '" + contentList.get(0) + "%'";
+			oper = "like";
+			content = "'" + contentList.get(0) + "%'";
     		break;
 		case 9://not rightlike(not like val%)
-			ret = col + " not like '" + contentList.get(0) + "%'";
+			oper = "not like";
+			content = "'" + contentList.get(0) + "%'";
     		break;
     	default://默认为=
-    		ret = col + " = '" + contentList.get(0) + "'";
+    		oper = "=";
+			content = "'" + contentList.get(0) + "'";
     		break;
     	}
-        return ret;
+    	ST st = new ST(CONTENT);
+    	st.add("col", "(" + col + ")");
+    	st.add("oper", oper);
+    	st.add("content", content);
+        return st.render();
     }
 
 
