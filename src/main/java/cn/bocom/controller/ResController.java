@@ -54,6 +54,11 @@ public class ResController {
         return new DataResponse(ret);
     }
     
+    @ApiOperation(value = "预览sql")
+    @RequestMapping(value = "/previewData", method = RequestMethod.POST)
+    public DataResponse previewData(@RequestBody Resource resource, int limit) {
+        return new DataResponse(resourceService.loadDataByResource(resource, limit, true));
+    }
     
     @ApiOperation(value = "获取全部资源库信息")
     @RequestMapping(value = "/selectResourceList", method = RequestMethod.GET)

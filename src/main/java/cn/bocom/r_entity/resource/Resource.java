@@ -22,7 +22,6 @@ public class Resource implements Serializable{
     private ResourceBody resourceBody;
     private List<ResourceCol> resourceCols;
     private ResourceData resourceData;
-    private List<ProcessEntity> processors;
     
     public ResourceBody getResourceBody() {
         return resourceBody;
@@ -42,11 +41,5 @@ public class Resource implements Serializable{
     }
     public void setResourceData(ResourceData resourceData) {
         this.resourceData = resourceData;
-    }
-    public List<ProcessEntity> getProcessors() {
-        return processors;
-    }
-    public void setProcessors(List<ProcessEntity> processors) {
-        this.processors = processors;
     }
 }

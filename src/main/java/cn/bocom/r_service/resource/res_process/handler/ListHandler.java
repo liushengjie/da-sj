@@ -28,12 +28,12 @@ public class ListHandler implements IHandler<List<Map<String, Object>>>{
     }
 
     @Override
-    public List<Map<String, Object>> readData(Resource resource) {
+    public List<Map<String, Object>> readData(Resource resource , int limit, boolean isPreview) {
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> pretreadment(Resource resource, boolean isCache) {
+    public List<Map<String, Object>> pretreadment(Resource resource, boolean isPreview) {
         return null;
     }
 

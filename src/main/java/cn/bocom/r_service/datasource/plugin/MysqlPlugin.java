@@ -145,7 +145,6 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
     @Override
     public ResourceData convertToResData(String resourceId, String datasourceId, TableInfo tbi) {
         ResourceData rd = new ResourceData();
-        rd.setId(RandomUtil.getRandomId(18));
         rd.setConnModel("");
         rd.setResId(resourceId);
         rd.setTableName(tbi.getTableName());
@@ -160,11 +159,11 @@ public class MysqlPlugin implements DataSourcePlugin<MySQL>{
         res_col.setCol(col.getCol());
         res_col.setChangeType(DBUtil.changeDBType(col.getType()));
         res_col.setColCache(col.getCol() + "_" + resourceId);
-        res_col.setId(RandomUtil.getRandomId(18));
         res_col.setIdx(col.getIdx());
         res_col.setPk(col.getPk());
         res_col.setStatus("1");
-        
+        res_col.setResId(resourceId);
+        res_col.setType(col.getType());
         return res_col;
     }
     

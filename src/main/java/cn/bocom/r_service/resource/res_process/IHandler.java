@@ -38,12 +38,12 @@ public interface IHandler<T> {
      * @param isCache
      * @return
      */
-    public T pretreadment(Resource resource, boolean isCache);
+    public T pretreadment(Resource resource, boolean isPreview);
     
     /**
      * 读取数据
      * @param resource
      * @return
      */
-    public List<Map<String, Object>> readData(Resource resource);
+    public List<Map<String, Object>> readData(Resource resource, int limit, boolean isPreview);
 }

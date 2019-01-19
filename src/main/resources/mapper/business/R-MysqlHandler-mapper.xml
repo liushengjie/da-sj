@@ -17,7 +17,7 @@
 		information_schema.TABLES where TABLE_SCHEMA = #{database} ORDER BY TABLE_TYPE,CREATE_TIME
 	</select>
 	<select id="loadData" resultType="HashMap" parameterType="string">
-		select * from ${tableName} 
+		select * from (${tableName}) x 
 		<if test="limit!=0">
 			limit 0,${limit}
 		</if>

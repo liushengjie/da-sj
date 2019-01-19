@@ -19,6 +19,9 @@ import cn.bocom.r_service.process.IProcess;
 import cn.bocom.r_service.process.impl.ListProcess;
 import cn.bocom.r_service.process.impl.MySQLProcess;
 import cn.bocom.r_service.process.impl.OracleProcess;
+import cn.bocom.r_service.resource.res_process.IHandler;
+import cn.bocom.r_service.resource.res_process.handler.JDBCHandler;
+import cn.bocom.r_service.resource.res_process.handler.ListHandler;
 
 /**
  * 上游数据源枚举类
@@ -28,34 +31,38 @@ import cn.bocom.r_service.process.impl.OracleProcess;
  */
 public class Origins {
     public enum DataSourceEnum {
-        
-        MYSQL("MYSQL", 0, MySQL.class, MysqlPlugin.class, MySQLProcess.class, "relationData"), 
-        ORACLE("ORACLE", 1, Oracle.class, OraclePlugin.class, OracleProcess.class, "relationData"), 
-        EXCEL("EXCEL", 2, Excel.class, ExcelPlugin.class, ListProcess.class, "noSQLData");
 
-        /**  源名称*/
+        MYSQL("MYSQL", 0, MySQL.class, MysqlPlugin.class, MySQLProcess.class, "relationData",0), 
+        ORACLE("ORACLE", 1, Oracle.class, OraclePlugin.class, OracleProcess.class, "relationData", 0),
+        EXCEL("EXCEL", 2, Excel.class, ExcelPlugin.class, ListProcess.class, "noSQLData", 1);
+
+        /** 源名称 */
         private String name;
-        /**  编号*/
+        /** 编号 */
         private int code;
-        /**  表单Entity*/
+        /** 表单Entity */
         private Class<? extends OriginEntity> entityClass;
-        /**  源插件类*/
+        /** 源插件类 */
         @SuppressWarnings("rawtypes")
         private Class<? extends DataSourcePlugin> pluginClass;
-        /**  处理器类*/
+        /** 处理器类 */
         private Class<? extends IProcess<?>> processClass;
-        /**  归类*/
+        /** 归类 */
         private String category;
+        /** 连接类型 */
+        private int connModel;
 
         @SuppressWarnings("rawtypes")
         private DataSourceEnum(String name, int code, Class<? extends OriginEntity> entityClass,
-                Class<? extends DataSourcePlugin> pluginClass, Class<? extends IProcess<?>> processClass, String categoty) {
+                Class<? extends DataSourcePlugin> pluginClass,
+                Class<? extends IProcess<?>> processClass, String categoty, int connModel) {
             this.name = name;
             this.code = code;
             this.entityClass = entityClass;
             this.pluginClass = pluginClass;
             this.processClass = processClass;
             this.category = categoty;
+            this.connModel = connModel;
         }
 
         public static DataSourceEnum match(int type, DataSourceEnum defaultDataSource) {
@@ -106,15 +113,38 @@ public class Origins {
             }
             return ret;
         }
+
+        public int getConnModel() {
+            return connModel;
+        }
     }
 
     public enum ConnModelEnum { // 连接类型枚举
-        JDBC(0), EXCEL(1);
+        JDBC(0, JDBCHandler.class), EXCEL(1, ListHandler.class);
 
         private int code;
+        private Class<? extends IHandler<?>> handler;
 
-        private ConnModelEnum(int code) {
+        private ConnModelEnum(int code, Class<? extends IHandler<?>> handler) {
             this.code = code;
+            this.handler = handler;
+        }
+
+        public static ConnModelEnum match(int code, ConnModelEnum defaultConnModel) {
+            for (ConnModelEnum item : ConnModelEnum.values()) {
+                if (item.code == code) {
+                    return item;
+                }
+            }
+            return defaultConnModel;
+        }
+
+        public IHandler<?> getHandlerClass() {
+            try {
+                return handler.newInstance();
+            } catch (Exception e) {
+                throw new SjException(e);
+            }
         }
 
         public int getCode() {

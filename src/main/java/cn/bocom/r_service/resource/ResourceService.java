@@ -24,6 +24,7 @@ import cn.bocom.r_entity.resource.ResourceBody;
 import cn.bocom.r_entity.resource.ResourceCol;
 import cn.bocom.r_entity.resource.ResourceData;
 import cn.bocom.r_entity.resource.ResourceView;
+import cn.bocom.r_service.resource.res_process.ResourceDataProcess;
 import cn.bocom.r_service.resource.res_transform.ResourceTrans;
 
 /**
@@ -38,21 +39,32 @@ public class ResourceService {
     @Autowired
     private R_ResourceMapper resMapper;
     
-    
     @Autowired
     private ResourceTrans resourceTrans;
     
+    @Autowired
+    private ResourceDataProcess resourceDataProcess;
+    
+    /**
+     * 
+     * @param datasourceId
+     * @param table
+     * @return
+     */
     public Resource loadResourceObj(String datasourceId, TableInfo table) {
         return resourceTrans.convertToRes(datasourceId, table);
     }
     
-    //TODO:根据资源获取数据预览
-    public List<Map<String, Object>> loadDataByResource(Resource resource){
-        return null;
+    /**
+     * 根據資源獲取數據信息
+     * @param resource
+     * @param limit
+     * @param isPreview
+     * @return
+     */
+    public List<Map<String, Object>> loadDataByResource(Resource resource, int limit, boolean isPreview){
+        return resourceDataProcess.loadResourceData(resource, limit, isPreview);
     }
-    
-    
-    //TODO: 资源对象增删改查
 
     /** 
 	 * @Title: selectResourceList 
