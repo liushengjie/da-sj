@@ -47,6 +47,8 @@ public class IgniteProcess implements IProcess<String>{
         return null;
     }
 
-
-
+    @Override
+    public String setAlias(String col, String data, String alias) {
+        return null;
+    }
 }

@@ -46,5 +46,9 @@ public class OracleProcess implements IProcess<String>{
     public String changeType(String col, String data, String newType) {
         return null;
     }
-    
+
+    @Override
+    public String setAlias(String col, String data, String alias) {
+        return null;
+    }
 }

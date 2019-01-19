@@ -80,35 +80,43 @@ public class JDBCHandler implements IHandler<String> {
     @Override
     @SuppressWarnings("unchecked")
     public String pretreadment(Resource resource, boolean isCache) {
-        
+
         DataSource ds = datasourceOrigin.selectDataSourceById(resource.getResourceData().getDsId());
-        IProcess<String> processorObj = (IProcess<String>) ProcessUtil.processObj(Integer.valueOf(ds.getType()));
-        
+        IProcess<String> processorObj =
+                (IProcess<String>) ProcessUtil.processObj(Integer.valueOf(ds.getType()));
+
         List<ResourceCol> res_col = resource.getResourceCols();
         String col_str = res_col.stream().map(c -> {
             String col = c.getCol();
-            
-            if(c.getColProcessor() != null && c.getColProcessor().size() > 0) {
+
+            if (c.getColProcessor() != null && c.getColProcessor().size() > 0) {
                 col = handlerCol(Integer.valueOf(ds.getType()), col, c.getColProcessor());
-            }else {
+            } else {
                 col = c.getCol();
             }
-            return processorObj.changeType(col, "",c.getChangeType());
-        }).reduce((s1,s2) -> {
+            col = processorObj.changeType(col, "", c.getChangeType());
+            if (isCache) col = processorObj.setAlias(col, "", c.getColCache());
+            return col;
+            
+        }).reduce((s1, s2) -> {
             return s1.concat(" , ").concat(s2);
         }).orElse("");
-        
+
         List<ProcessEntity> rowProcessors = resource.getResourceData().getDataProcessor();
         String where_str = "";
-        if(rowProcessors != null && rowProcessors.size() > 0) {
+        if (rowProcessors != null && rowProcessors.size() > 0) {
             where_str = handlerRow(Integer.valueOf(ds.getType()), rowProcessors);
         }
-        
+
         ST sql = new ST(SQL);
         sql.add("col", col_str);
-        sql.add("table", isCache ? resource.getResourceData().getTableName() : resource.getResourceData().getTableName() + " as " + resource.getResourceBody().getCacheTable());
+        sql.add("table",
+                isCache
+                        ? resource.getResourceData().getTableName()
+                        : resource.getResourceData().getTableName() + " as "
+                                + resource.getResourceBody().getCacheTable());
         sql.add("where", where_str);
-        
+
         return null;
     }
 

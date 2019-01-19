@@ -54,7 +54,23 @@ public interface IProcess<T>{
      */
     public T split(String col, T data, String params);
     
+    /**
+     * 更改列类型
+     * @param col
+     * @param data
+     * @param newType
+     * @return
+     */
     public T changeType(String col, T data, String newType);
+    
+    /**
+     * 设置别名
+     * @param col
+     * @param data
+     * @param alias
+     * @return
+     */
+    public T setAlias(String col, T data, String alias);
     
     
 	default <E> E convertObj(String json, Class<E> c) {
