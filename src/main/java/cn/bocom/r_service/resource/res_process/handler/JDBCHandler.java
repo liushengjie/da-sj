@@ -133,12 +133,4 @@ public class JDBCHandler implements IHandler<String> {
         String sql = pretreadment(resource, isPreview);
         return plugin.loadData(sql, String.valueOf(limit));
     }
-
-    public static void main(String[] args) {
-        JDBCHandler jdbc = new JDBCHandler();
-
-    }
-
-
-
 }
