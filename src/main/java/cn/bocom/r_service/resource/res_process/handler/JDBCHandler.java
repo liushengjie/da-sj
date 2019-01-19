@@ -3,15 +3,12 @@ package cn.bocom.r_service.resource.res_process.handler;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import org.assertj.core.util.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.stringtemplate.v4.ST;
 
-import cn.bocom.other.common.SQLTemplet;
 import cn.bocom.other.common.SjException;
 import cn.bocom.r_entity.datasource.DataSource;
 import cn.bocom.r_entity.process.ProcessEntity;
@@ -32,7 +29,7 @@ public class JDBCHandler implements IHandler<String> {
 
     private static Logger logger = LoggerFactory.getLogger(JDBCHandler.class);
 
-    public static final String SQL = "select <col> from <table> where <where>";
+    public static final String SQL = "select <col> from <table> where  1=1 <where>";
 
     @Autowired
     private DataSourceOrigin datasourceOrigin;
