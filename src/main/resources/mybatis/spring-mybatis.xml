@@ -28,7 +28,7 @@
 	            <prop key="url">${jdbc.url}</prop>    
 	            <prop key="username">${jdbc.username}</prop>    
 	            <prop key="password">${jdbc.password}</prop>    
-	            <prop key="initialSize">10</prop>    
+	            <prop key="initialSize">1</prop>    
 	            <prop key="minIdle">2</prop>    
 	            <prop key="maxActive">30</prop>    
 	            <prop key="maxWait">60000</prop>    

@@ -59,7 +59,7 @@ public class AtomikosDynamicDataSource extends AbstractDynamicDataSource<DataSou
         ds.setUsername(username);
         ds.setPassword(password);
         ds.setDriverClassName(driverClassName);
-        ds.setInitialSize(20);
+        ds.setInitialSize(1);
         ds.setMinIdle(2);
         ds.setMaxActive(100);
         ds.setMaxWait(60000);
@@ -109,7 +109,7 @@ public class AtomikosDynamicDataSource extends AbstractDynamicDataSource<DataSou
         ds.setUsername(username);
         ds.setPassword(password);
         ds.setDriverClassName(driverClassName);
-        ds.setInitialSize(10);
+        ds.setInitialSize(1);
         ds.setMinIdle(2);
         ds.setMaxActive(30);
         ds.setMaxWait(60000);

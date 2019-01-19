@@ -2,16 +2,17 @@ package cn.bocom.r_service.datasource;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.bocom.other.datasource.jdbc.AtomikosDynamicDataSource;
 import cn.bocom.other.datasource.jdbc.DBContextHolder;
 import cn.bocom.r_entity.datasource.ColInfo;
 import cn.bocom.r_entity.datasource.DataSource;
@@ -82,18 +83,18 @@ public class DatasourceUtil {
      * @date 2018年9月14日上午10:34:45
      */
     public static Connection getJDBCConnection(DataSource ds) {
-    	Connection conn = null;
-    	try {
-            AtomikosDynamicDataSource atomikosDynamicDataSource = new AtomikosDynamicDataSource();
-            javax.sql.DataSource dataSource =
-                    atomikosDynamicDataSource.createDataSource(ds.getDriver(),
-                            ds.getUrl(), ds.getUsername(), ds.getPwd());
-            conn = dataSource.getConnection();
-        } catch (Exception e) {
-        	e.printStackTrace();
-            return null;
+        String url = ds.getUrl();
+        String user = ds.getUsername();
+        String password = ds.getPwd();
+ 
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(url,user,password);
+            return connection;
+        }catch (Exception e) {
+            e.printStackTrace();
         }
-		return conn;
+        return null;
 	}
     
     /** 
