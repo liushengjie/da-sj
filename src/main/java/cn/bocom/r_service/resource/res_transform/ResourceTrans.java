@@ -37,18 +37,18 @@ public class ResourceTrans {
         Resource resource = new Resource();
         // 1、设置body属性
         ResourceBody res_body = new ResourceBody();
-        String resId = RandomUtil.getRandomId(18);
-        String cacheTable = "res_" + resId;
-        res_body.setId(resId);
-        res_body.setCacheTable(cacheTable);
+        //String resId = RandomUtil.getRandomId(18);
+        //String cacheTable = "res_" + resId;
+        //res_body.setId(resId);
+        //res_body.setCacheTable(cacheTable);
 
         DataSourcePlugin<?> dp = DatasourceUtil.originPluginById(datasourceId);
-        ResourceData res_data = dp.convertToResData(resId, datasourceId, table);
+        ResourceData res_data = dp.convertToResData("", datasourceId, table);
 
         List<ColInfo> cols = dp.showColsInfo(datasourceId, table.getTableName());
         List<ResourceCol> res_cols = Lists.newArrayList();
         for (int i = 0; i < cols.size(); i++) {
-            ResourceCol res_col = dp.convertToResCol(resId, cols.get(i));
+            ResourceCol res_col = dp.convertToResCol("", cols.get(i));
             res_col.setSort(String.valueOf(i));
             res_cols.add(res_col);
         }

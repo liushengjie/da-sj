@@ -19,6 +19,7 @@ import cn.bocom.mapper.main.R_ResourceMapper;
 import cn.bocom.other.util.DBUtil;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.TableInfo;
+import cn.bocom.r_entity.process.ProcessEntity;
 import cn.bocom.r_entity.resource.Resource;
 import cn.bocom.r_entity.resource.ResourceBody;
 import cn.bocom.r_entity.resource.ResourceCol;
@@ -143,6 +144,12 @@ public class ResourceService {
     		resCol.setOrigin(map.get("col_origin")==null?"":map.get("col_origin").toString());
     		resCol.setSort(map.get("col_sort")==null?"":map.get("col_sort").toString());
     		
+    		//查询该列的处理器
+    		ProcessEntity proc = new ProcessEntity();
+    		proc.setColId(resCol.getId());
+    		List<ProcessEntity> procList = resMapper.selectResourceColProcList(proc);
+    		resCol.setColProcessor(procList);
+
     		colsList.add(resCol);
     		
     		//最后一次循环时，整合最后一个资源
@@ -246,8 +253,8 @@ public class ResourceService {
     	//>>>>设置id并保存ResourceBody
     	if(StringUtils.isBlank(resBody.getId())) {//新增则生成id
     		resBody.setId(RandomUtil.getRandomId(18));
-    		resBody.setCacheTable("res_" + RandomUtil.getRandomId(18));
-    	}else{//更新则先删后插
+    		resBody.setCacheTable("res_" + resBody.getId());
+    	}else{//更新
     		//查询库中Resource
     		Resource resOld = selectResourceById(resBody.getId());
     		//将库中的Resource部分属性赋值到新Resource里
@@ -264,7 +271,7 @@ public class ResourceService {
 		resData.setResId(resBody.getId());
 		if(resData.getId()==null || "".equals(resData.getId())) {
 			resData.setId(RandomUtil.getRandomId(18));
-		}	    		
+		}
     	resMapper.saveResourceData(resData);
     	
     	//>>>>设置id并保存ResourceCol
@@ -290,6 +297,19 @@ public class ResourceService {
         		resCol.setSort(String.valueOf(i+1));
         		resCol.setColCache(resCol.getCol()+"_"+resBody.getId());
         		resMapper.saveResourceCol(resCol);
+    			
+        		//>>>>设置id并保存ProcessEntity
+        		List<ProcessEntity> colProcList = resCol.getColProcessor();
+        		if(colProcList!=null&&colProcList.size()>0) {
+        			for(int j=0;j<colProcList.size();j++) {
+        				ProcessEntity proc = colProcList.get(j);
+        				proc.setColId(resCol.getId());
+        				if(proc.getId()==null || "".equals(proc.getId())) {
+        					proc.setId(RandomUtil.getRandomId(18));
+        				}
+        				resMapper.saveResourceColProcess(proc);
+        			}
+        		}
     		}
     	}
     	

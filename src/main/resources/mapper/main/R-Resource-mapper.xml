@@ -82,6 +82,24 @@
 	     order by create_time desc
 	</select>
 	
+	<select id="selectResourceColProcList" resultType="cn.bocom.r_entity.process.ProcessEntity" parameterType="cn.bocom.r_entity.process.ProcessEntity">
+		select t.*
+		from t_res_col_processor t where 1=1
+		<if test="id != null and id != ''">
+	       and t.id=#{id}
+		</if>
+		<if test="colId != null and colId != ''">
+	       and t.col_id=#{colId}
+		</if>
+		<if test="processCol != null and processCol != ''">
+	       and t.process_col like CONCAT('%',#{processCol},'%')
+		</if>
+		<if test="processName != null and processName != ''">
+	       and t.process_name like CONCAT('%',#{processName},'%')
+		</if>
+	     order by t.id
+	</select>
+	
 	<update id="saveResourceBody" parameterType="cn.bocom.r_entity.resource.ResourceBody">
 		REPLACE INTO t_res(
 			<if test="id!=null and id!=''">id,</if>
@@ -168,11 +186,30 @@
 		)
 	</update>
 	
+	<update id="saveResourceColProcess" parameterType="cn.bocom.r_entity.process.ProcessEntity">
+		REPLACE INTO t_res_col_processor(
+			<if test="id!=null and id!=''">id,</if>
+			<if test="processName!=null and processName!=''">process_name,</if>
+			<if test="processCol!=null and processCol!=''">process_col,</if>
+			<if test="params!=null and params!=''">params,</if>
+			<if test="colId!=null and colId!=''">col_id</if>
+		) values (
+			<if test="id!=null and id!=''">#{id},</if>
+			<if test="processName!=null and processName!=''">#{processName},</if>
+			<if test="processCol!=null and processCol!=''">#{processCol},</if>
+			<if test="params!=null and params!=''">#{params},</if>
+			<if test="colId!=null and colId!=''">#{colId}</if>
+		)
+	</update>
+	
 	<delete id="deleteResourceBody" parameterType="string">
 		delete from t_res where id=#{resourceId}
 	</delete>
 	<delete id="deleteResourceCol" parameterType="string">
 		delete from t_res_col where res_id=#{resourceId}
+	</delete>
+	<delete id="deleteResourceColProess" parameterType="string">
+		delete from t_res_row_proc where col_id in (select id from t_res_col where res_id=#{resourceId})
 	</delete>
 	<delete id="deleteResourceData" parameterType="string">
 		delete from t_res_data where res_id=#{resourceId}
