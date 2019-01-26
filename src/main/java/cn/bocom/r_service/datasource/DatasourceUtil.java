@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -89,6 +88,7 @@ public class DatasourceUtil {
  
         Connection connection = null;
         try {
+        	Class.forName(ds.getDriver());
             connection = DriverManager.getConnection(url,user,password);
             return connection;
         }catch (Exception e) {
@@ -115,7 +115,7 @@ public class DatasourceUtil {
         	if(conn==null) {
         		return result;
         	}
-        	preparedStatement = conn.prepareStatement("select * from "+tableName+" t limit 1");
+        	preparedStatement = conn.prepareStatement("select * from "+tableName+" t where 1=2");
             // 获取ResultSetMetaData
             ResultSetMetaData metaData = preparedStatement.executeQuery().getMetaData();
             result = new ArrayList<ColInfo>();

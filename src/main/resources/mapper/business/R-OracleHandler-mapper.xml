@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.bocom.mapper.business.R_OracleHandlerMapper">
+	<resultMap id="tableInfo" type="cn.bocom.r_entity.datasource.TableInfo" >
+		<result column="ID" property="id" />
+		<result column="TABLE_NAME" property="tableName" />
+		<result column="TABLE_ROWS" property="tableRows" />
+		<result column="UPDATE_TIME" property="updateTime" />
+		<result column="TABLE_COMMENT" property="tableComment" />
+		<result column="OBJ_TYPE" property="objType" />
+	</resultMap>
+	
+	<select id="showTablesInfo" resultMap="tableInfo" parameterType="cn.bocom.r_entity.datasource.form.Oracle">
+		SELECT * FROM ( select #{id}||'.'||#{username}||'.'||T1.TABLE_NAME AS ID,T1.TABLE_NAME,TO_CHAR(T1.NUM_ROWS) AS TABLE_ROWS,TO_CHAR(T1.LAST_ANALYZED,'yyyy-mm-dd HH24:mi:ss') AS UPATE_TIME,(select a.COMMENTS from user_tab_comments a where a.TABLE_NAME=T1.TABLE_NAME) AS TABLE_COMMENT,'TABLE' AS OBJ_TYPE from user_tables t1 
+		union all
+		select #{id}||'.'||#{username}||'.'||T2.VIEW_NAME AS ID,T2.VIEW_NAME AS TABLE_NAME,'' AS TABLE_ROWS,'' AS UPATE_TIME,(select b.COMMENTS from user_tab_comments b where b.TABLE_NAME=T2.VIEW_NAME) AS TABLE_COMMENT,'VIEW' AS OBJ_TYPE from user_views t2 
+		union all
+		select #{id}||'.'||#{username}||'.'||T3.SYNONYM_NAME AS ID,T3.SYNONYM_NAME AS TABLE_NAME,'' AS TABLE_ROWS,'' AS UPATE_TIME,(select c.COMMENTS from user_tab_comments c where c.TABLE_NAME=T3.SYNONYM_NAME) AS TABLE_COMMENT,'SYNONYM' AS OBJ_TYPE from user_synonyms t3  ) ORDER BY OBJ_TYPE,TABLE_NAME
+	</select>
+	<select id="loadData" resultType="HashMap" parameterType="string">
+		select * from ${tableName} where rownum &lt;= ${limit}
+	</select>
+	<select id="preloadSQLData" resultType="HashMap" parameterType="string">
+		select * from (${sql}) where rownum &lt;= ${limit}
+	</select>
+	<select id="tableCount" resultType="int" parameterType="string">
+		select count(1) from ${tableName}
+	</select>
+</mapper>
