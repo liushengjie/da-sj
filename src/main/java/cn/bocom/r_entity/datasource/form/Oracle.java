@@ -10,7 +10,7 @@ public class Oracle extends OriginEntity{
     private String driver;
     private String ip;
     private String port;
-    private String sid;
+    private String database;
     private String username;
     private String pwd;
     private String xa;
@@ -33,12 +33,12 @@ public class Oracle extends OriginEntity{
 	public void setPort(String port) {
 		this.port = port;
 	}
-	public String getSid() {
-		return sid;
-	}
-	public void setSid(String sid) {
-		this.sid = sid;
-	}
+	public String getDatabase() {
+        return database;
+    }
+    public void setDatabase(String database) {
+        this.database = database;
+    }
 	public String getUsername() {
 		return username;
 	}

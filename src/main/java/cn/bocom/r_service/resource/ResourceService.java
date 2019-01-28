@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import com.github.pagehelper.PageInfo;
 
 import cn.bocom.mapper.main.R_ResourceMapper;
 import cn.bocom.other.util.DBUtil;
+import cn.bocom.other.util.MapUtil;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.process.ProcessEntity;
@@ -65,7 +67,10 @@ public class ResourceService {
      * @return
      */
     public List<Map<String, Object>> loadDataByResource(Resource resource, int limit, boolean isPreview){
-        return resourceDataProcess.loadResourceData(resource, limit, isPreview);
+        List<Map<String, Object>> ret = resourceDataProcess.loadResourceData(resource, limit, isPreview);
+        return ret.stream().map(m -> {
+			return MapUtil.transformLowerCase(m);
+		}).collect(Collectors.toList());
     }
 
     /** 

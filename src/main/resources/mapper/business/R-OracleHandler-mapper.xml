@@ -19,7 +19,10 @@
 		select #{id}||'.'||#{username}||'.'||T3.SYNONYM_NAME AS ID,T3.SYNONYM_NAME AS TABLE_NAME,'' AS TABLE_ROWS,'' AS UPATE_TIME,(select c.COMMENTS from user_tab_comments c where c.TABLE_NAME=T3.SYNONYM_NAME) AS TABLE_COMMENT,'SYNONYM' AS OBJ_TYPE from user_synonyms t3  ) ORDER BY OBJ_TYPE,TABLE_NAME
 	</select>
 	<select id="loadData" resultType="HashMap" parameterType="string">
-		select * from ${tableName} where rownum &lt;= ${limit}
+		select * from (${tableName}) x where 1=1
+		<if test="limit!=0">
+			and rownum &lt;= ${limit}
+		</if>
 	</select>
 	<select id="preloadSQLData" resultType="HashMap" parameterType="string">
 		select * from (${sql}) where rownum &lt;= ${limit}

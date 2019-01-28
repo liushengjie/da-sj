@@ -63,7 +63,7 @@ public class OraclePlugin implements DataSourcePlugin<Oracle>{
         datasource.setType(String.valueOf(typeCode)); // 数据源类型
         datasource.setDriver(Constant.ORACLE_DRIVER_TPL); // 数据源驱动
         datasource.setUrl(String.format(Constant.ORACLE_URL_TPL, originObj.getIp(), originObj.getPort(),
-            originObj.getSid())); // 数据源url
+            originObj.getDatabase())); // 数据源url
         datasource.setUsername(originObj.getUsername()); // 数据源用户名
         datasource.setPwd(originObj.getPwd()); // 数据源密码
         datasource.setXa(originObj.getXa()); // 数据源是否启用分布式事务
@@ -89,7 +89,7 @@ public class OraclePlugin implements DataSourcePlugin<Oracle>{
         	 String[] arr = url.replace("jdbc:oracle:thin:@", "").split(":");
         	 oracle.setIp(arr[0]);
         	 oracle.setPort(arr[1]);
-        	 oracle.setSid(arr[2]);
+        	 oracle.setDatabase(arr[2]);
         }
         
         oracle.setModel((datasource.getDataMode()==null||datasource.getDataMode().equals(""))?0:Integer.parseInt(datasource.getDataMode()));
