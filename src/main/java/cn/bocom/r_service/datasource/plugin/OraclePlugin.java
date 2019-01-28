@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import cn.bocom.mapper.business.R_OracleHandlerMapper;
 import cn.bocom.other.common.Constant;
+import cn.bocom.other.util.DBUtil;
 import cn.bocom.other.util.ListUtil;
 import cn.bocom.other.util.RandomUtil;
 import cn.bocom.r_entity.datasource.ColInfo;
@@ -139,12 +140,27 @@ public class OraclePlugin implements DataSourcePlugin<Oracle>{
 
     @Override
     public ResourceData convertToResData(String resourceId, String datasourceId, TableInfo tbi) {
-        return null;
+    	ResourceData rd = new ResourceData();
+        rd.setConnModel("");
+        rd.setResId(resourceId);
+        rd.setTableName(tbi.getTableName());
+        rd.setDsId(datasourceId);
+        return rd;
     }
 
     @Override
     public ResourceCol convertToResCol(String resourceId, ColInfo col) {
-        return null;
+    	ResourceCol res_col = new ResourceCol();
+        res_col.setAlias(col.getAlias());
+        res_col.setCol(col.getCol());
+        res_col.setChangeType(DBUtil.changeDBType(col.getType()));
+        res_col.setColCache(col.getCol() + "_" + resourceId);
+        res_col.setIdx(col.getIdx());
+        res_col.setPk(col.getPk());
+        res_col.setStatus("1");
+        res_col.setResId(resourceId);
+        res_col.setType(col.getType());
+        return res_col;
     }
     
 }
