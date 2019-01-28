@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -237,7 +238,7 @@ public class ResourceService {
    	 * @author lishipeng
    	 * @date 2019年1月15日
      */ 
-    //@Transactional
+    @Transactional
    	public int saveResource(Resource resource) {
    		if(resource==null) {
     		return 0;
