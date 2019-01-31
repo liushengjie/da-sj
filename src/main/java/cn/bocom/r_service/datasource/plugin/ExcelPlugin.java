@@ -21,6 +21,17 @@ import cn.bocom.r_service.datasource.DataSourcePlugin;
  */
 public class ExcelPlugin implements DataSourcePlugin<Excel>{
     private static Logger logger = LoggerFactory.getLogger(ExcelPlugin.class);
+    
+    private DataSource datasource ;
+
+    public ExcelPlugin() {
+        super();
+    }
+
+    public ExcelPlugin(DataSource datasource) {
+        super();
+        this.datasource = datasource;
+    }
 
     @Override
     public DataSource convertDataSource(Excel originObj, int typeCode) {

@@ -37,7 +37,7 @@ public class DataSourceAbility {
      */
     @SuppressWarnings("unchecked")
     public <T extends OriginEntity> boolean connect(int type, String obj) {
-        DataSourcePlugin<T> op = (DataSourcePlugin<T>)DatasourceUtil.originPlugin(type);
+        DataSourcePlugin<T> op = (DataSourcePlugin<T>)DatasourceUtil.originPlugin(new DataSource(String.valueOf(type)));
         Class<? extends OriginEntity> oe = DatasourceUtil.originEntity(type);
         
         T originObj = (T)JSON.parseObject(obj, oe);

@@ -36,7 +36,7 @@ public  class DataSourceOrigin {
      */
     @SuppressWarnings("unchecked")
     public <T extends OriginEntity> int insertDataSource(int type, String obj) {
-        DataSourcePlugin<T> op = (DataSourcePlugin<T>)DatasourceUtil.originPlugin(type);
+        DataSourcePlugin<T> op = (DataSourcePlugin<T>)DatasourceUtil.originPlugin(new DataSource(String.valueOf(type)));
         Class<? extends OriginEntity> oe = DatasourceUtil.originEntity(type);
         
         T originObj = (T)JSON.parseObject(obj, oe);
@@ -56,7 +56,7 @@ public  class DataSourceOrigin {
     	Page<Object> page = PageHelper.startPage(currentPage, pageSize);
         List<DataSource> docs = dataSourceMapper.selectDs(datasource);
         PageInfo<? extends OriginEntity> pageInfo = new PageInfo<>(docs.stream().map(x -> {
-        	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPlugin(Integer.parseInt(x.getType()));
+        	DataSourcePlugin<? extends OriginEntity> op = (DataSourcePlugin<? extends OriginEntity>)DatasourceUtil.originPlugin(x);
             return op.converOrigin(x);
         }).collect(Collectors.toList()));   
         pageInfo.setTotal(page.getTotal());
@@ -87,7 +87,7 @@ public  class DataSourceOrigin {
      */
     @SuppressWarnings("unchecked")
 	public <T extends OriginEntity> int updateDataSource(int type, String obj) {
-    	DataSourcePlugin<T> op = (DataSourcePlugin<T>)DatasourceUtil.originPlugin(type);
+    	DataSourcePlugin<T> op = (DataSourcePlugin<T>)DatasourceUtil.originPlugin(new DataSource(String.valueOf(type)));
         Class<? extends OriginEntity> oe = DatasourceUtil.originEntity(type);
         
         T originObj = (T)JSON.parseObject(obj, oe);
