@@ -100,7 +100,6 @@ dependencies {
     compile group: 'tk.mybatis', name:'mapper', version:'3.4.0'
     compile group: 'org.mybatis.generator', name:'mybatis-generator-core', version:'1.3.5'
     
-    compile files('lib/lts-1.7.2-SNAPSHOT.jar')
     compile ('com.github.sgroschupf:zkclient:0.1'){
     	exclude module: 'log4j'
     	exclude module: 'slf4j-log4j12'
@@ -118,6 +117,9 @@ dependencies {
     compile ("cn.sj:da-common-sj:0.0.8")
     compile ("org.antlr:ST4:4.0.8")
     
+    // https://mvnrepository.com/artifact/com.alibaba/easyexcel
+	//compile group: 'com.alibaba', name: 'easyexcel', version: '1.1.2-beat1'
+	compile files('lib/easyexcel-1.1.2-beta5.jar')
     
 	mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.3.5'
     mybatisGenerator 'tk.mybatis:mapper:3.4.0'

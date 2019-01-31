@@ -191,9 +191,9 @@ public class POIExcelUtil {
         if (POIFSFileSystem.hasPOIFSHeader(is)) {
             wb = new HSSFWorkbook(is);
         }
-        if (POIXMLDocument.hasOOXMLHeader(is)) {
+        /*if (POIXMLDocument.hasOOXMLHeader(is)) {
             wb = new XSSFWorkbook(OPCPackage.open(is));
-        }
+        }*/
 
         // 开始读取数据
         List<ExcelSheetPO> sheetPOs = new ArrayList<>();
@@ -468,26 +468,26 @@ public class POIExcelUtil {
         }
         // 生成一个样式
         CellStyle style = wb.createCellStyle();
-        style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-        style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-        style.setBorderRight(HSSFCellStyle.BORDER_THIN);
-        style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+        //style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+        //style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+        //style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+        //style.setBorderTop(HSSFCellStyle.BORDER_THIN);
         style.setWrapText(true);
 
         if (STYLE_HEADER == type) {
-            style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+            //style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
             Font font = wb.createFont();
             font.setFontHeightInPoints((short) 16);
-            font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+            //font.setBoldweight(Font.BOLDWEIGHT_BOLD);
             style.setFont(font);
         } else if (STYLE_TITLE == type) {
-            style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+            //style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
             Font font = wb.createFont();
             font.setFontHeightInPoints((short) 18);
-            font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+            //font.setBoldweight(Font.BOLDWEIGHT_BOLD);
             style.setFont(font);
         } else if (STYLE_DATA == type) {
-            style.setAlignment(HSSFCellStyle.ALIGN_LEFT);
+            //style.setAlignment(HSSFCellStyle.ALIGN_LEFT);
             Font font = wb.createFont();
             font.setFontHeightInPoints((short) 12);
             style.setFont(font);
