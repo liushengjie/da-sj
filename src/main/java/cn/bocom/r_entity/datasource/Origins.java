@@ -95,9 +95,10 @@ public class Origins {
         }
 
         @SuppressWarnings("rawtypes")
-        public DataSourcePlugin getPluginClass() {
+        public DataSourcePlugin getPluginClass(DataSource datasource) {
             try {
-                return pluginClass.newInstance();
+                if(String.valueOf(EXCEL.code).equals(datasource.getType())) return pluginClass.getConstructor(DataSource.class).newInstance(datasource);
+                else return pluginClass.newInstance();
             } catch (Exception e) {
                 throw new SjException(e);
             }

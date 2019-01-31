@@ -21,6 +21,13 @@ import tk.mybatis.mapper.annotation.ColumnType;
 @Table(name = "t_data_source")
 @ApiModel("DataSource（）")
 public class DataSource implements Serializable {
+    
+    public DataSource() {}
+
+    public DataSource(String type) {
+        this.type = type;
+    }
+
     /**
      * 主键
      */

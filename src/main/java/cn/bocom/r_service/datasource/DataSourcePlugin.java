@@ -19,8 +19,7 @@ import cn.bocom.r_service.resource.res_transform.ResourceProtocol;
  */
 
 public interface DataSourcePlugin<T extends OriginEntity> extends ResourceProtocol{
-
-	 
+    
     /**
      * 转换为DataSource对象，进行数据存储
      * 
@@ -106,7 +105,4 @@ public interface DataSourcePlugin<T extends OriginEntity> extends ResourceProtoc
         }
         return connFlag;
     }
-    
-    
-    
 }

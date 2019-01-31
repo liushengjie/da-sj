@@ -48,7 +48,6 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
         this.datasource = datasource;
     }
 
-    
     private static AliasService aliasService;
     private static DataSourceOrigin datasourceOrigin;
     

@@ -39,9 +39,9 @@ public class DatasourceUtil {
      * @param type
      * @return
      */
-    public static DataSourcePlugin<?> originPlugin(int type){
-        DataSourceEnum datasourceEnum = DataSourceEnum.match(type, null);
-        return datasourceEnum!=null?datasourceEnum.getPluginClass():null;
+    public static DataSourcePlugin<?> originPlugin(DataSource datasource){
+        DataSourceEnum datasourceEnum = DataSourceEnum.match(Integer.valueOf(datasource.getType()), null);
+        return datasourceEnum!=null?datasourceEnum.getPluginClass(datasource):null;
     }
     
     /**
@@ -62,7 +62,7 @@ public class DatasourceUtil {
     public static DataSourcePlugin<?> originPluginById(String datasourceId){
         DataSource datasource = datasourceOrigin.selectDataSourceById(datasourceId);
         changeDataSourceContext(datasourceId);
-        return originPlugin(Integer.valueOf(datasource.getType()));
+        return originPlugin(datasource);
     }
     
     /**
