@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,6 @@ import cn.bocom.r_entity.datasource.form.Excel;
 import cn.bocom.r_entity.resource.ResourceCol;
 import cn.bocom.r_entity.resource.ResourceData;
 import cn.bocom.r_service.datasource.DataSourcePlugin;
-import cn.bocom.r_service.datasource.origin.DataSourceOrigin;
 import cn.bocom.r_service.system.alias.AliasService;
 
 /**
@@ -49,17 +49,11 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
     }
 
     private static AliasService aliasService;
-    private static DataSourceOrigin datasourceOrigin;
     
     @Autowired  
     public void setAliasService(AliasService aliasService) {  
     	ExcelPlugin.aliasService = aliasService;  
     } 
-    
-    @Autowired  
-    public void setDatasourceOrigin(DataSourceOrigin datasourceOrigin) {  
-    	ExcelPlugin.datasourceOrigin = datasourceOrigin;  
-    }
     
     
     @Override
@@ -97,11 +91,10 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
 
     @Override
     public List<TableInfo> showTablesInfo(String datasourceId) {
-    	DataSource datasource = datasourceOrigin.selectDataSourceById(datasourceId);
         Excel excel = converOrigin(datasource);
         List<Map<String, Object>> sheetList = null;
         try {
-        	sheetList = EasyExcelUtil.getExcelSheets(new File(excel.getDatabase()), null);
+        	sheetList = EasyExcelUtil.getExcelSheets(new File(excel.getDatabase()));
 		} catch (FileNotFoundException e) {
 			sheetList = null;
 			logger.error("文件" + excel.getDatabase() + "不存在！");
@@ -129,13 +122,10 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
 
     @Override
     public List<ColInfo> showColsInfo(String datasourceId, String table) {
-    	DataSource datasource = datasourceOrigin.selectDataSourceById(datasourceId);
         Excel excel = converOrigin(datasource);
         List<List<String>> list = null;
         try {
-        	//此时传的table其实是TableInfo的id，如传tablename需查询
-        	//headList = EasyExcelUtil.getExcelSheetHead(new File(excel.getDatabase()), Integer.parseInt(table), 1, null);
-        	list = EasyExcelUtil.readExcelWithStringList(new File(excel.getDatabase()), Integer.parseInt(table), 1, null);
+        	list = EasyExcelUtil.readExcelWithStringList(new File(excel.getDatabase()), getSheetIndexBySheetName(table));
 		} catch (FileNotFoundException e) {
 			list = null;
 			logger.error("文件" + excel.getDatabase() + "不存在！");
@@ -150,8 +140,8 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
         	List<String> firstList = list.get(0)==null?(new ArrayList<String>()):list.get(0);
         	for(int i=0;i<firstList.size();i++) {
             	ColInfo c = new ColInfo();
-            	c.setCol("COL" + i);
-            	c.setType("STRING");
+            	c.setCol("COL" + (i+1));
+            	c.setType("VARCHAR");
             	c.setIdx("0");
             	c.setNullable("0");
             	c.setPk("0");
@@ -162,7 +152,7 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
         	for(int i=0;i<headList.size();i++) {
             	ColInfo c = new ColInfo();
             	c.setCol(headList.get(i));
-            	c.setType("STRING");
+            	c.setType("VARCHAR");
             	c.setIdx("0");
             	c.setNullable("0");
             	c.setPk("0");
@@ -180,12 +170,10 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
 
     @Override
     public int tableCount(String table) {
-    	DataSource datasource = datasourceOrigin.selectDataSourceById("103588");
         Excel excel = converOrigin(datasource);
         List<List<String>> list = null;
         try {
-        	//此时传的table其实是TableInfo的id，如传tablename需查询
-        	list = EasyExcelUtil.getExcelSheetData(new File(excel.getDatabase()), Integer.parseInt(table), 3, -1, null);
+        	list = EasyExcelUtil.getExcelSheetData(new File(excel.getDatabase()), getSheetIndexBySheetName(table), Integer.parseInt(datasource.getXa()), -1);
 		} catch (FileNotFoundException e) {
 			list = null;
 			logger.error("文件" + excel.getDatabase() + "不存在！");
@@ -200,12 +188,13 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
 
     @Override
     public List<Map<String, Object>> loadData(String table, String limit) {
-    	DataSource datasource = datasourceOrigin.selectDataSourceById("103588");
         Excel excel = converOrigin(datasource);
         List<List<String>> list = null;
+        List<ColInfo> headList = null;
+        int sheetIndex = getSheetIndexBySheetName(table);
         try {
-        	//此时传的table其实是TableInfo的id，如传tablename需查询
-        	list = EasyExcelUtil.getExcelSheetData(new File(excel.getDatabase()), Integer.parseInt(table), 3, -1, null);
+        	headList = showColsInfo(null,table);
+        	list = EasyExcelUtil.getExcelSheetData(new File(excel.getDatabase()), sheetIndex, Integer.parseInt(datasource.getXa().toString()), -1);
 		} catch (FileNotFoundException e) {
 			list = null;
 			logger.error("文件" + excel.getDatabase() + "不存在！");
@@ -213,9 +202,20 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
 		}
         if(list==null||list.size()==0) {
         	return null;
-        } else {
-        	return null;//list.subList(0, Integer.parseInt(limit));
         }
+        
+        List<Map<String, Object>> ret = new ArrayList<Map<String, Object>>();
+        int len = list.size()>Integer.parseInt(limit)?Integer.parseInt(limit):list.size();
+        for(int j=0;j<len;j++) {
+        	List<String> row = list.get(j);
+        	Map<String, Object> m = new HashMap<String, Object>();
+        	for(int w=0;w<headList.size();w++) {
+        		ColInfo c = headList.get(w);
+        		m.put(c.getCol(), row.get(w));
+        	}
+        	ret.add(m);
+        }
+        return ret;
     }
 
     @Override
@@ -241,5 +241,22 @@ public class ExcelPlugin implements DataSourcePlugin<Excel>{
         res_col.setResId(resourceId);
         res_col.setType(col.getType());
         return res_col;
+    }
+    
+    //根据sheet名称获取sheet索引
+    private int getSheetIndexBySheetName(String sheetName) {
+    	List<TableInfo> list = showTablesInfo(null);
+    	if(list==null||list.size()==0) {
+    		return -1;
+    	}
+    	int sheetIndex = -1;
+    	for(int i=0;i<list.size();i++) {
+    		TableInfo t = list.get(i);
+    		if(t.getTableName().equalsIgnoreCase(sheetName)) {
+    			sheetIndex = i;
+    			break;
+    		}
+    	}
+    	return sheetIndex;
     }
 }

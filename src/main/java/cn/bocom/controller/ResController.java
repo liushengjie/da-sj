@@ -84,8 +84,8 @@ public class ResController {
     
     @ApiOperation(value = "根据id获取资源库信息")
     @RequestMapping(value = "/selectResourceById", method = RequestMethod.GET)
-    public DataResponse selectResourceById(String id) {
-        return new DataResponse(r_resService.selectResourceById(id));
+    public DataResponse selectResourceById(String resId) {
+        return new DataResponse(r_resService.selectResourceById(resId));
     }
     
     @ApiOperation(value = "根据类型获取资源库信息")

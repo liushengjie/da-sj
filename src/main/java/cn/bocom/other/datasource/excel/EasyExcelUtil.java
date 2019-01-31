@@ -5,11 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +13,6 @@ import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
-import com.alibaba.excel.support.ExcelTypeEnum;
 
 /**
  * @author: lishipeng
@@ -73,7 +68,7 @@ public class EasyExcelUtil {
 	 * @return 返回 StringList 的列表
 	 * @throws FileNotFoundException 
 	 */
-	public static List<List<String>> readExcelWithStringList(File file, int sheetIndex, int headRowNum, ExcelTypeEnum excelTypeEnum) throws FileNotFoundException {
+	public static List<List<String>> readExcelWithStringList(File file, int sheetIndex) throws FileNotFoundException {
 		InputStream inputStream = new FileInputStream(file);
 		StringExcelListener listener = new StringExcelListener();
 		ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
@@ -81,9 +76,7 @@ public class EasyExcelUtil {
 		if(sheetList.size()<sheetIndex) {
 			return null;
 		}
-		//excelReader.read();
-		//excelReader.read(sheetList.get(sheetIndex-1));
-		excelReader.read(new com.alibaba.excel.metadata.Sheet(sheetIndex,headRowNum-1));
+		excelReader.read(sheetList.get(sheetIndex));
 		List<List<String>> list = listener.getDatas();
 		try {
 			inputStream.close();
@@ -99,7 +92,7 @@ public class EasyExcelUtil {
 	 * @return 返回 Sheet的列表
 	 * @throws FileNotFoundException 
 	 */
-	public static List<Map<String, Object>> getExcelSheets(File file, ExcelTypeEnum excelTypeEnum) throws FileNotFoundException{
+	public static List<Map<String, Object>> getExcelSheets(File file) throws FileNotFoundException{
 		InputStream inputStream = new FileInputStream(file);
 		StringExcelListener listener = new StringExcelListener();
 		ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
@@ -130,15 +123,19 @@ public class EasyExcelUtil {
 	 * @return 返回表头列表
 	 * @throws FileNotFoundException 
 	 */
-	public static List<String> getExcelSheetHead(File file, int sheetIndex, int headRowNum, ExcelTypeEnum excelTypeEnum) throws FileNotFoundException {
+	public static List<String> getExcelSheetHead(File file, int sheetIndex, int headRowNum) throws FileNotFoundException {
 		if(headRowNum<1) {
 			return null;
 		}
-		List<List<String>> list = readExcelWithStringList(file, sheetIndex, headRowNum, excelTypeEnum);
+		List<List<String>> list = readExcelWithStringList(file, sheetIndex);
 		if(list==null||list.size()==0) {
 			return null;
 		}
-		return list.get(0);
+		if(headRowNum>0) {
+			return list.get(0);
+		} else {
+			return null;
+		}
 	}
 	/**
 	 * 来读取Excel数据，不含表头
@@ -150,8 +147,8 @@ public class EasyExcelUtil {
 	 * @return 返回 StringList 的列表
 	 * @throws FileNotFoundException 
 	 */
-	public static List<List<String>> getExcelSheetData(File file, int sheetIndex, int headRowNum, int limit, ExcelTypeEnum excelTypeEnum) throws FileNotFoundException {
-		List<List<String>> list = readExcelWithStringList(file, sheetIndex, headRowNum, excelTypeEnum);
+	public static List<List<String>> getExcelSheetData(File file, int sheetIndex, int headRowNum, int limit) throws FileNotFoundException {
+		List<List<String>> list = readExcelWithStringList(file, sheetIndex);
 		if(list==null||list.size()==0) {
 			return null;
 		}

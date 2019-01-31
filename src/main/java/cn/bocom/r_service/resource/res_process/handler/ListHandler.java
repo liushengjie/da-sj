@@ -6,6 +6,8 @@ import java.util.Map;
 import cn.bocom.other.common.SjException;
 import cn.bocom.r_entity.process.ProcessEntity;
 import cn.bocom.r_entity.resource.Resource;
+import cn.bocom.r_service.datasource.DataSourcePlugin;
+import cn.bocom.r_service.datasource.DatasourceUtil;
 import cn.bocom.r_service.resource.res_process.IHandler;
 
 /**
@@ -29,7 +31,8 @@ public class ListHandler implements IHandler<List<Map<String, Object>>>{
 
     @Override
     public List<Map<String, Object>> readData(Resource resource , int limit, boolean isPreview) {
-        return null;
+    	DataSourcePlugin<?> plugin = DatasourceUtil.originPluginById(resource.getResourceData().getDsId());
+        return plugin.loadData(resource.getResourceData().getTableName(), limit+"");
     }
 
     @Override
