@@ -7,8 +7,6 @@
  */
 package cn.bocom.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.bocom.entity.Processor;
 import cn.bocom.other.common.DataResponse;
 import cn.bocom.r_entity.datasource.TableInfo;
 import cn.bocom.r_entity.resource.Resource;
-import cn.bocom.r_entity.resource.ResourceCol;
 import cn.bocom.r_entity.resource.ResourceView;
 import cn.bocom.r_service.resource.ResourceService;
 import io.swagger.annotations.Api;
@@ -50,7 +46,7 @@ public class ResController {
     @ApiOperation(value = "获取资源对象")
     @RequestMapping(value = "/loadResourceObj", method = RequestMethod.POST)
     public DataResponse loadResourceObj(@RequestParam("datasourceId") String datasourceId, @RequestBody TableInfo table) {
-        Resource ret = resourceService.loadResourceObj(datasourceId, table);
+        Resource ret = resourceService.initResourceObj(datasourceId, table);
         return new DataResponse(ret);
     }
     

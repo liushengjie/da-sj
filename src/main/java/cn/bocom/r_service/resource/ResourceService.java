@@ -55,8 +55,8 @@ public class ResourceService {
      * @param table
      * @return
      */
-    public Resource loadResourceObj(String datasourceId, TableInfo table) {
-        return resourceTrans.convertToRes(datasourceId, table);
+    public Resource initResourceObj(String datasourceId, TableInfo table) {
+        return resourceTrans.initResource(datasourceId, table);
     }
     
     /**

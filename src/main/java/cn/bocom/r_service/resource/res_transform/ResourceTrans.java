@@ -33,7 +33,7 @@ public class ResourceTrans {
      * @param datasource
      * @return
      */
-    public Resource convertToRes(String datasourceId, TableInfo table) {
+    public Resource initResource(String datasourceId, TableInfo table) {
         Resource resource = new Resource();
         // 1、设置body属性
         ResourceBody res_body = new ResourceBody();
